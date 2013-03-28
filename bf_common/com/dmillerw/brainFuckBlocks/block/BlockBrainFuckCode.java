@@ -39,6 +39,8 @@ public class BlockBrainFuckCode extends BlockContainer {
 		
 		//TODO Add active state from TE
 		
+		System.out.println(bottomTexture.getIconName());
+		
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
