@@ -9,7 +9,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
@@ -17,20 +19,34 @@ import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 public class BlockBrainFuckCode extends BlockContainer {
 
 	public static Icon[][] textures;
+	public static Icon bottomTexture;
+	public static Icon sideTexture;
 	
 	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close"};
 	
 	private static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose"};
-	private static String[] textureTypes = new String[] {"side", "bottom", "on", "off"};
+	private static String[] textureTypes = new String[] {"on", "off"};
 	
 	protected BlockBrainFuckCode(int id) {
 		super(id, Material.rock);
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
 	}
 
-//	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-//		
-//	}
+	@Override
+	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
+		int meta = world.getBlockMetadata(x, y, z);
+		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
+		
+		//TODO Add active state from TE
+		
+		if (sideForge == ForgeDirection.DOWN) {
+			return bottomTexture;
+		} else if (sideForge != ForgeDirection.UP) {
+			return sideTexture;
+		} else {
+			return textures[meta][0];
+		}
+	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -44,9 +60,12 @@ public class BlockBrainFuckCode extends BlockContainer {
 	public void registerIcons(IconRegister register) {
 		textures = new Icon[16][4];
 		
+		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom.png");
+		sideTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side.png");
+		
 		for (int i=0; i<blockNames.length; i++) {
 			for (int x=0; x<textureTypes.length; x++) {
-				textures[i][x] = register.registerIcon(ModInfo.BLOCK_TEXTURE_LOCATION + blockFileNames[i] + "/" + textureTypes[x] + ".png");
+				textures[i][x] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_" + blockFileNames[i] + "_" + textureTypes[x] );
 			}
 		}
 	}
