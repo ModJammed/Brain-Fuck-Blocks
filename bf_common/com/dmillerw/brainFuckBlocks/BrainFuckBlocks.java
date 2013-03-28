@@ -3,6 +3,7 @@ package com.dmillerw.brainFuckBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 
+import com.dmillerw.brainFuckBlocks.block.BlockHandler;
 import com.dmillerw.brainFuckBlocks.block.BlockIDs;
 import com.dmillerw.brainFuckBlocks.core.CommonProxy;
 import com.dmillerw.brainFuckBlocks.core.CreativeTabBrainFuck;
@@ -18,6 +19,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid=ModInfo.MOD_ID, name=ModInfo.MOD_NAME, version=ModInfo.MOD_VERSION)
 @NetworkMod(serverSideRequired=false, clientSideRequired=true, packetHandler=BFPacketHandler.class)
@@ -31,6 +33,7 @@ public class BrainFuckBlocks {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent e) {
+		//Config stuffs
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
 		try {
 			config.load();
@@ -48,7 +51,11 @@ public class BrainFuckBlocks {
 	
 	@Init
 	public void init(FMLInitializationEvent e) {
+		//Adds proper localization string for creative tab
+		LanguageRegistry.instance().addStringLocalization("itemGroup.brainFuck", "BrainFuck Blocks");
 		
+		//Initializes blocks
+		BlockHandler.init();
 	}
 	
 }
