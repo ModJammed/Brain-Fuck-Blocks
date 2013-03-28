@@ -39,14 +39,25 @@ public class BlockBrainFuckCode extends BlockContainer {
 		
 		//TODO Add active state from TE
 		
-		System.out.println(bottomTexture.getIconName());
-		
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
 			return sideTexture;
 		} else {
 			return textures[meta][0];
+		}
+	}
+	
+	@Override
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
+		
+		if (sideForge == ForgeDirection.DOWN) {
+			return bottomTexture;
+		} else if (sideForge != ForgeDirection.UP) {
+			return sideTexture;
+		} else {
+			return textures[meta][1];
 		}
 	}
 	
@@ -62,8 +73,8 @@ public class BlockBrainFuckCode extends BlockContainer {
 	public void registerIcons(IconRegister register) {
 		textures = new Icon[16][4];
 		
-		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom.png");
-		sideTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side.png");
+		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
+		sideTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
 		
 		for (int i=0; i<blockNames.length; i++) {
 			for (int x=0; x<textureTypes.length; x++) {
