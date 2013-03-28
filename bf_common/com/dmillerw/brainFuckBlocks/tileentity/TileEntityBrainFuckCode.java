@@ -4,6 +4,9 @@ import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -13,6 +16,10 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	
 	@Override
 	public ForgeDirection getRotation() {
+		if (rotation == null) {
+			return ForgeDirection.NORTH;
+		}
+		
 		return rotation;
 	}
 
@@ -37,6 +44,18 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 		super.readFromNBT(nbt);
 		rotation = ForgeDirection.getOrientation(nbt.getByte("rotation"));
 	}
+	
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 0, nbt);
+    }
+	
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+		if (pkt.xPosition == this.xCoord && pkt.yPosition == this.yCoord && pkt.zPosition == this.zCoord) {
+			readFromNBT(pkt.customParam1);
+		}
+    }
 	
 	@Override
 	public int[] getPayload() {

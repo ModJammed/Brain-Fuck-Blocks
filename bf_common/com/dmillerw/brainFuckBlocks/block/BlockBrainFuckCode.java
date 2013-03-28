@@ -6,6 +6,8 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -16,6 +18,9 @@ import net.minecraftforge.common.ForgeDirection;
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityBrainFuckCode;
+import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
+import com.dmillerw.brainFuckBlocks.util.Position;
 
 public class BlockBrainFuckCode extends BlockContainer {
 
@@ -36,6 +41,15 @@ public class BlockBrainFuckCode extends BlockContainer {
 	}
 
 	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
+		super.onBlockPlacedBy(world, x, y, z, living, stack);
+		EntityPlayer player = (EntityPlayer)living;
+		ForgeDirection side = PlayerUtil.get2dOrientation(new Position(player.posX, player.posY, player.posZ), new Position(x,y, z ));
+		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
+		tile.setRotation(side);
+	}
+	
+	@Override
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
@@ -52,7 +66,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 			
 			return sideTexture[0];
 		} else {
-			return textures[meta][1][0];
+			return textures[meta][1][getTextureIndexFromRotation(blockRotator.getRotation())];
 		}
 	}
 	
@@ -118,14 +132,8 @@ public class BlockBrainFuckCode extends BlockContainer {
 	}
 	
 	@Override
-	public TileEntity createTileEntity(World world, int meta) {
-		return null;
-	}
-	
-	/* IGNORE */
-	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return null;
+		return new TileEntityBrainFuckCode();
 	}
 
 }

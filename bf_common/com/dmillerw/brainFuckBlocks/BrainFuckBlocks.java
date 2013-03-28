@@ -56,6 +56,9 @@ public class BrainFuckBlocks {
 		
 		//Initializes blocks
 		BlockHandler.init();
+		
+		//Initializes TileEntities
+		proxy.registerTileEntities();
 	}
 	
 }
