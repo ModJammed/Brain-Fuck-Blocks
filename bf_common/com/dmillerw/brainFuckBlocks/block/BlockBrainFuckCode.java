@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
 public class BlockBrainFuckCode extends BlockContainer {
@@ -38,13 +39,18 @@ public class BlockBrainFuckCode extends BlockContainer {
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
-		
-		//TODO Add active state from TE
-		
+		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
+
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
-			return bottomTexture;
+			if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP)) {
+				return sideTexture[1];
+			} else if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP).getOpposite()) {
+				return sideTexture[2];
+			}
+			
+			return sideTexture[0];
 		} else {
 			return textures[meta][1][0];
 		}
@@ -87,7 +93,6 @@ public class BlockBrainFuckCode extends BlockContainer {
 		sideTexture[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
 		sideTexture[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_in");
 		sideTexture[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_out");
-		
 		
 		for (int i=0; i<blockNames.length; i++) {
 			for (int x=0; x<textureTypes.length; x++) {
