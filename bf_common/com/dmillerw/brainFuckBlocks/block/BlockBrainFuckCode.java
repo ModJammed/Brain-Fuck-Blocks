@@ -18,14 +18,16 @@ import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
 public class BlockBrainFuckCode extends BlockContainer {
 
-	public static Icon[][] textures;
+	public static Icon[][][] textures;
 	public static Icon bottomTexture;
-	public static Icon sideTexture;
+	public static Icon[] sideTexture;
 	
 	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close"};
 	
 	private static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose"};
 	private static String[] textureTypes = new String[] {"on", "off"};
+	
+	private static String[] symbolTextureRotations = new String[] {"north", "east", "south", "west"};
 	
 	protected BlockBrainFuckCode(int id) {
 		super(id, Material.rock);
@@ -42,9 +44,9 @@ public class BlockBrainFuckCode extends BlockContainer {
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
-			return sideTexture;
+			return bottomTexture;
 		} else {
-			return textures[meta][0];
+			return textures[meta][1][0];
 		}
 	}
 	
@@ -55,9 +57,15 @@ public class BlockBrainFuckCode extends BlockContainer {
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
-			return sideTexture;
+			if (sideForge == ForgeDirection.WEST) {
+				return sideTexture[1];
+			} else if (sideForge == ForgeDirection.EAST) {
+				return sideTexture[2];
+			}
+			
+			return sideTexture[0];
 		} else {
-			return textures[meta][1];
+			return textures[meta][1][2];
 		}
 	}
 	
@@ -71,16 +79,37 @@ public class BlockBrainFuckCode extends BlockContainer {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		textures = new Icon[16][4];
+		textures = new Icon[16][4][4];
 		
 		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
-		sideTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
+		sideTexture = new Icon[3];
+		
+		sideTexture[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
+		sideTexture[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_in");
+		sideTexture[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_out");
+		
 		
 		for (int i=0; i<blockNames.length; i++) {
 			for (int x=0; x<textureTypes.length; x++) {
-				textures[i][x] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_" + blockFileNames[i] + "_" + textureTypes[x] );
+				for (int j=0; j<4; j++) {
+					textures[i][x][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_" + blockFileNames[i] + "_" + symbolTextureRotations[j] + "_" + textureTypes[x]);
+				}
 			}
 		}
+	}
+	
+	private int getTextureIndexFromRotation(ForgeDirection rot) {
+		if (rot == ForgeDirection.NORTH) {
+			return 0;
+		} else if (rot == ForgeDirection.EAST) {
+			return 1;
+		} else if (rot == ForgeDirection.SOUTH) {
+			return 2;
+		} else if (rot == ForgeDirection.WEST) {
+			return 3;
+		}
+		
+		return 0;
 	}
 	
 	@Override
