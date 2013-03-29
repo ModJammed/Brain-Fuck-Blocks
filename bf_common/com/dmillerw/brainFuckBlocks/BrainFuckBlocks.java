@@ -11,6 +11,7 @@ import com.dmillerw.brainFuckBlocks.helper.LogHelper;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.network.BFPacketHandler;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -31,6 +32,8 @@ public class BrainFuckBlocks {
 	
 	public static CreativeTabs creativeTabBF = new CreativeTabBrainFuck("brainFuck");
 	
+	public static int wireRenderID = 0;
+	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent e) {
 		//Config stuffs
@@ -39,6 +42,7 @@ public class BrainFuckBlocks {
 			config.load();
 			
 			BlockIDs.brainFuckCodeBlockID = config.getBlock("brainFuckCodeBlockID", BlockIDs.brainFuckCodeBlockDefaultID).getInt();
+			BlockIDs.bfWireID = config.getBlock("bfWireID", BlockIDs.bfWireDefaultID).getInt();
 		} catch(Exception ex) {
 			LogHelper.log("Failed to load config. Assuming defaults!");
 			BlockIDs.brainFuckCodeBlockID = BlockIDs.brainFuckCodeBlockDefaultID;
@@ -51,6 +55,11 @@ public class BrainFuckBlocks {
 	
 	@Init
 	public void init(FMLInitializationEvent e) {
+		wireRenderID = RenderingRegistry.getNextAvailableRenderId();
+		
+		//Registering renders
+		proxy.registerRenders();
+		
 		//Initializing logger
 		LogHelper.init();
 		
