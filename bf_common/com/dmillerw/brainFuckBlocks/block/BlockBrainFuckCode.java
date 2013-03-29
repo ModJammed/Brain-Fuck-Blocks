@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityBrainFuckCode;
@@ -40,13 +41,17 @@ public class BlockBrainFuckCode extends BlockContainer {
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
 	}
 
-//	@Override
-//	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-//		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
-//		LogHelper.log("Block Rotation: "+symbolTextureRotations[getTextureIndexFromRotation(tile.getRotation())]);
-//		LogHelper.log("Block Meta: "+world.getBlockMetadata(x, y, z));
-//		return true;
-//	}
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IBFWrench) {
+			IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
+			tile.rotate();
+			world.markBlockForRenderUpdate(x, y, z);
+			return true;
+		}
+		
+		return false;
+	}
 	
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
