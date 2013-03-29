@@ -1,11 +1,8 @@
 package com.dmillerw.brainFuckBlocks.block;
 
-import java.util.List;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,32 +13,31 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
-import com.dmillerw.brainFuckBlocks.helper.LogHelper;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityBrainFuckCode;
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
 import com.dmillerw.brainFuckBlocks.util.Position;
 
-public class BlockBrainFuckCode extends BlockContainer {
+public class BlockCPU extends BlockContainer {
 
-	public static Icon[][][] textures;
-	public static Icon bottomTexture;
-	public static Icon[] sideTexture;
+	//0 = bottom
+	//1 = side_normal
+	//2 = side_in
+	//3 = side_out
+	//4 = top
+	//5 = front
+	private Icon[] textures;
 	
-	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close"};
-	
-	private static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose"};
-	private static String[] textureTypes = new String[] {"on", "off"};
-	
-	private static String[] symbolTextureRotations = new String[] {"north", "east", "south", "west"};
-	
-	protected BlockBrainFuckCode(int id) {
-		super(id, Material.rock);
+	public BlockCPU(int id) {
+		super(id, Material.iron);
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
+		setHardness(5F);
+		setResistance(5F);
 	}
-
+	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IBFWrench) {
@@ -71,17 +67,19 @@ public class BlockBrainFuckCode extends BlockContainer {
 		TileEntityBrainFuckCode tile = (TileEntityBrainFuckCode) world.getBlockTileEntity(x, y, z);
 		
 		if (sideForge == ForgeDirection.DOWN) {
-			return bottomTexture;
+			return textures[0];
 		} else if (sideForge != ForgeDirection.UP) {
 			if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP)) {
-				return sideTexture[1];
+				return textures[3];
 			} else if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP).getOpposite()) {
-				return sideTexture[2];
+				return textures[2];
+			} else if (sideForge == blockRotator.getRotation()) {
+				return textures[5];
 			}
 			
-			return sideTexture[0];
+			return textures[1];
 		} else {
-			return textures[meta][tile.isActive()][getTextureIndexFromRotation(blockRotator.getRotation())];
+			return textures[4];
 		}
 	}
 	
@@ -90,69 +88,34 @@ public class BlockBrainFuckCode extends BlockContainer {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		
 		if (sideForge == ForgeDirection.DOWN) {
-			return bottomTexture;
+			return textures[0];
 		} else if (sideForge != ForgeDirection.UP) {
-			if (sideForge == ForgeDirection.WEST) {
-				return sideTexture[1];
-			} else if (sideForge == ForgeDirection.EAST) {
-				return sideTexture[2];
+			if (sideForge == sideForge.getRotation(ForgeDirection.UP)) {
+				return textures[3];
+			} else if (sideForge == sideForge.getRotation(ForgeDirection.UP).getOpposite()) {
+				return textures[2];
+			} else if (sideForge == ForgeDirection.SOUTH) {
+				return textures[5];
 			}
 			
-			return sideTexture[0];
+			return textures[1];
 		} else {
-			return textures[meta][1][0];
-		}
-	}
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	public void getSubBlocks(int id, CreativeTabs tab, List list) {
-		for (int i=0; i<blockNames.length; i++) {
-			list.add(new ItemStack(id, 1, i));
+			return textures[4];
 		}
 	}
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		textures = new Icon[16][4][4];
-		
-		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
-		sideTexture = new Icon[3];
-		
-		sideTexture[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
-		sideTexture[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_in");
-		sideTexture[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_out");
-		
-		for (int i=0; i<blockNames.length; i++) {
-			for (int x=0; x<textureTypes.length; x++) {
-				for (int j=0; j<4; j++) {
-					textures[i][x][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":"+blockFileNames[i]+"/code_" + blockFileNames[i] + "_" + symbolTextureRotations[j] + "_" + textureTypes[x]);
-				}
-			}
-		}
+		textures[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_bottom.png");
+		textures[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side.png");
+		textures[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side_in.png");
+		textures[3] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side_out.png");
+		textures[4] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_top.png");
+		textures[5] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_front.png");
 	}
 	
-	private int getTextureIndexFromRotation(ForgeDirection rot) {
-		if (rot == ForgeDirection.NORTH) {
-			return 0;
-		} else if (rot == ForgeDirection.EAST) {
-			return 1;
-		} else if (rot == ForgeDirection.SOUTH) {
-			return 2;
-		} else if (rot == ForgeDirection.WEST) {
-			return 3;
-		}
-		
-		return 0;
-	}
-	
-	public TileEntity createTileEntity(World world, int meta) {
-		return new TileEntityBrainFuckCode(meta);
-	}
-	
-	/* IGNORE */
 	public TileEntity createNewTileEntity(World world) {
-		return null;
+		return new TileEntityCPU();
 	}
-
+	
 }
