@@ -51,6 +51,9 @@ public class BrainFuckBlocks {
 	
 	@Init
 	public void init(FMLInitializationEvent e) {
+		//Initializing logger
+		LogHelper.init();
+		
 		//Adds proper localization string for creative tab
 		LanguageRegistry.instance().addStringLocalization("itemGroup.brainFuck", "BrainFuck Blocks");
 		
