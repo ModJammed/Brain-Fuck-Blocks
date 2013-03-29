@@ -13,6 +13,8 @@ import net.minecraftforge.common.ForgeDirection;
 public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, ISyncedTile {
 
 	private ForgeDirection rotation;
+	private ForgeDirection inputSide;
+	private ForgeDirection outputSide;
 	
 	private int type;
 	
@@ -34,6 +36,8 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	@Override
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
+		outputSide = rot.getRotation(ForgeDirection.NORTH);
+		inputSide = outputSide.getOpposite();
 	}
 
 	@Override
