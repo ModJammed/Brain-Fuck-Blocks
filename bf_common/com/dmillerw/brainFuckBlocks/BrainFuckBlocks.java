@@ -8,6 +8,8 @@ import com.dmillerw.brainFuckBlocks.block.BlockIDs;
 import com.dmillerw.brainFuckBlocks.core.CommonProxy;
 import com.dmillerw.brainFuckBlocks.core.CreativeTabBrainFuck;
 import com.dmillerw.brainFuckBlocks.helper.LogHelper;
+import com.dmillerw.brainFuckBlocks.item.ItemHandler;
+import com.dmillerw.brainFuckBlocks.item.ItemIDs;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.network.BFPacketHandler;
 
@@ -43,9 +45,15 @@ public class BrainFuckBlocks {
 			
 			BlockIDs.brainFuckCodeBlockID = config.getBlock("brainFuckCodeBlockID", BlockIDs.brainFuckCodeBlockDefaultID).getInt();
 			BlockIDs.bfWireID = config.getBlock("bfWireID", BlockIDs.bfWireDefaultID).getInt();
+		
+			ItemIDs.bfWrenchID = config.getItem("bfWrench", ItemIDs.bfWrenchDefaultID).getInt();
 		} catch(Exception ex) {
 			LogHelper.log("Failed to load config. Assuming defaults!");
+			
 			BlockIDs.brainFuckCodeBlockID = BlockIDs.brainFuckCodeBlockDefaultID;
+			BlockIDs.bfWireID = BlockIDs.bfWireDefaultID;
+			
+			ItemIDs.bfWrenchID = ItemIDs.bfWrenchDefaultID;
 		} finally {
 			if (config.hasChanged()) {
 				config.save();
@@ -68,6 +76,9 @@ public class BrainFuckBlocks {
 		
 		//Initializes blocks
 		BlockHandler.init();
+		
+		//Initializes items
+		ItemHandler.init();
 		
 		//Initializes TileEntities
 		proxy.registerTileEntities();
