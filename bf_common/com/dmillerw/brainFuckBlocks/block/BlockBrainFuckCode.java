@@ -94,7 +94,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 			
 			return sideTexture[0];
 		} else {
-			return textures[meta][1][2];
+			return textures[meta][1][0];
 		}
 	}
 	
