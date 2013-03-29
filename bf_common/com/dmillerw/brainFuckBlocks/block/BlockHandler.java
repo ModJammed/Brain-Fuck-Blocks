@@ -9,6 +9,7 @@ public class BlockHandler {
 
 	public static Block brainFuckCodeBlock;
 	public static Block bfWire;
+	public static Block bfCPU;
 	
 	public static void init() {
 		brainFuckCodeBlock = new BlockBrainFuckCode(BlockIDs.brainFuckCodeBlockID).setUnlocalizedName("bfCode");
@@ -20,6 +21,10 @@ public class BlockHandler {
 		bfWire = new BlockWire(BlockIDs.bfWireID).setUnlocalizedName("bfWire");
 		GameRegistry.registerBlock(bfWire, "bfWire");
 		LanguageRegistry.addName(bfWire, "Wire");
+		
+		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setUnlocalizedName("bfCPU");
+		GameRegistry.registerBlock(bfCPU, "bfCPU");
+		LanguageRegistry.addName(bfCPU, "CPU");
 	}
 	
 }

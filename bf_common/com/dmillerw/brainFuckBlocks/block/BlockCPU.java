@@ -64,7 +64,6 @@ public class BlockCPU extends BlockContainer {
 		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
-		TileEntityBrainFuckCode tile = (TileEntityBrainFuckCode) world.getBlockTileEntity(x, y, z);
 		
 		if (sideForge == ForgeDirection.DOWN) {
 			return textures[0];
@@ -73,7 +72,7 @@ public class BlockCPU extends BlockContainer {
 				return textures[3];
 			} else if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP).getOpposite()) {
 				return textures[2];
-			} else if (sideForge == blockRotator.getRotation()) {
+			} else if (sideForge == blockRotator.getRotation().getOpposite()) {
 				return textures[5];
 			}
 			
@@ -90,10 +89,10 @@ public class BlockCPU extends BlockContainer {
 		if (sideForge == ForgeDirection.DOWN) {
 			return textures[0];
 		} else if (sideForge != ForgeDirection.UP) {
-			if (sideForge == sideForge.getRotation(ForgeDirection.UP)) {
-				return textures[3];
-			} else if (sideForge == sideForge.getRotation(ForgeDirection.UP).getOpposite()) {
+			if (sideForge == ForgeDirection.WEST) {
 				return textures[2];
+			} else if (sideForge == ForgeDirection.EAST) {
+				return textures[3];
 			} else if (sideForge == ForgeDirection.SOUTH) {
 				return textures[5];
 			}
@@ -106,12 +105,14 @@ public class BlockCPU extends BlockContainer {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		textures[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_bottom.png");
-		textures[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side.png");
-		textures[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side_in.png");
-		textures[3] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side_out.png");
-		textures[4] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_top.png");
-		textures[5] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_front.png");
+		textures = new Icon[6];
+		
+		textures[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_bottom");
+		textures[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side");
+		textures[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side_in");
+		textures[3] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_side_out");
+		textures[4] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_top");
+		textures[5] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":cpu/cpu_front");
 	}
 	
 	public TileEntity createNewTileEntity(World world) {
