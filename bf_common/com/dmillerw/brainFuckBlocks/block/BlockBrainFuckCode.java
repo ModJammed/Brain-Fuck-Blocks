@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+import com.dmillerw.brainFuckBlocks.helper.LogHelper;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
@@ -67,7 +68,10 @@ public class BlockBrainFuckCode extends BlockContainer {
 		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
-
+		TileEntityBrainFuckCode tile = (TileEntityBrainFuckCode) world.getBlockTileEntity(x, y, z);
+		
+		LogHelper.log("Is active: "+tile.isActive());
+		
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
@@ -79,7 +83,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 			
 			return sideTexture[0];
 		} else {
-			return textures[meta][1][getTextureIndexFromRotation(blockRotator.getRotation())];
+			return textures[meta][tile.isActive()][getTextureIndexFromRotation(blockRotator.getRotation())];
 		}
 	}
 	
@@ -144,9 +148,13 @@ public class BlockBrainFuckCode extends BlockContainer {
 		return 0;
 	}
 	
-	@Override
+	public TileEntity createTileEntity(World world, int meta) {
+		return new TileEntityBrainFuckCode(meta);
+	}
+	
+	/* IGNORE */
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityBrainFuckCode();
+		return null;
 	}
 
 }

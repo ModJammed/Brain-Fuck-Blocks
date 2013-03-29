@@ -14,6 +14,14 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 
 	private ForgeDirection rotation;
 	
+	private int type;
+	
+	private boolean active = false;
+	
+	public TileEntityBrainFuckCode(int type) {
+		this.type = type;
+	}
+	
 	@Override
 	public ForgeDirection getRotation() {
 		if (rotation == null) {
@@ -37,12 +45,14 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setByte("rotation", (byte) rotation.ordinal());
+		nbt.setInteger("type", type);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		rotation = ForgeDirection.getOrientation(nbt.getByte("rotation"));
+		type = nbt.getInteger("type");
 	}
 	
 	public Packet getDescriptionPacket() {
@@ -67,4 +77,12 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 		
 	}
 
+	public int isActive() {
+		if (active) {
+			return 0;
+		}
+		
+		return 1;
+	}
+	
 }
