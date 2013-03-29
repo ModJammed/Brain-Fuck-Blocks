@@ -26,7 +26,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	}
 
 	//TODO Functionality
-	
+		
 	@Override
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
