@@ -43,6 +43,8 @@ public class BlockBrainFuckCode extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
+		LogHelper.log("Block Rotation: "+symbolTextureRotations[getTextureIndexFromRotation(tile.getRotation())]);
 		LogHelper.log("Block Meta: "+world.getBlockMetadata(x, y, z));
 		return true;
 	}
@@ -118,7 +120,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 		for (int i=0; i<blockNames.length; i++) {
 			for (int x=0; x<textureTypes.length; x++) {
 				for (int j=0; j<4; j++) {
-					textures[i][x][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_" + blockFileNames[i] + "_" + symbolTextureRotations[j] + "_" + textureTypes[x]);
+					textures[i][x][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":"+blockFileNames[i]+"/code_" + blockFileNames[i] + "_" + symbolTextureRotations[j] + "_" + textureTypes[x]);
 				}
 			}
 		}
