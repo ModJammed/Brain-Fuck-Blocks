@@ -15,7 +15,7 @@ public class RenderBlockWire implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		//TODO Finish.
-		block.setBlockBounds(0.35F, 0.47F, 0.35F, 65F, 0.77F, 0.65F);
+		block.setBlockBounds(0.35F, 0.47F, 0.35F, 0.65F, 0.77F, 0.65F);
 		renderer.renderStandardBlock(block, x, y, z);
 		return false;
 	}
