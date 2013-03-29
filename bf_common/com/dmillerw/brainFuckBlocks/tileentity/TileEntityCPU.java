@@ -1,5 +1,6 @@
 package com.dmillerw.brainFuckBlocks.tileentity;
 
+import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 
@@ -10,10 +11,9 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile {
+public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile, IConnection {
 
 	private ForgeDirection rotation;
-	private ForgeDirection inputSide;
 	private ForgeDirection outputSide;
 	
 	@Override
@@ -31,7 +31,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
 		outputSide = rot.getRotation(ForgeDirection.NORTH);
-		inputSide = outputSide.getOpposite();
 	}
 
 	@Override
@@ -71,5 +70,15 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	@Override
 	public void handlePayload(int[] payload) {
 		
+	}
+
+	@Override
+	public ForgeDirection getOutput() {
+		return outputSide;
+	}
+
+	@Override
+	public ForgeDirection getInput() {
+		return null;
 	}
 }

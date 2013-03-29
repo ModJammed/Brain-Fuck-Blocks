@@ -1,5 +1,7 @@
 package com.dmillerw.brainFuckBlocks.tileentity;
 
+import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
+import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 
@@ -10,7 +12,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, ISyncedTile {
+public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, ISyncedTile, IConnection, IBrainfuckSymbol {
 
 	private ForgeDirection rotation;
 	private ForgeDirection inputSide;
@@ -87,6 +89,21 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 		}
 		
 		return 1;
+	}
+
+	@Override
+	public int interpret(char[] array, int pointerPos) {
+		return 0;
+	}
+
+	@Override
+	public ForgeDirection getOutput() {
+		return outputSide;
+	}
+
+	@Override
+	public ForgeDirection getInput() {
+		return inputSide;
 	}
 	
 }
