@@ -33,7 +33,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		return rotation;
 	}
 
-	//TODO Functionality
+	//TODO Finish
 	public void updateInstructions() {
 		if (this.worldObj.isRemote) {
 			return;
