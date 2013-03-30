@@ -13,7 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
-import com.dmillerw.brainFuckBlocks.block.BlockBrainFuckCode;
+import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
@@ -37,7 +37,7 @@ public class ItemCodeWriter extends Item {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean show) {
-		list.add(BlockBrainFuckCode.blockNames[getCodeWriterMeta(stack)]);
+		list.add(BlockCode.blockNames[getCodeWriterMeta(stack)]);
 	}
 	
 	@Override
@@ -50,10 +50,10 @@ public class ItemCodeWriter extends Item {
 			int cwMeta = getCodeWriterMeta(par1ItemStack) + 1;
 			
 			if (cwMeta <= 7) {
-				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockBrainFuckCode.blockNames[cwMeta]);
+				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[cwMeta]);
 				setCodeWriterMeta(par1ItemStack, cwMeta);
 			} else {
-				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockBrainFuckCode.blockNames[0]);
+				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[0]);
 				setCodeWriterMeta(par1ItemStack, 0);
 			}
 		}
@@ -227,7 +227,7 @@ public class ItemCodeWriter extends Item {
     	textures = new Icon[8];
     	
     	for (int i=0; i<8; i++) {
-    		textures[i] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":codewriter/cw_"+BlockBrainFuckCode.blockFileNames[i]);
+    		textures[i] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":codewriter/cw_"+BlockCode.blockFileNames[i]);
     	}
     }
     

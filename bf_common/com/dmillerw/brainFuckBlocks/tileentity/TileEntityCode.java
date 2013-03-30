@@ -7,7 +7,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-import com.dmillerw.brainFuckBlocks.block.BlockBrainFuckCode;
+import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
@@ -97,7 +97,7 @@ public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTil
 	}
 
 	public String getSymbol() {
-		return "Type: "+BlockBrainFuckCode.blockNames[type];
+		return "Type: "+BlockCode.blockNames[type];
 	}
 	
 	@Override

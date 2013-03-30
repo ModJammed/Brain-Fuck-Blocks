@@ -12,10 +12,10 @@ public class BlockHandler {
 	public static Block bfWire;
 	
 	public static void init() {
-		bfCode = new BlockBrainFuckCode(BlockIDs.bfCodeID).setUnlocalizedName("bfCode");
+		bfCode = new BlockCode(BlockIDs.bfCodeID).setUnlocalizedName("bfCode");
 		GameRegistry.registerBlock(bfCode, ItemBlockBrainFuckCode.class, "bfCode");
-		for (int i=0; i<BlockBrainFuckCode.blockNames.length; i++) {
-			LanguageRegistry.addName(new ItemStack(BlockHandler.bfCode.blockID, 1, i), BlockBrainFuckCode.blockNames[i]);
+		for (int i=0; i<BlockCode.blockNames.length; i++) {
+			LanguageRegistry.addName(new ItemStack(BlockHandler.bfCode.blockID, 1, i), BlockCode.blockNames[i]);
 		}
 		
 		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setUnlocalizedName("bfCPU");

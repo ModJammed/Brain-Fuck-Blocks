@@ -26,7 +26,7 @@ import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCode;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
 import com.dmillerw.brainFuckBlocks.util.Position;
 
-public class BlockBrainFuckCode extends BlockContainer {
+public class BlockCode extends BlockContainer {
 
 	public static Icon[][][] textures;
 	public static Icon bottomTexture;
@@ -39,7 +39,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 	
 	private static String[] symbolTextureRotations = new String[] {"north", "east", "south", "west"};
 	
-	protected BlockBrainFuckCode(int id) {
+	protected BlockCode(int id) {
 		super(id, Material.rock);
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
 		setHardness(1F);
