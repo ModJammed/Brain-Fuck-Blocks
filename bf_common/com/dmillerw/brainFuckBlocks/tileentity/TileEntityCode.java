@@ -91,11 +91,6 @@ public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTil
 		return 1;
 	}
 
-	@Override
-	public int interpret(char[] array, int pointerPos) {
-		return 0;
-	}
-
 	public EnumToken getSymbol() {
 		return EnumToken.values()[type];
 	}
