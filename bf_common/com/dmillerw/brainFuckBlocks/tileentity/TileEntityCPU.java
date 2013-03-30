@@ -21,8 +21,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
 	
-	private List<IBrainfuckSymbol> instructions = new ArrayList<IBrainfuckSymbol>();
-	private List<String> instructionPositions = new ArrayList<String>();
+	private List<IBrainfuckSymbol> instructions;
+	private List<String> instructionPositions;
 	
 	@Override
 	public ForgeDirection getRotation() {
@@ -33,39 +33,34 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		return rotation;
 	}
 
-	//TODO Finish
 	public void updateInstructions() {
 		if (this.worldObj.isRemote) {
 			return;
 		}
+		
+		instructions = new ArrayList<IBrainfuckSymbol>();
+		instructionPositions = new ArrayList<String>();
 		
 		int currXOffset = xCoord + outputSide.offsetX;
 		int currYOffset = yCoord + outputSide.offsetY;
 		int currZOffset = zCoord + outputSide.offsetZ;
 		
 		boolean keepSearching = true;
-		int blocksFound = 0;
 		
 		while (keepSearching) {
 			if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IConnection) {
-				blocksFound++;
-				System.out.println("IConnection found @ "+currXOffset+":"+currYOffset+":"+currZOffset);
 				IConnection connection = (IConnection) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
 				
-				System.out.println(connection.getPosition().toString());
-				
 				if (instructionPositions.contains(connection.getPosition().toString())) {
-					System.out.println("Position already listed. Breaking");
 					keepSearching = false;
 					break;
 				} else {
-					System.out.println("Position not found. Adding");
 					instructionPositions.add(connection.getPosition().toString());
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
 					IBrainfuckSymbol symbol = (IBrainfuckSymbol) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
-					System.out.println(symbol.getSymbol());
+					instructions.add(symbol);
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof TileEntityCPU) {
@@ -76,10 +71,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				currXOffset = currXOffset + connection.getOutput().offsetX;
 				currYOffset = currYOffset + connection.getOutput().offsetY;
 				currZOffset = currZOffset + connection.getOutput().offsetZ;
-				System.out.println("Will look for next block @ "+currXOffset+":"+currYOffset+":"+currZOffset);
 			} else {
 				keepSearching = false;
-				System.out.println("Blocks found: "+blocksFound);
 			}
 		}
 	}
