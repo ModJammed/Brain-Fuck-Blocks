@@ -13,10 +13,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+import com.dmillerw.brainFuckBlocks.helper.LogHelper;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
+import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
-import com.dmillerw.brainFuckBlocks.tileentity.TileEntityBrainFuckCode;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
 import com.dmillerw.brainFuckBlocks.util.Position;
@@ -47,6 +48,12 @@ public class BlockCPU extends BlockContainer {
 			return true;
 		}
 		
+		//Debug
+		TileEntityCPU cpu = (TileEntityCPU) world.getBlockTileEntity(x, y, z);
+		IBrainfuckSymbol symbol = (IBrainfuckSymbol) cpu.getConnection(ForgeDirection.UNKNOWN);
+		
+//		LogHelper.log(symbol.getSymbol());
+		
 		return false;
 	}
 	
@@ -61,7 +68,6 @@ public class BlockCPU extends BlockContainer {
 	
 	@Override
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
-		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
 		
@@ -70,8 +76,6 @@ public class BlockCPU extends BlockContainer {
 		} else if (sideForge != ForgeDirection.UP) {
 			if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP)) {
 				return textures[3];
-			} else if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP).getOpposite()) {
-				return textures[2];
 			} else if (sideForge == blockRotator.getRotation().getOpposite()) {
 				return textures[5];
 			}
@@ -89,9 +93,7 @@ public class BlockCPU extends BlockContainer {
 		if (sideForge == ForgeDirection.DOWN) {
 			return textures[0];
 		} else if (sideForge != ForgeDirection.UP) {
-			if (sideForge == ForgeDirection.WEST) {
-				return textures[2];
-			} else if (sideForge == ForgeDirection.EAST) {
+			if (sideForge == ForgeDirection.EAST) {
 				return textures[3];
 			} else if (sideForge == ForgeDirection.SOUTH) {
 				return textures[5];

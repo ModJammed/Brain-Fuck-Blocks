@@ -9,4 +9,6 @@ public interface IBrainfuckSymbol {
 	 */
 	public int interpret(char[] array, int pointerPos);
 	
+	public String getSymbol();
+	
 }

@@ -96,6 +96,10 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 		return 0;
 	}
 
+	public String getSymbol() {
+		return "Type: "+type;
+	}
+	
 	@Override
 	public ForgeDirection getOutput() {
 		return outputSide;
@@ -104,6 +108,11 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	@Override
 	public ForgeDirection getInput() {
 		return inputSide;
+	}
+
+	@Override
+	public IConnection getConnection(ForgeDirection direction) {
+		return null;
 	}
 	
 }
