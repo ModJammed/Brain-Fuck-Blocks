@@ -7,14 +7,14 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class BlockHandler {
 
-	public static Block brainFuckCodeBlock;
+	public static Block bfCode;
 	public static Block bfCPU;
 	
 	public static void init() {
-		brainFuckCodeBlock = new BlockBrainFuckCode(BlockIDs.brainFuckCodeBlockID).setUnlocalizedName("bfCode");
-		GameRegistry.registerBlock(brainFuckCodeBlock, ItemBlockBrainFuckCode.class, "brainFuckCodeBlock");
+		bfCode = new BlockBrainFuckCode(BlockIDs.bfCodeID).setUnlocalizedName("bfCode");
+		GameRegistry.registerBlock(bfCode, ItemBlockBrainFuckCode.class, "bfCode");
 		for (int i=0; i<BlockBrainFuckCode.blockNames.length; i++) {
-			LanguageRegistry.addName(new ItemStack(BlockHandler.brainFuckCodeBlock.blockID, 1, i), BlockBrainFuckCode.blockNames[i]);
+			LanguageRegistry.addName(new ItemStack(BlockHandler.bfCode.blockID, 1, i), BlockBrainFuckCode.blockNames[i]);
 		}
 		
 		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setUnlocalizedName("bfCPU");

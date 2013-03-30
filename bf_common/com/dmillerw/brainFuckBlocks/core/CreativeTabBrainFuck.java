@@ -11,7 +11,7 @@ public class CreativeTabBrainFuck extends CreativeTabs {
 	}
 	
 	public int getTabIconItemIndex() {
-		return BlockHandler.brainFuckCodeBlock.blockID;
+		return BlockHandler.bfCode.blockID;
 	}
 	
 }

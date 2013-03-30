@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCodeWriter extends Item {
 
-	private int blockID = BlockHandler.brainFuckCodeBlock.blockID;
+	private int blockID = BlockHandler.bfCode.blockID;
 	
 	private Icon[] textures;
 	

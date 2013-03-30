@@ -15,7 +15,6 @@ import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 import com.dmillerw.brainFuckBlocks.network.BFPacketHandler;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -45,7 +44,7 @@ public class BrainFuckBlocks {
 		try {
 			config.load();
 			
-			BlockIDs.brainFuckCodeBlockID = config.getBlock("brainFuckCodeBlockID", BlockIDs.brainFuckCodeBlockDefaultID).getInt();
+			BlockIDs.bfCodeID = config.getBlock("brainFuckCodeBlockID", BlockIDs.bfCodeDefaultID).getInt();
 			BlockIDs.bfCPUID = config.getBlock("bfCPU", BlockIDs.bfCPUDefaultID).getInt();
 			
 			Property craftingEnable = config.get(Configuration.CATEGORY_GENERAL, "codeBlockCraftingEnabled", UserPreferences.codeBlockCraftingEnableDefault);
@@ -57,7 +56,7 @@ public class BrainFuckBlocks {
 		} catch(Exception ex) {
 			LogHelper.log("Failed to load config. Assuming defaults!");
 			
-			BlockIDs.brainFuckCodeBlockID = BlockIDs.brainFuckCodeBlockDefaultID;
+			BlockIDs.bfCodeID = BlockIDs.bfCodeDefaultID;
 			BlockIDs.bfCPUID = BlockIDs.bfCPUDefaultID;
 			
 			UserPreferences.codeBlockCraftingEnable = UserPreferences.codeBlockCraftingEnableDefault;
@@ -73,11 +72,6 @@ public class BrainFuckBlocks {
 	
 	@Init
 	public void init(FMLInitializationEvent e) {
-		wireRenderID = RenderingRegistry.getNextAvailableRenderId();
-		
-		//Registering renders
-		proxy.registerRenders();
-		
 		//Initializing logger
 		LogHelper.init();
 		
