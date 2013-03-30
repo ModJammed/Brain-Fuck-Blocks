@@ -44,7 +44,6 @@ public class BrainFuckBlocks {
 			config.load();
 			
 			BlockIDs.brainFuckCodeBlockID = config.getBlock("brainFuckCodeBlockID", BlockIDs.brainFuckCodeBlockDefaultID).getInt();
-			BlockIDs.bfWireID = config.getBlock("bfWireID", BlockIDs.bfWireDefaultID).getInt();
 			BlockIDs.bfCPUID = config.getBlock("bfCPU", BlockIDs.bfCPUDefaultID).getInt();
 			
 			ItemIDs.bfWrenchID = config.getItem("bfWrench", ItemIDs.bfWrenchDefaultID).getInt();
@@ -52,7 +51,6 @@ public class BrainFuckBlocks {
 			LogHelper.log("Failed to load config. Assuming defaults!");
 			
 			BlockIDs.brainFuckCodeBlockID = BlockIDs.brainFuckCodeBlockDefaultID;
-			BlockIDs.bfWireID = BlockIDs.bfWireDefaultID;
 			BlockIDs.bfCPUID = BlockIDs.bfCPUDefaultID;
 			
 			ItemIDs.bfWrenchID = ItemIDs.bfWrenchDefaultID;

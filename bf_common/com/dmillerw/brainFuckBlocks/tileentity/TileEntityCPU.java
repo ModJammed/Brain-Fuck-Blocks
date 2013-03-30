@@ -22,6 +22,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	private ForgeDirection outputSide;
 	
 	private List<IBrainfuckSymbol> instructions = new ArrayList<IBrainfuckSymbol>();
+	private List<Position> instructionPositions = new ArrayList<Position>();
 	
 	@Override
 	public ForgeDirection getRotation() {
