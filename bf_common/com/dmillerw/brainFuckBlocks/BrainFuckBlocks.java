@@ -2,6 +2,7 @@ package com.dmillerw.brainFuckBlocks;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
 import com.dmillerw.brainFuckBlocks.block.BlockIDs;
@@ -11,6 +12,7 @@ import com.dmillerw.brainFuckBlocks.helper.LogHelper;
 import com.dmillerw.brainFuckBlocks.item.ItemHandler;
 import com.dmillerw.brainFuckBlocks.item.ItemIDs;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
+import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 import com.dmillerw.brainFuckBlocks.network.BFPacketHandler;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -46,12 +48,18 @@ public class BrainFuckBlocks {
 			BlockIDs.brainFuckCodeBlockID = config.getBlock("brainFuckCodeBlockID", BlockIDs.brainFuckCodeBlockDefaultID).getInt();
 			BlockIDs.bfCPUID = config.getBlock("bfCPU", BlockIDs.bfCPUDefaultID).getInt();
 			
+			Property craftingEnable = config.get(Configuration.CATEGORY_GENERAL, "codeBlockCraftingEnabled", UserPreferences.codeBlockCraftingEnableDefault);
+			craftingEnable.comment = "Should code blocks have crafting recipes? If enabled, the blocks will drop themselves when broken. If false, they'll drop nothing and a code block creation item will exist.";
+			UserPreferences.codeBlockCraftingEnable = craftingEnable.getBoolean(UserPreferences.codeBlockCraftingEnableDefault);
+			
 			ItemIDs.bfWrenchID = config.getItem("bfWrench", ItemIDs.bfWrenchDefaultID).getInt();
 		} catch(Exception ex) {
 			LogHelper.log("Failed to load config. Assuming defaults!");
 			
 			BlockIDs.brainFuckCodeBlockID = BlockIDs.brainFuckCodeBlockDefaultID;
 			BlockIDs.bfCPUID = BlockIDs.bfCPUDefaultID;
+			
+			UserPreferences.codeBlockCraftingEnable = UserPreferences.codeBlockCraftingEnableDefault;
 			
 			ItemIDs.bfWrenchID = ItemIDs.bfWrenchDefaultID;
 		} finally {

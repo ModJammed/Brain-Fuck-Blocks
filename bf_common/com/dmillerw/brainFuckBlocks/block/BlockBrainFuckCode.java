@@ -21,6 +21,7 @@ import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
+import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityBrainFuckCode;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
 import com.dmillerw.brainFuckBlocks.util.Position;
@@ -154,11 +155,15 @@ public class BlockBrainFuckCode extends BlockContainer {
 	
 	@Override
     public boolean canDropFromExplosion(Explosion explosion) {
-        return false;
+        return UserPreferences.codeBlockCraftingEnable;
     }
     
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {
+        if (UserPreferences.codeBlockCraftingEnable) {
+        	return 1;
+        }
+        
         return 0;
     }
 	
