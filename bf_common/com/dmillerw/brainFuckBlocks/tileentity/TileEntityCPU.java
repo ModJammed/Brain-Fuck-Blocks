@@ -1,6 +1,5 @@
 package com.dmillerw.brainFuckBlocks.tileentity;
 
-import com.dmillerw.brainFuckBlocks.helper.LogHelper;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
@@ -16,10 +15,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
-	
-	private int outputXCoord;
-	private int outputYCoord;
-	private int outputZCoord;
 	
 	@Override
 	public ForgeDirection getRotation() {
@@ -37,9 +32,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
 		outputSide = rot.getRotation(ForgeDirection.UP);
-		outputXCoord = xCoord + outputSide.offsetX;
-		outputYCoord = yCoord + outputSide.offsetY;
-		outputZCoord = zCoord + outputSide.offsetZ;
 	}
 
 	@Override
@@ -90,10 +82,5 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	public ForgeDirection getInput() {
 		return null;
 	}
-
-	@Override
-	public IConnection getConnection(ForgeDirection direction) {
-		LogHelper.log("Block ID @ "+outputXCoord+":"+outputYCoord+":"+outputZCoord+" = "+worldObj.getBlockId(outputXCoord, outputYCoord, outputZCoord));
-		return (IConnection) worldObj.getBlockTileEntity(xCoord + outputSide.offsetX, yCoord + outputSide.offsetY, zCoord + outputSide.offsetZ);
-	}
+	
 }

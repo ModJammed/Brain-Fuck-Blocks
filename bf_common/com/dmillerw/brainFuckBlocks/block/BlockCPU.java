@@ -48,12 +48,6 @@ public class BlockCPU extends BlockContainer {
 			return true;
 		}
 		
-		//Debug
-		TileEntityCPU cpu = (TileEntityCPU) world.getBlockTileEntity(x, y, z);
-		IBrainfuckSymbol symbol = (IBrainfuckSymbol) cpu.getConnection(ForgeDirection.UNKNOWN);
-		
-//		LogHelper.log(symbol.getSymbol());
-		
 		return false;
 	}
 	

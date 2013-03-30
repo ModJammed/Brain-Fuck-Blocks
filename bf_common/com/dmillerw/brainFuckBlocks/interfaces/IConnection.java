@@ -8,6 +8,4 @@ public interface IConnection {
 	
 	public ForgeDirection getInput();
 	
-	public IConnection getConnection(ForgeDirection direction);
-	
 }
