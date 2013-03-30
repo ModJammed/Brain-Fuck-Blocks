@@ -78,7 +78,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
 			if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP)) {
-				return sideTexture[1];
+				return sideTexture[2];
 			}
 			
 			return sideTexture[0];
@@ -94,9 +94,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
-			if (sideForge == ForgeDirection.WEST) {
-				return sideTexture[1];
-			} else if (sideForge == ForgeDirection.EAST) {
+			if (sideForge == ForgeDirection.EAST) {
 				return sideTexture[2];
 			}
 			
