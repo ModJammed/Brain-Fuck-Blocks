@@ -22,7 +22,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	private ForgeDirection outputSide;
 	
 	private List<IBrainfuckSymbol> instructions = new ArrayList<IBrainfuckSymbol>();
-	private List<Position> instructionPositions = new ArrayList<Position>();
+	private List<String> instructionPositions = new ArrayList<String>();
 	
 	@Override
 	public ForgeDirection getRotation() {
@@ -52,11 +52,15 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				System.out.println("IConnection found @ "+currXOffset+":"+currYOffset+":"+currZOffset);
 				IConnection connection = (IConnection) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
 				
-				if (instructionPositions.contains(connection.getPosition())) {
+				System.out.println(connection.getPosition().toString());
+				
+				if (instructionPositions.contains(connection.getPosition().toString())) {
+					System.out.println("Position already listed. Breaking");
 					keepSearching = false;
 					break;
 				} else {
-					instructionPositions.add(connection.getPosition());
+					System.out.println("Position not found. Adding");
+					instructionPositions.add(connection.getPosition().toString());
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
