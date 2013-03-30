@@ -53,6 +53,10 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		boolean keepSearching = true;
 		
 		while (keepSearching) {
+			if (worldObj.getWorldTime() % 2 != 0) {
+				return;
+			}
+			
 			if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IConnection) {
 				IConnection connection = (IConnection) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
 				
