@@ -1,8 +1,7 @@
 package com.dmillerw.brainFuckBlocks.tileentity;
 
-import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
-import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
-import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -11,10 +10,18 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
+import com.dmillerw.brainFuckBlocks.helper.LogHelper;
+import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
+import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
+import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
+import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
+
 public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile, IConnection {
 
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
+	
+	private List<IBrainfuckSymbol> instructions = new ArrayList<IBrainfuckSymbol>();
 	
 	@Override
 	public ForgeDirection getRotation() {
@@ -26,7 +33,17 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	}
 
 	//TODO Functionality
-	
+	public void updateInstructions() {
+		boolean keepSearching = true;
+		
+		while (keepSearching) {
+			int offsetX = xCoord + outputSide.offsetX;
+			int offsetY = yCoord + outputSide.offsetY;
+			int offsetZ = zCoord + outputSide.offsetZ;
+			
+			
+		}
+	}
 	
 	@Override
 	public void setRotation(ForgeDirection rot) {

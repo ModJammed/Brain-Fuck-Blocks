@@ -110,9 +110,4 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 		return inputSide;
 	}
 
-	@Override
-	public IConnection getConnection(ForgeDirection direction) {
-		return null;
-	}
-	
 }
