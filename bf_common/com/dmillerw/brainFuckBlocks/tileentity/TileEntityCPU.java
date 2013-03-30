@@ -21,7 +21,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
 	
-	private List<IBrainfuckSymbol> instructions;
 	private List<String> instructionPositions;
 	
 	@Override
@@ -39,7 +38,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 			return;
 		}
 		
-		instructions = new ArrayList<IBrainfuckSymbol>();
 		instructionPositions = new ArrayList<String>();
 		
 		int currXOffset = xCoord + outputSide.offsetX;
@@ -61,7 +59,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
 					IBrainfuckSymbol symbol = (IBrainfuckSymbol) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
-					instructions.add(symbol);
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof TileEntityCPU) {

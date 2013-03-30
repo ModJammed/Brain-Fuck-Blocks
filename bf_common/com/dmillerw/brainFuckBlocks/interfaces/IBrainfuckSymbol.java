@@ -1,5 +1,7 @@
 package com.dmillerw.brainFuckBlocks.interfaces;
 
+import com.dmillerw.brainFuckBlocks.enums.EnumToken;
+
 public interface IBrainfuckSymbol {
 
 	/**
@@ -9,6 +11,6 @@ public interface IBrainfuckSymbol {
 	 */
 	public int interpret(char[] array, int pointerPos);
 	
-	public String getSymbol();
+	public EnumToken getSymbol();
 	
 }
