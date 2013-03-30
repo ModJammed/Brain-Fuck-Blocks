@@ -46,6 +46,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		
 		instructionPositions = new ArrayList<String>();
 		
+		engine.clear();
+		
 		int currXOffset = xCoord + outputSide.offsetX;
 		int currYOffset = yCoord + outputSide.offsetY;
 		int currZOffset = zCoord + outputSide.offsetZ;
@@ -69,8 +71,10 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
 					IBrainfuckSymbol symbol = (IBrainfuckSymbol) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
-				
 					engine.interpret(symbol.getSymbol());
+					
+					System.out.println("Data Pointer >>> "+engine.dataPointer);
+					System.out.println("Data @ Pointer >>> "+engine.data[engine.dataPointer]);
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof TileEntityCPU) {
