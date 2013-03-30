@@ -22,7 +22,7 @@ import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
-import com.dmillerw.brainFuckBlocks.tileentity.TileEntityBrainFuckCode;
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCode;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
 import com.dmillerw.brainFuckBlocks.util.Position;
 
@@ -72,7 +72,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
-		TileEntityBrainFuckCode tile = (TileEntityBrainFuckCode) world.getBlockTileEntity(x, y, z);
+		TileEntityCode tile = (TileEntityCode) world.getBlockTileEntity(x, y, z);
 		
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
@@ -166,7 +166,7 @@ public class BlockBrainFuckCode extends BlockContainer {
     }
 	
 	public TileEntity createTileEntity(World world, int meta) {
-		return new TileEntityBrainFuckCode(meta);
+		return new TileEntityCode(meta);
 	}
 	
 	/* IGNORE */

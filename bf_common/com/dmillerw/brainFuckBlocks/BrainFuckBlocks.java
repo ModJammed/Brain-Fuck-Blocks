@@ -46,6 +46,7 @@ public class BrainFuckBlocks {
 			
 			BlockIDs.bfCodeID = config.getBlock("brainFuckCodeBlockID", BlockIDs.bfCodeDefaultID).getInt();
 			BlockIDs.bfCPUID = config.getBlock("bfCPU", BlockIDs.bfCPUDefaultID).getInt();
+			BlockIDs.bfWireID = config.getBlock("bfWire", BlockIDs.bfWireDefaultID).getInt();
 			
 			Property craftingEnable = config.get(Configuration.CATEGORY_GENERAL, "codeBlockCraftingEnabled", UserPreferences.codeBlockCraftingEnableDefault);
 			craftingEnable.comment = "Should code blocks have crafting recipes? If enabled, the blocks will drop themselves when broken. If false, they'll drop nothing and a code block creation item will exist.";
@@ -58,6 +59,7 @@ public class BrainFuckBlocks {
 			
 			BlockIDs.bfCodeID = BlockIDs.bfCodeDefaultID;
 			BlockIDs.bfCPUID = BlockIDs.bfCPUDefaultID;
+			BlockIDs.bfWireID = BlockIDs.bfWireDefaultID;
 			
 			UserPreferences.codeBlockCraftingEnable = UserPreferences.codeBlockCraftingEnableDefault;
 			
