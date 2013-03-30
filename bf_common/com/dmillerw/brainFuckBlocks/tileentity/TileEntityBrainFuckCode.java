@@ -38,7 +38,7 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	@Override
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
-		outputSide = rot.getRotation(ForgeDirection.NORTH);
+		outputSide = rot.getRotation(ForgeDirection.UP);
 	}
 
 	@Override

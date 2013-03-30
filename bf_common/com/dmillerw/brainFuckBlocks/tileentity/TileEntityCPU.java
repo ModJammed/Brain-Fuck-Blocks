@@ -39,10 +39,23 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 			return;
 		}
 		
+		int currXOffset = xCoord + outputSide.offsetX;
+		int currYOffset = yCoord + outputSide.offsetY;
+		int currZOffset = zCoord + outputSide.offsetZ;
+		
 		boolean keepSearching = true;
 		
 		while (keepSearching) {
-			
+			if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IConnection) {
+				System.out.println("IConnection found @ "+currXOffset+":"+currYOffset+":"+currZOffset);
+				IConnection connection = (IConnection) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
+				currXOffset = currXOffset + connection.getOutput().offsetX;
+				currYOffset = currYOffset + connection.getOutput().offsetY;
+				currZOffset = currZOffset + connection.getOutput().offsetZ;
+				System.out.println("Will look for next block @ "+currXOffset+":"+currYOffset+":"+currZOffset);
+			} else {
+				keepSearching = false;
+			}
 		}
 	}
 	
