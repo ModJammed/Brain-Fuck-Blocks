@@ -34,7 +34,7 @@ public class BlockBrainFuckCode extends BlockContainer {
 	
 	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close"};
 	
-	private static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose"};
+	public static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose"};
 	private static String[] textureTypes = new String[] {"on", "off"};
 	
 	private static String[] symbolTextureRotations = new String[] {"north", "east", "south", "west"};

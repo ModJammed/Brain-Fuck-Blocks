@@ -53,6 +53,7 @@ public class BrainFuckBlocks {
 			UserPreferences.codeBlockCraftingEnable = craftingEnable.getBoolean(UserPreferences.codeBlockCraftingEnableDefault);
 			
 			ItemIDs.bfWrenchID = config.getItem("bfWrench", ItemIDs.bfWrenchDefaultID).getInt();
+			ItemIDs.bfCodeWriterID = config.getItem("bfCodeWriter", ItemIDs.bfCodeWriterDefaultID).getInt();
 		} catch(Exception ex) {
 			LogHelper.log("Failed to load config. Assuming defaults!");
 			
@@ -62,6 +63,7 @@ public class BrainFuckBlocks {
 			UserPreferences.codeBlockCraftingEnable = UserPreferences.codeBlockCraftingEnableDefault;
 			
 			ItemIDs.bfWrenchID = ItemIDs.bfWrenchDefaultID;
+			ItemIDs.bfCodeWriterID = ItemIDs.bfCodeWriterDefaultID;
 		} finally {
 			if (config.hasChanged()) {
 				config.save();

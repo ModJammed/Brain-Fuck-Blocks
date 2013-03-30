@@ -3,16 +3,19 @@ package com.dmillerw.brainFuckBlocks.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.block.BlockBrainFuckCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
+import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,11 +24,14 @@ public class ItemCodeWriter extends Item {
 
 	private int blockID = BlockHandler.brainFuckCodeBlock.blockID;
 	
+	private Icon[] textures;
+	
 	public ItemCodeWriter(int id) {
 		super(id);
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
-		setMaxDamage(1000);
+		setMaxDamage(0);
 		setMaxStackSize(1);
+		setHasSubtypes(true);
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -55,6 +61,11 @@ public class ItemCodeWriter extends Item {
 		return par1ItemStack;
 	}
 	
+	@Override
+	public Icon getIconFromDamage(int damage) {
+        return textures[damage];
+    }
+	
 	public int getCodeWriterMeta(ItemStack stack) {
 		if (stack.stackTagCompound == null) {
 			stack.setTagCompound(new NBTTagCompound());
@@ -68,6 +79,8 @@ public class ItemCodeWriter extends Item {
 		if (stack.stackTagCompound == null) {
 			stack.setTagCompound(new NBTTagCompound());
 		}
+		
+		stack.setItemDamage(meta);
 		
 		stack.stackTagCompound.setInteger("meta", meta);
 	}
@@ -209,4 +222,13 @@ public class ItemCodeWriter extends Item {
        return true;
     }
 	
+    @Override
+    public void updateIcons(IconRegister register) {
+    	textures = new Icon[8];
+    	
+    	for (int i=0; i<8; i++) {
+    		textures[i] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":codewriter/cw_"+BlockBrainFuckCode.blockFileNames[i]);
+    	}
+    }
+    
 }
