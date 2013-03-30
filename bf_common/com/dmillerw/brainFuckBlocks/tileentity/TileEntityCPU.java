@@ -15,13 +15,20 @@ import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 import com.dmillerw.brainFuckBlocks.util.Position;
+import com.dmillerw.brainfuckInterpreter.BrainfuckEngine;
 
 public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile, IConnection {
 
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
 	
+	private BrainfuckEngine engine;
+	
 	private List<String> instructionPositions;
+	
+	public TileEntityCPU() {
+		engine = new BrainfuckEngine(30000);
+	}
 	
 	@Override
 	public ForgeDirection getRotation() {
@@ -32,7 +39,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		return rotation;
 	}
 
-	//TODO parsing, eventually
 	public void updateInstructions() {
 		if (this.worldObj.isRemote) {
 			return;
@@ -59,6 +65,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
 					IBrainfuckSymbol symbol = (IBrainfuckSymbol) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
+				
+					engine.interpret(symbol.getSymbol());
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof TileEntityCPU) {

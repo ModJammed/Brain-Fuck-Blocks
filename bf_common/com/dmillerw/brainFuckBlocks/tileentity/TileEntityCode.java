@@ -7,12 +7,12 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-import com.dmillerw.brainFuckBlocks.enums.EnumToken;
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 import com.dmillerw.brainFuckBlocks.util.Position;
+import com.dmillerw.brainfuckInterpreter.Token;
 
 public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTile, IConnection, IBrainfuckSymbol {
 
@@ -91,8 +91,8 @@ public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTil
 		return 1;
 	}
 
-	public EnumToken getSymbol() {
-		return EnumToken.values()[type];
+	public char getSymbol() {
+		return Token.getToken(type);
 	}
 	
 	@Override
