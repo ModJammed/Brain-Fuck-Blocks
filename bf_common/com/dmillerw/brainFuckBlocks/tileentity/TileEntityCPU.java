@@ -96,11 +96,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	}
 
 	@Override
-	public ForgeDirection getInput() {
-		return null;
-	}
-	
-	@Override
 	public Position getPosition() {
 		return new Position(xCoord, yCoord, zCoord);
 	}

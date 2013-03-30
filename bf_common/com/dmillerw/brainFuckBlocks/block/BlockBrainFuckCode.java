@@ -74,8 +74,6 @@ public class BlockBrainFuckCode extends BlockContainer {
 		} else if (sideForge != ForgeDirection.UP) {
 			if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP)) {
 				return sideTexture[1];
-			} else if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP).getOpposite()) {
-				return sideTexture[2];
 			}
 			
 			return sideTexture[0];

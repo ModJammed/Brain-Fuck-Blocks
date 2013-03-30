@@ -16,7 +16,6 @@ import com.dmillerw.brainFuckBlocks.util.Position;
 public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, ISyncedTile, IConnection, IBrainfuckSymbol {
 
 	private ForgeDirection rotation;
-	private ForgeDirection inputSide;
 	private ForgeDirection outputSide;
 	
 	private int type;
@@ -40,7 +39,6 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
 		outputSide = rot.getRotation(ForgeDirection.NORTH);
-		inputSide = outputSide.getOpposite();
 	}
 
 	@Override
@@ -104,11 +102,6 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	@Override
 	public ForgeDirection getOutput() {
 		return outputSide;
-	}
-
-	@Override
-	public ForgeDirection getInput() {
-		return inputSide;
 	}
 
 	@Override

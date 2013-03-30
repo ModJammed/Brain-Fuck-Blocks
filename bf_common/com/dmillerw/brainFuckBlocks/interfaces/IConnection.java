@@ -8,8 +8,6 @@ public interface IConnection {
 
 	public ForgeDirection getOutput();
 	
-	public ForgeDirection getInput();
-	
 	public Position getPosition();
 	
 }
