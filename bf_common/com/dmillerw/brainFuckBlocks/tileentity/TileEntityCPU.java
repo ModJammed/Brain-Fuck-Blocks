@@ -15,6 +15,7 @@ import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
+import com.dmillerw.brainFuckBlocks.util.Position;
 
 public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile, IConnection {
 
@@ -34,13 +35,13 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 
 	//TODO Functionality
 	public void updateInstructions() {
+		if (this.worldObj.isRemote) {
+			return;
+		}
+		
 		boolean keepSearching = true;
 		
 		while (keepSearching) {
-			int offsetX = xCoord + outputSide.offsetX;
-			int offsetY = yCoord + outputSide.offsetY;
-			int offsetZ = zCoord + outputSide.offsetZ;
-			
 			
 		}
 	}
@@ -98,6 +99,11 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	@Override
 	public ForgeDirection getInput() {
 		return null;
+	}
+	
+	@Override
+	public Position getPosition() {
+		return new Position(xCoord, yCoord, zCoord);
 	}
 	
 }

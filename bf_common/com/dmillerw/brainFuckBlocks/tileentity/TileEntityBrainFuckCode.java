@@ -1,16 +1,17 @@
 package com.dmillerw.brainFuckBlocks.tileentity;
 
-import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
-import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
-import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
-import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+
+import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
+import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
+import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
+import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
+import com.dmillerw.brainFuckBlocks.util.Position;
 
 public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, ISyncedTile, IConnection, IBrainfuckSymbol {
 
@@ -57,7 +58,7 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		rotation = ForgeDirection.getOrientation(nbt.getByte("rotation"));
+		setRotation(ForgeDirection.getOrientation(nbt.getByte("rotation")));
 		type = nbt.getInteger("type");
 	}
 	
@@ -110,4 +111,9 @@ public class TileEntityBrainFuckCode extends TileEntity implements IRotatable, I
 		return inputSide;
 	}
 
+	@Override
+	public Position getPosition() {
+		return new Position(xCoord, yCoord, zCoord);
+	}
+	
 }
