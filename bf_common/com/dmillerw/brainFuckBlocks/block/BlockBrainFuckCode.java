@@ -1,6 +1,7 @@
 package com.dmillerw.brainFuckBlocks.block;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -39,6 +41,8 @@ public class BlockBrainFuckCode extends BlockContainer {
 	protected BlockBrainFuckCode(int id) {
 		super(id, Material.rock);
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
+		setHardness(1F);
+		setResistance(1F);
 	}
 
 	@Override
@@ -142,6 +146,21 @@ public class BlockBrainFuckCode extends BlockContainer {
 		
 		return 0;
 	}
+	
+	@Override
+	public int idPicked(World world, int x, int y, int z) {
+        return this.blockID;
+    }
+	
+	@Override
+    public boolean canDropFromExplosion(Explosion explosion) {
+        return false;
+    }
+    
+	@Override
+	public int quantityDropped(int meta, int fortune, Random random) {
+        return 0;
+    }
 	
 	public TileEntity createTileEntity(World world, int meta) {
 		return new TileEntityBrainFuckCode(meta);
