@@ -1,5 +1,8 @@
 package com.dmillerw.brainfuckInterpreter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
 
 public class BrainfuckEngine {
@@ -9,6 +12,8 @@ public class BrainfuckEngine {
 	public int cells;
 	public int dataPointer;
 	public int charPointer;
+	
+	private List<Character> storedSymbols = new ArrayList<Character>();
 	
 	private TileEntityCPU cpu;
 	
@@ -28,6 +33,10 @@ public class BrainfuckEngine {
 		data = new byte[cells];
 		dataPointer = 0;
 		charPointer = 0;
+	}
+	
+	public void store(char token) {
+		storedSymbols.add(token);
 	}
 	
 	//TODO Implement loop parsing
