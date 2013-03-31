@@ -1,5 +1,7 @@
 package com.dmillerw.brainFuckBlocks.core;
 
-public class ClientTickHandler {
+import cpw.mods.fml.common.ITickHandler;
+
+public class ClientTickHandler implements ITickHandler {
 
 }
