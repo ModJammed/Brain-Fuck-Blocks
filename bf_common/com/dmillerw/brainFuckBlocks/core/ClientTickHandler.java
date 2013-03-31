@@ -29,7 +29,7 @@ public class ClientTickHandler implements ITickHandler {
 
 	public void onRenderTick() {
 		if (shouldRender) {
-			BrainFuckBlocks.instance.documentation.render();
+			BrainFuckBlocks.instance.documentation.drawScreen(0, 0, 0);
 		}
 	}
 	
