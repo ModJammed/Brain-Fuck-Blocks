@@ -12,6 +12,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
+import com.dmillerw.brainFuckBlocks.interfaces.IPerpherial;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 import com.dmillerw.brainFuckBlocks.util.Position;
@@ -25,6 +26,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	private BrainfuckEngine engine;
 	
 	private List<String> instructionPositions;
+	
+	private List<IPerpherial> connectedPeripherals;
 	
 	public TileEntityCPU() {
 		engine = new BrainfuckEngine(30000, this);
@@ -48,6 +51,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		
 		engine.clear();
 		
+		updateConnectedPeripherals();
+				
 		int currXOffset = xCoord + outputSide.offsetX;
 		int currYOffset = yCoord + outputSide.offsetY;
 		int currZOffset = zCoord + outputSide.offsetZ;
@@ -82,6 +87,35 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				keepSearching = false;
 			}
 		}
+	}
+	
+	private void updateConnectedPeripherals() {
+		connectedPeripherals = new ArrayList<IPerpherial>();
+		
+		for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+			if (worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ) instanceof IPerpherial) {
+				connectedPeripherals.add((IPerpherial) worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ));
+			}
+		}
+	}
+	
+	public void sendOutput(byte data) {
+		for (IPerpherial periph : connectedPeripherals) {
+			if (periph.getPeripheralType() == 0) {
+				periph.handleDataInput(data);
+			}
+		}
+	}
+	
+	//TODO potential issue with multiple inputs?
+	public byte getInput() {
+		for (IPerpherial periph : connectedPeripherals) {
+			if (periph.getPeripheralType() == 1) {
+				return periph.handleDataOutput();
+			}
+		}
+		
+		return 0;
 	}
 	
 	@Override

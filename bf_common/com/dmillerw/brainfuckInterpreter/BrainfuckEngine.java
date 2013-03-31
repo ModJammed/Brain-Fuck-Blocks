@@ -30,6 +30,7 @@ public class BrainfuckEngine {
 		charPointer = 0;
 	}
 	
+	//TODO Implement loop parsing
 	public void interpret(char token) {
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
@@ -48,10 +49,9 @@ public class BrainfuckEngine {
 				data[dataPointer]--;
 			}
 		} else if (token == Token.BYTE_IN) {
-			//TODO Uhhh, how do
+			data[dataPointer] = cpu.getInput();
 		} else if (token == Token.BYTE_OUT) {
-			//Temporary
-			System.out.println("Output from BYTE_OUT Block: "+data[dataPointer]);
+			cpu.sendOutput(data[dataPointer]);
 		}
 	}
 	

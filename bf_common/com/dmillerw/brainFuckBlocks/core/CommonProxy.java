@@ -2,6 +2,7 @@ package com.dmillerw.brainFuckBlocks.core;
 
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCode;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRSInterpreter;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityWire;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,6 +15,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityCode.class, "bfCode");
 		GameRegistry.registerTileEntity(TileEntityCPU.class, "bfCPU");
 		GameRegistry.registerTileEntity(TileEntityWire.class, "bfWire");
+		GameRegistry.registerTileEntity(TileEntityRSInterpreter.class, "bfRSInterpreter");
 	}
 	
 }
