@@ -4,7 +4,7 @@ import net.minecraft.client.gui.GuiScreen;
 
 public class GuiDocumentation extends GuiScreen {
 
-	//Test
+	//Test 2
 	private int page = 1;
 	
 	
