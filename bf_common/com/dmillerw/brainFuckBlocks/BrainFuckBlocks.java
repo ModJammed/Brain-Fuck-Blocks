@@ -76,6 +76,8 @@ public class BrainFuckBlocks {
 	
 	@Init
 	public void init(FMLInitializationEvent e) {
+		//Break
+		
 		//Initializing logger
 		LogHelper.init();
 		
