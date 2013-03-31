@@ -31,7 +31,7 @@ public class TileEntityWire extends TileEntity implements IRotatable, IConnectio
 	@Override
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
-		outputSide = rot.getRotation(ForgeDirection.UP);
+		outputSide = rot;
 	}
 
 	@Override

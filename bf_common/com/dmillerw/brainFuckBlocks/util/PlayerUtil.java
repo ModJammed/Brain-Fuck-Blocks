@@ -1,9 +1,16 @@
 package com.dmillerw.brainFuckBlocks.util;
 
+import net.minecraft.block.BlockPistonBase;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class PlayerUtil {
 
+	public static ForgeDirection getBlockOrientation(World world, int x, int y, int z, EntityLiving entity) {
+		return ForgeDirection.getOrientation(BlockPistonBase.determineOrientation(world, x, y, z, entity));
+	}
+	
 	public static ForgeDirection get2dOrientation(double angle) {
 		if (angle < 45 || angle > 315)
 			return ForgeDirection.EAST;
