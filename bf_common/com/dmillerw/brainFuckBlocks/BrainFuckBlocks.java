@@ -6,8 +6,6 @@ import net.minecraftforge.common.Property;
 
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
 import com.dmillerw.brainFuckBlocks.block.BlockIDs;
-import com.dmillerw.brainFuckBlocks.client.gui.GuiDocumentation;
-import com.dmillerw.brainFuckBlocks.core.ClientTickHandler;
 import com.dmillerw.brainFuckBlocks.core.CommonProxy;
 import com.dmillerw.brainFuckBlocks.core.CreativeTabBrainFuck;
 import com.dmillerw.brainFuckBlocks.helper.LogHelper;
@@ -40,8 +38,6 @@ public class BrainFuckBlocks {
 	public static CreativeTabs creativeTabBF = new CreativeTabBrainFuck("brainFuck");
 	
 	public static int wireRenderID = 0;
-	
-	public GuiDocumentation documentation;
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent e) {
@@ -82,12 +78,6 @@ public class BrainFuckBlocks {
 	
 	@Init
 	public void init(FMLInitializationEvent e) {
-		//Creates Documentation GUI instance
-		documentation = new GuiDocumentation();
-		
-		//Registering TickHandler
-		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-		
 		//Initializing logger
 		LogHelper.init();
 		
