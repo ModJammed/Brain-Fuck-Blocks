@@ -89,7 +89,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 			}
 		}
 		
-		
+		engine.interpret();
 	}
 	
 	private void updateConnectedPeripherals() {

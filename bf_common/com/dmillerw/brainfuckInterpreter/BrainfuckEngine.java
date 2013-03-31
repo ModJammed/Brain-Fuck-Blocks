@@ -13,7 +13,7 @@ public class BrainfuckEngine {
 	public int dataPointer;
 	public int charPointer;
 	
-	private List<Character> storedSymbols = new ArrayList<Character>();
+	private List<Character> storedSymbols;
 	
 	private TileEntityCPU cpu;
 	
@@ -27,20 +27,28 @@ public class BrainfuckEngine {
 		dataPointer = 0;
 		charPointer = 0;
 		this.cells = cells;
+		storedSymbols = new ArrayList<Character>();
 	}
 	
 	public void clear() {
 		data = new byte[cells];
 		dataPointer = 0;
 		charPointer = 0;
+		storedSymbols = new ArrayList<Character>();
 	}
 	
 	public void store(char token) {
 		storedSymbols.add(token);
 	}
 	
+	public void interpret() {
+		for (char token : storedSymbols) {
+			interpret(token);
+		}
+	}
+	
 	//TODO Implement loop parsing
-	public void interpret(char token) {
+	private void interpret(char token) {
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
 				dataPointer++;
