@@ -50,6 +50,7 @@ public class BlockPeripheralRedstone extends BlockContainer {
 		return true;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {
 		for (int i=0; i<blockNames.length; i++) {

@@ -46,11 +46,19 @@ public class ItemCodeWriter extends Item {
 			return par1ItemStack;
 		}
 		
+		if (getCodeWriterMeta(par1ItemStack) == 8) {
+			//Open documentation
+			return par1ItemStack;
+		}
+		
 		if (par3EntityPlayer.isSneaking()) {
 			int cwMeta = getCodeWriterMeta(par1ItemStack) + 1;
 			
 			if (cwMeta <= 7) {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[cwMeta]);
+				setCodeWriterMeta(par1ItemStack, cwMeta);
+			} else if (cwMeta == 8) {
+				par3EntityPlayer.addChatMessage("Mode Changed: Documentation");
 				setCodeWriterMeta(par1ItemStack, cwMeta);
 			} else {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[0]);
@@ -88,6 +96,10 @@ public class ItemCodeWriter extends Item {
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
 		if (par2EntityPlayer.isSneaking()) {
+			return false;
+		}
+		
+		if (getCodeWriterMeta(par1ItemStack) == 8) {
 			return false;
 		}
 		
@@ -224,11 +236,13 @@ public class ItemCodeWriter extends Item {
 	
     @Override
     public void updateIcons(IconRegister register) {
-    	textures = new Icon[8];
+    	textures = new Icon[9];
     	
     	for (int i=0; i<8; i++) {
     		textures[i] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":codewriter/cw_"+BlockCode.blockFileNames[i]);
     	}
+    	
+    	textures[8] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":codewriter/cw_documentation");
     }
     
 }
