@@ -2,6 +2,8 @@ package com.dmillerw.brainFuckBlocks.core;
 
 import java.util.EnumSet;
 
+import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+
 import net.minecraft.client.Minecraft;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
@@ -27,7 +29,7 @@ public class ClientTickHandler implements ITickHandler {
 
 	public void onRenderTick() {
 		if (shouldRender) {
-			//Render documentation
+			BrainFuckBlocks.instance.documentation.render();
 		}
 	}
 	

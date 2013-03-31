@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
+import com.dmillerw.brainFuckBlocks.core.ClientTickHandler;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
 import cpw.mods.fml.relauncher.Side;
@@ -47,7 +48,7 @@ public class ItemCodeWriter extends Item {
 		}
 		
 		if (getCodeWriterMeta(par1ItemStack) == 8) {
-			//Open documentation
+			ClientTickHandler.shouldRender = !ClientTickHandler.shouldRender;
 			return par1ItemStack;
 		}
 		
