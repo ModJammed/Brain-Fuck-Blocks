@@ -10,11 +10,10 @@ import net.minecraftforge.common.ForgeDirection;
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
-import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 import com.dmillerw.brainFuckBlocks.util.Position;
 import com.dmillerw.brainfuckInterpreter.Token;
 
-public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTile, IConnection, IBrainfuckSymbol {
+public class TileEntityCode extends TileEntity implements IRotatable, IConnection, IBrainfuckSymbol {
 
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
@@ -72,16 +71,6 @@ public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTil
 			readFromNBT(pkt.customParam1);
 		}
     }
-	
-	@Override
-	public int[] getPayload() {
-		return null;
-	}
-
-	@Override
-	public void handlePayload(int[] payload) {
-		
-	}
 
 	public char getSymbol() {
 		return Token.getToken(type);

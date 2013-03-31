@@ -5,16 +5,11 @@ import net.minecraft.tileentity.TileEntity;
 
 import com.dmillerw.brainFuckBlocks.block.BlockIDs;
 import com.dmillerw.brainFuckBlocks.block.BlockPeripheralRedstone;
-import com.dmillerw.brainFuckBlocks.interfaces.IPerpherial;
+import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
 
-public class TileEntityRedstoneData extends TileEntity implements IPerpherial {
+public class TileEntityRedstoneData extends TileEntity implements IInputPeripheral {
 
 	public byte rsOutput = 0;
-	
-	@Override
-	public byte getPeripheralType() {
-		return 0;
-	}
 
 	@SuppressWarnings("static-access")
 	@Override
@@ -22,11 +17,6 @@ public class TileEntityRedstoneData extends TileEntity implements IPerpherial {
 		BlockPeripheralRedstone block = (BlockPeripheralRedstone) Block.blocksList[BlockIDs.bfPeripheralRedstoneID];
 		block.updateSurroundingBlocks(worldObj, xCoord, yCoord, zCoord);
 		rsOutput = data;
-	}
-
-	@Override
-	public byte handleDataOutput() {
-		return 0;
 	}
 
 }

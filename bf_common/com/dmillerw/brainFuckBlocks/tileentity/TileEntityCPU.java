@@ -16,11 +16,10 @@ import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IOutputPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
-import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 import com.dmillerw.brainFuckBlocks.util.Position;
 import com.dmillerw.brainfuckInterpreter.BrainfuckEngine;
 
-public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile, IConnection {
+public class TileEntityCPU extends TileEntity implements IRotatable, IConnection {
 
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
@@ -155,16 +154,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		}
     }
 	
-	@Override
-	public int[] getPayload() {
-		return null;
-	}
-
-	@Override
-	public void handlePayload(int[] payload) {
-		
-	}
-
 	@Override
 	public ForgeDirection getOutput() {
 		return outputSide;
