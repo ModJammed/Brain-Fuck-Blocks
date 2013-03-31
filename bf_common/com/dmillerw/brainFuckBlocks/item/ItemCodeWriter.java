@@ -15,9 +15,11 @@ import net.minecraft.world.World;
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
+import com.dmillerw.brainFuckBlocks.client.gui.GuiDocumentation;
 import com.dmillerw.brainFuckBlocks.core.ClientTickHandler;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -48,7 +50,7 @@ public class ItemCodeWriter extends Item {
 		}
 		
 		if (getCodeWriterMeta(par1ItemStack) == 8) {
-			ClientTickHandler.shouldRender = !ClientTickHandler.shouldRender;
+			FMLClientHandler.instance().getClient().displayGuiScreen(new GuiDocumentation());
 			return par1ItemStack;
 		}
 		
