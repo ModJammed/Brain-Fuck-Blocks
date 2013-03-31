@@ -12,7 +12,9 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
-import com.dmillerw.brainFuckBlocks.interfaces.IPerpherial;
+import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
+import com.dmillerw.brainFuckBlocks.interfaces.IOutputPeripheral;
+import com.dmillerw.brainFuckBlocks.interfaces.IPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.interfaces.ISyncedTile;
 import com.dmillerw.brainFuckBlocks.util.Position;
@@ -27,7 +29,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	
 	private List<String> instructionPositions;
 	
-	private List<IPerpherial> connectedPeripherals;
+	private List<IPeripheral> connectedPeripherals;
 	
 	public TileEntityCPU() {
 		engine = new BrainfuckEngine(30000, this);
@@ -90,28 +92,28 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	}
 	
 	private void updateConnectedPeripherals() {
-		connectedPeripherals = new ArrayList<IPerpherial>();
+		connectedPeripherals = new ArrayList<IPeripheral>();
 		
 		for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
-			if (worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ) instanceof IPerpherial) {
-				connectedPeripherals.add((IPerpherial) worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ));
+			if (worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ) instanceof IPeripheral) {
+				connectedPeripherals.add((IPeripheral) worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ));
 			}
 		}
 	}
 	
 	public void sendOutput(byte data) {
-		for (IPerpherial periph : connectedPeripherals) {
-			if (periph.getPeripheralType() == 0) {
-				periph.handleDataInput(data);
+		for (IPeripheral periph : connectedPeripherals) {
+			if (periph instanceof IInputPeripheral) {
+				((IInputPeripheral)periph).handleDataInput(data);
 			}
 		}
 	}
 	
 	//TODO potential issue with multiple inputs?
 	public byte getInput() {
-		for (IPerpherial periph : connectedPeripherals) {
-			if (periph.getPeripheralType() == 1) {
-				return periph.handleDataOutput();
+		for (IPeripheral periph : connectedPeripherals) {
+			if (periph instanceof IOutputPeripheral) {
+				return ((IOutputPeripheral)periph).handleDataOutput();
 			}
 		}
 		
