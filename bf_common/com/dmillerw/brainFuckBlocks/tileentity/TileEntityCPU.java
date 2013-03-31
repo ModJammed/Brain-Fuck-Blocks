@@ -89,6 +89,10 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 			}
 		}
 		
+		for (char token : engine.storedSymbols) {
+			System.out.println(token);
+		}
+		
 		engine.interpret();
 	}
 	

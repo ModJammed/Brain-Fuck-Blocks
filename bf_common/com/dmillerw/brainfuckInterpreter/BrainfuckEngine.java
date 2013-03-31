@@ -13,7 +13,7 @@ public class BrainfuckEngine {
 	public int dataPointer;
 	public int charPointer;
 	
-	private List<Character> storedSymbols;
+	public List<Character> storedSymbols;
 	
 	private TileEntityCPU cpu;
 	
