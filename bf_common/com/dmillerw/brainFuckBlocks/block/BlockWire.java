@@ -30,7 +30,14 @@ public class BlockWire extends BlockContainer {
 		setHardness(1F);
 		setResistance(1F);
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
-		this.setBlockBounds(0F, 0.45F, 0F, 1F, 0.72F, 1F);
+	}
+	
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 	
 	@Override
