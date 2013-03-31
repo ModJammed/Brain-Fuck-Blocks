@@ -51,6 +51,7 @@ public class BrainfuckEngine {
 		} else if (token == Token.BYTE_IN) {
 			data[dataPointer] = cpu.getInput();
 		} else if (token == Token.BYTE_OUT) {
+			System.out.println("Debug Output @ "+dataPointer+" >>> "+data[dataPointer]);
 			cpu.sendOutput(data[dataPointer]);
 		}
 	}
