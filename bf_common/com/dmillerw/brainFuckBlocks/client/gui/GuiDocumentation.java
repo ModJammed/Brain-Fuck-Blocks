@@ -1,5 +1,7 @@
 package com.dmillerw.brainFuckBlocks.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import kovu.utils.gui.GuiUtils;
 import net.minecraft.client.gui.FontRenderer;
@@ -15,7 +17,9 @@ public class GuiDocumentation extends GuiScreen {
 		
 		FontRenderer font = FMLClientHandler.instance().getClient().fontRenderer;
 		
-		font.drawStringWithShadow("Hello", 0, 0, 0x000000);
+		GL11.glScalef(2F, 2F, 2F);
+		font.drawStringWithShadow("Hello", 0, 0, 0xFFFFFF);
+		GL11.glScalef(.5F, .5F, .5F);
 		
 		GuiUtils.enableDefaults();
 	}
