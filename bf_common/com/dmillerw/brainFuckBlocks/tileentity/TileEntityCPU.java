@@ -67,7 +67,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
 					IBrainfuckSymbol symbol = (IBrainfuckSymbol) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
-					System.out.println(symbol.getSymbol());
 					engine.interpret(symbol.getSymbol());
 				}
 				

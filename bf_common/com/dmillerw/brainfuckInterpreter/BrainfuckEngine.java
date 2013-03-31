@@ -48,8 +48,7 @@ public class BrainfuckEngine {
 			//TODO Uhhh, how do
 		} else if (token == Token.BYTE_OUT) {
 			//Temporary
-			System.out.println("Byte out");
-			System.out.println(data[dataPointer]);
+			System.out.println("Output from BYTE_OUT Block: "+data[dataPointer]);
 		}
 	}
 	
