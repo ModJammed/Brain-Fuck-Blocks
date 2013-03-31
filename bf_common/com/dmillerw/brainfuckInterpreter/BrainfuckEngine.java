@@ -70,6 +70,8 @@ public class BrainfuckEngine {
 		} else if (token == Token.BYTE_OUT) {
 			System.out.println("Debug Output @ "+dataPointer+" >>> "+data[dataPointer]);
 			cpu.sendOutput(data[dataPointer]);
+		} else if (token == Token.BRACKET_OPEN) {
+			
 		}
 	}
 	
