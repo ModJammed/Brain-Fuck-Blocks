@@ -1,4 +1,4 @@
-package com.dmillerw.brainFuckBlocks.client;
+package com.dmillerw.brainFuckBlocks.client.gui;
 
 import net.minecraft.client.gui.GuiScreen;
 
