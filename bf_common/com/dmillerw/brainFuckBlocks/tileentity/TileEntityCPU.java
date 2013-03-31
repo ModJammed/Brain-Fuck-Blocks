@@ -27,7 +27,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	private List<String> instructionPositions;
 	
 	public TileEntityCPU() {
-		engine = new BrainfuckEngine(30000);
+		engine = new BrainfuckEngine(30000, this);
 	}
 	
 	@Override

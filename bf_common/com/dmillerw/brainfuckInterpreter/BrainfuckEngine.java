@@ -1,17 +1,20 @@
 package com.dmillerw.brainfuckInterpreter;
 
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
+
 public class BrainfuckEngine {
 
 	public byte[] data;
 	
 	public int cells;
-	
 	public int dataPointer;
-	
 	public int charPointer;
 	
-	public BrainfuckEngine(int cells) {
+	private TileEntityCPU cpu;
+	
+	public BrainfuckEngine(int cells, TileEntityCPU cpu) {
 		initate(cells);
+		this.cpu = cpu;
 	}
 	
 	public void initate(int cells) {
