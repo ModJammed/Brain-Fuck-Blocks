@@ -15,6 +15,8 @@ public class BrainfuckEngine {
 	
 	public List<Character> storedSymbols;
 	
+	public List<Integer> loopStack;
+	
 	private TileEntityCPU cpu;
 	
 	public BrainfuckEngine(int cells, TileEntityCPU cpu) {
@@ -28,13 +30,15 @@ public class BrainfuckEngine {
 		charPointer = 0;
 		this.cells = cells;
 		storedSymbols = new ArrayList<Character>();
+		loopStack = new ArrayList<Integer>();
 	}
 	
 	public void clear() {
 		data = new byte[cells];
 		dataPointer = 0;
 		charPointer = 0;
-		storedSymbols = new ArrayList<Character>();
+		storedSymbols.clear();
+		loopStack.clear();
 	}
 	
 	public void store(char token) {
