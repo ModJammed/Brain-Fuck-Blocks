@@ -4,13 +4,17 @@ import java.util.List;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneData;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneInput;
 
@@ -18,11 +22,40 @@ public class BlockPeripheralRedstone extends BlockContainer {
 
 	public static String[] blockNames = new String[] {"Redstone Data Interpreter", "Redstone Input Interpreter"};
 	
+	private Icon[] textures;
+	
 	public BlockPeripheralRedstone(int id) {
 		super(id, Material.iron);
 		setHardness(1F);
 		setResistance(1F);
 		setCreativeTab(BrainFuckBlocks.creativeTabBF);
+	}
+	
+	@Override
+	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
+		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
+		int meta = world.getBlockMetadata(x, y, z);
+		
+		if (sideForge == ForgeDirection.DOWN) {
+			return textures[3];
+		} else if (sideForge != ForgeDirection.UP) {
+			return textures[2];
+		} else {
+			return textures[meta];
+		}
+	}
+	
+	@Override
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
+		
+		if (sideForge == ForgeDirection.DOWN) {
+			return textures[3];
+		} else if (sideForge != ForgeDirection.UP) {
+			return textures[2];
+		} else {
+			return textures[meta];
+		}
 	}
 	
 	@Override
@@ -48,6 +81,16 @@ public class BlockPeripheralRedstone extends BlockContainer {
 	@Override
 	public boolean canProvidePower() {
 		return true;
+	}
+	
+	@Override
+	public void registerIcons(IconRegister register) {
+		textures = new Icon[4];
+		
+		textures[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":rsperipheral/rs_data");
+		textures[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":rsperipheral/rs_input");
+		textures[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
+		textures[3] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
