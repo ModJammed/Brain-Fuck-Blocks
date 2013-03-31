@@ -19,7 +19,6 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
-import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
@@ -56,9 +55,6 @@ public class BlockCode extends BlockContainer {
 			return true;
 		}
 		
-		IBrainfuckSymbol symbol = (IBrainfuckSymbol) world.getBlockTileEntity(x, y, z);
-		System.out.println(symbol.getSymbol());
-		
 		return false;
 	}
 	
@@ -87,7 +83,7 @@ public class BlockCode extends BlockContainer {
 			
 			return sideTexture[0];
 		} else {
-			return textures[meta][tile.isActive()][getTextureIndexFromRotation(blockRotator.getRotation())];
+			return textures[meta][tile.getAccessingFlag()][getTextureIndexFromRotation(blockRotator.getRotation())];
 		}
 	}
 	

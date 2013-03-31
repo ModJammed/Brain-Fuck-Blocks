@@ -21,7 +21,7 @@ public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTil
 	
 	private int type;
 	
-	private boolean active = false;
+	private byte active = 1;
 	
 	public TileEntityCode(int type) {
 		this.type = type;
@@ -83,14 +83,6 @@ public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTil
 		
 	}
 
-	public int isActive() {
-		if (active) {
-			return 0;
-		}
-		
-		return 1;
-	}
-
 	public char getSymbol() {
 		return Token.getToken(type);
 	}
@@ -103,6 +95,17 @@ public class TileEntityCode extends TileEntity implements IRotatable, ISyncedTil
 	@Override
 	public Position getPosition() {
 		return new Position(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void setAccessingFlag(byte flag) {
+		active = flag;
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public byte getAccessingFlag() {
+		return active;
 	}
 	
 }
