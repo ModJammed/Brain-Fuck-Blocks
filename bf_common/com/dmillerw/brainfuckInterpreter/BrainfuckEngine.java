@@ -44,12 +44,12 @@ public class BrainfuckEngine {
 	public void interpret() {
 		for (char token : storedSymbols) {
 			charPointer++;
-			interpret(token);
+			interpret(token, storedSymbols.toArray());
 		}
 	}
 	
 	//TODO Implement loop parsing
-	private void interpret(char token) {
+	private void interpret(char token, char[] chars) {
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
 				dataPointer++;
@@ -72,9 +72,10 @@ public class BrainfuckEngine {
 			System.out.println("Debug Output @ "+dataPointer+" >>> "+data[dataPointer]);
 			cpu.sendOutput(data[dataPointer]);
 		} else if (token == Token.BRACKET_OPEN) {
-			if (data[dataPointer] > 0) {
-				for (int i=charPointer; i<storedSymbols.size(); i++) {
-					interpret(storedSymbols.get(charPointer + 1));
+			if (data[dataPointer] == 0) {
+				int i=0;
+				while (i > 0) {
+					char c2 = 
 				}
 			}
 		} else if (token == Token.BRACKET_CLOSE) {
