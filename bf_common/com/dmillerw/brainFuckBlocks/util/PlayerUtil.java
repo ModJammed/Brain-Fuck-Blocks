@@ -23,4 +23,18 @@ public class PlayerUtil {
 		return get2dOrientation(angle);
 	}
 	
+	public static ForgeDirection get3dOrientation(Position pos1, Position pos2) {
+		double Dx = pos1.x - pos2.x;
+		double Dy = pos1.y - pos2.y;
+		double angle = Math.atan2(Dy, Dx) / Math.PI * 180 + 180;
+
+		if (angle > 45 && angle < 135)
+			return ForgeDirection.UP;
+		else if (angle > 225 && angle < 315)
+			return ForgeDirection.DOWN;
+		else
+			return get2dOrientation(pos1, pos2);
+	}
+
+	
 }

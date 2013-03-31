@@ -14,6 +14,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
+import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityWire;
@@ -64,9 +65,9 @@ public class BlockWire extends BlockContainer {
 	@Override
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
-		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
+		IConnection connection = (IConnection) world.getBlockTileEntity(x, y, z);
 		
-		if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP)) {
+		if (sideForge == connection.getOutput()) {
 			return outTexture;
 		} else {
 			return sideTexture;
