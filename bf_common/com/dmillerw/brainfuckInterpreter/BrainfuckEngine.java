@@ -76,9 +76,14 @@ public class BrainfuckEngine {
 			System.out.println("Debug Output @ "+dataPointer+" >>> "+data[dataPointer]);
 			cpu.sendOutput(data[dataPointer]);
 		} else if (token == Token.BRACKET_OPEN) {
-			
+			if (data[dataPointer] > 0) {
+				loopStack.add(dataPointer);
+			}
 		} else if (token == Token.BRACKET_CLOSE) {
-			
+			if (loopStack.size() > 0) {
+				dataPointer = loopStack.get(loopStack.size() - 1);
+				loopStack.remove(loopStack.size() - 1);
+			}
 		}
 	}
 	
