@@ -6,6 +6,7 @@ import net.minecraftforge.common.Property;
 
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
 import com.dmillerw.brainFuckBlocks.block.BlockIDs;
+import com.dmillerw.brainFuckBlocks.core.ClientTickHandler;
 import com.dmillerw.brainFuckBlocks.core.CommonProxy;
 import com.dmillerw.brainFuckBlocks.core.CreativeTabBrainFuck;
 import com.dmillerw.brainFuckBlocks.helper.LogHelper;
@@ -24,6 +25,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid=ModInfo.MOD_ID, name=ModInfo.MOD_NAME, version=ModInfo.MOD_VERSION)
 @NetworkMod(serverSideRequired=false, clientSideRequired=true, packetHandler=BFPacketHandler.class)
@@ -76,6 +79,9 @@ public class BrainFuckBlocks {
 	
 	@Init
 	public void init(FMLInitializationEvent e) {
+		//Registering TickHandler
+		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		
 		//Initializing logger
 		LogHelper.init();
 		
