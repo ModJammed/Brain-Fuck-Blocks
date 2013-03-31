@@ -27,10 +27,11 @@ public class TileEntityWire extends TileEntity implements IRotatable, IConnectio
 		return rotation;
 	}
 
+	//TODO Make wire rotate in all three dimensions
 	@Override
 	public void setRotation(ForgeDirection rot) {
 		rotation = rot;
-		outputSide = rot.getOpposite();
+		outputSide = rot.getRotation(ForgeDirection.UP);
 	}
 
 	@Override
