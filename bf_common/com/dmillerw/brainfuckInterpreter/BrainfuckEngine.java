@@ -44,7 +44,7 @@ public class BrainfuckEngine {
 	public void interpret() {
 		for (char token : storedSymbols) {
 			charPointer++;
-			interpret(token, storedSymbols.toArray());
+			interpret(token, toCharArray(storedSymbols));
 		}
 	}
 	
@@ -75,12 +75,28 @@ public class BrainfuckEngine {
 			if (data[dataPointer] == 0) {
 				int i=0;
 				while (i > 0) {
-					char c2 = 
+					char c2 = chars[++charPointer];
+					if (c2 == Token.BRACKET_OPEN) {
+						i++;
+					} else if (c2 == Token.BRACKET_CLOSE) {
+						i--;
+					}
 				}
 			}
 		} else if (token == Token.BRACKET_CLOSE) {
 			return;
 		}
+	}
+	
+	private char[] toCharArray(List<Character> charList) {
+		Object[] array = charList.toArray();
+		char[] charArray = new char[array.length];
+		
+		for (int i=0; i<array.length; i++) {
+			charArray[i] = (char) array[i];
+		}
+		
+		return charArray;
 	}
 	
 }
