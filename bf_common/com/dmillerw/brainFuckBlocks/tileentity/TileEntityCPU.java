@@ -55,10 +55,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 		boolean keepSearching = true;
 		
 		while (keepSearching) {
-			if (worldObj.getWorldTime() % 2 != 0) {
-				return;
-			}
-			
 			if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IConnection) {
 				IConnection connection = (IConnection) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
 				
@@ -71,11 +67,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
 					IBrainfuckSymbol symbol = (IBrainfuckSymbol) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
-					symbol.setAccessingFlag((byte) 0);
+					System.out.println(symbol.getSymbol());
 					engine.interpret(symbol.getSymbol());
-					System.out.println("Data Pointer >>> "+engine.dataPointer);
-					System.out.println("Data @ Pointer >>> "+engine.data[engine.dataPointer]);
-					symbol.setAccessingFlag((byte) 1);
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof TileEntityCPU) {

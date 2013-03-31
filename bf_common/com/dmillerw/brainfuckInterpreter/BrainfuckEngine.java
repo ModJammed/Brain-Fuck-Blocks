@@ -44,6 +44,12 @@ public class BrainfuckEngine {
 			if (data[dataPointer] - 1 >= 0) {
 				data[dataPointer]--;
 			}
+		} else if (token == Token.BYTE_IN) {
+			//TODO Uhhh, how do
+		} else if (token == Token.BYTE_OUT) {
+			//Temporary
+			System.out.println("Byte out");
+			System.out.println(data[dataPointer]);
 		}
 	}
 	

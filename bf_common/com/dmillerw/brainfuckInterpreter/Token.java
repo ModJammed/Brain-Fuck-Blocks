@@ -21,9 +21,9 @@ public class Token {
 		} else if (id == 3) {
 			return BYTE_DEC;
 		} else if (id == 4) {
-			return BYTE_IN;
-		} else if (id == 5) {
 			return BYTE_OUT;
+		} else if (id == 5) {
+			return BYTE_IN;
 		} else if (id == 6) {
 			return BRACKET_OPEN;
 		} else if (id == 7) {
