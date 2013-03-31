@@ -138,7 +138,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, ISyncedTile
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		rotation = ForgeDirection.getOrientation(nbt.getByte("rotation"));
+		setRotation(ForgeDirection.getOrientation(nbt.getByte("rotation")));
 	}
 	
 	public Packet getDescriptionPacket() {
