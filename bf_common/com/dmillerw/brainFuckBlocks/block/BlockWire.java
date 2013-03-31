@@ -41,19 +41,6 @@ public class BlockWire extends BlockContainer {
 	}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
-		
-		if (tile.getRotation() == ForgeDirection.NORTH && tile.getRotation() == ForgeDirection.SOUTH) {
-			setBlockBounds(0F, 0.55F, 0.35F, 1F, 0.75F, 0.65F);
-		} else if (tile.getRotation() == ForgeDirection.EAST && tile.getRotation() == ForgeDirection.WEST) {
-			
-		} else if (tile.getRotation() == ForgeDirection.UP && tile.getRotation() == ForgeDirection.DOWN) {
-			
-		}
-	}
-	
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IBFWrench) {
 			IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
