@@ -58,19 +58,19 @@ public class BrainfuckEngine {
 	private void interpret(char token, char[] chars) {
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
-				dataPointer++;
+				++dataPointer;
 			}
 		} else if (token == Token.DATA_DEC) {
 			if (dataPointer - 1 >= 0) {
-				dataPointer--;
+				++dataPointer;
 			}
 		} else if (token == Token.BYTE_INC) {
 			if (data[dataPointer] + 1 <= Byte.MAX_VALUE) {
-				data[dataPointer]++;
+				++data[dataPointer];
 			}
 		} else if (token == Token.BYTE_DEC) {
 			if (data[dataPointer] - 1 >= 0) {
-				data[dataPointer]--;
+				--data[dataPointer];
 			}
 		} else if (token == Token.BYTE_IN) {
 			data[dataPointer] = cpu.getInput();
