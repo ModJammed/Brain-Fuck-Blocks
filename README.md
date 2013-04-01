@@ -61,7 +61,7 @@ This is only enabled if crafting recipes for code blocks are disabled. Shift-cli
 #### Byte Output
 ![Byte Output](http://i.imgur.com/kaYv3Aq.png)
 #### Byte Input
-![Byte Input](http://i.imgur.com/7R7rXUF.png)
+![Byte Input](http://i.imgur.com/A8MzaMA.png)
 #### Bracket Open
 ![Bracket Open](http://i.imgur.com/4k7x2xX.png)
 #### Bracket Close
