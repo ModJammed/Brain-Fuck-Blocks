@@ -73,7 +73,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof IBrainfuckSymbol) {
 					IBrainfuckSymbol symbol = (IBrainfuckSymbol) worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset);
-					engine.store(new Position((TileEntity) symbol), symbol.getSymbol());
+					engine.store(symbol.getSymbol());
 				}
 				
 				if (worldObj.getBlockTileEntity(currXOffset, currYOffset, currZOffset) instanceof TileEntityCPU) {
