@@ -155,7 +155,7 @@ public class BrainFuckBlocks {
 		
 		/* ITEMS */
 		//Wrench
-		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfWrench), new Object[] {"  RI", "BIR", "IR ", 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 1), 'I', Item.ingotIron});
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfWrench), new Object[] {"  RI", "BIR", "IB ", 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 1), 'I', Item.ingotIron});
 	
 		if (!UserPreferences.codeBlockCraftingEnable) {
 			GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCodeWriter), new Object[] {"III", "IGI", "SRS", 'I', Item.ingotIron, 'G', Block.thinGlass, 'S', Block.stone, 'R', Item.redstone});
