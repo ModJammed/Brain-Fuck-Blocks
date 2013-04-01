@@ -63,7 +63,7 @@ public class ItemCodeWriter extends Item {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[0]);
 				setCodeWriterMeta(par1ItemStack, 0);
 			}
-		} else if (cwMeta == 8) {
+		} else if (cwMeta == 9) {
 			System.out.println("OPenling documentation");
 			FMLClientHandler.instance().getClient().displayGuiScreen(new GuiDocumentation());
 		}

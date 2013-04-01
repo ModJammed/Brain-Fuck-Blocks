@@ -2,6 +2,8 @@ package com.dmillerw.brainFuckBlocks.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 import net.minecraft.client.gui.GuiScreen;
 
 public class GuiDocumentation extends GuiScreen {
@@ -13,7 +15,7 @@ public class GuiDocumentation extends GuiScreen {
 		System.out.println("Drawing screen");
 		
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/gui/book.png");
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture("/gui/book.png");
         int k = (this.width - this.bookImageWidth) / 2;
         byte b0 = 2;
         this.drawTexturedModalRect(k, b0, 0, 0, this.bookImageWidth, this.bookImageHeight);
