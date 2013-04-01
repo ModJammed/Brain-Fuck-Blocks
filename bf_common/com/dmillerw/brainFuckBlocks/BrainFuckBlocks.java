@@ -108,7 +108,7 @@ public class BrainFuckBlocks {
 		//CPU
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCPU), new Object[] {"T", "A", "M", 'T', new ItemStack(ItemHandler.bfCraftingComponent, 1, 4), 'A', new ItemStack(ItemHandler.bfCraftingComponent, 1, 3), 'M', new ItemStack(BlockHandler.bfCode, 1, 8)});
 		//Wire
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfWire), new Object[] {" B ", "BRB", " B ", 'B', new ItemStack(Block.cloth, 1, 15), 'R', Item.redstone});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfWire, 16), new Object[] {" B ", "BRB", " B ", 'B', new ItemStack(Block.cloth, 1, 15), 'R', Item.redstone});
 		//Redstone Data Interpreter
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheralRS, 1, 0), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
 		//Redstone Input Interpreter
