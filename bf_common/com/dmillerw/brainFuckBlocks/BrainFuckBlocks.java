@@ -30,7 +30,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class BrainFuckBlocks {
 	@Instance(ModInfo.MOD_ID)
 	public static BrainFuckBlocks instance;
-	@SidedProxy(serverSide="com.dmillerw.brainFuckBlocks.CommonProxy", clientSide="com.dmillerw.brainFuckBlocks.client.ClientProxy")
+	@SidedProxy(serverSide="com.dmillerw.brainFuckBlocks.core.CommonProxy", clientSide="com.dmillerw.brainFuckBlocks.client.ClientProxy")
 	public static CommonProxy proxy;
 	
 	public static CreativeTabs creativeTabBF = new CreativeTabBrainFuck("brainFuck");
