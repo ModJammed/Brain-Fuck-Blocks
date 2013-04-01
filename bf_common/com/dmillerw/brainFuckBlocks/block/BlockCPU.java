@@ -51,6 +51,15 @@ public class BlockCPU extends BlockContainer {
 		return false;
 	}
 	
+	public void onNeighborBlockChange(World world, int x, int y, int z, int blockID) {
+		if (!world.isRemote) {
+			if (world.isBlockIndirectlyGettingPowered(x, y, z)) {
+				TileEntityCPU cpu = (TileEntityCPU) world.getBlockTileEntity(x, y, z);
+				cpu.updateInstructions();
+			}
+		}
+    }
+	
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, living, stack);
