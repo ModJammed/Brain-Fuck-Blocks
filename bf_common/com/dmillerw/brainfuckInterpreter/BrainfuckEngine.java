@@ -46,9 +46,8 @@ public class BrainfuckEngine {
 	}
 	
 	public void interpret() {
-		for (char token : storedSymbols) {
-			charPointer++;
-			interpret(token, toCharArray(storedSymbols));
+		for (; charPointer<storedSymbols.size(); charPointer++) {
+			interpret(storedSymbols.get(charPointer), toCharArray(storedSymbols));
 		}
 	}
 	
