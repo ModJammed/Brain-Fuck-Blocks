@@ -113,6 +113,8 @@ public class BrainFuckBlocks {
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 0), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
 		//Redstone Input Interpreter
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 1), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 5)});
+		//Chat Data Interpreter
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 2), new Object[] {"S", "M", 'S', Item.sign, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
 		
 		//Code blocks
 		if (UserPreferences.codeBlockCraftingEnable) {
