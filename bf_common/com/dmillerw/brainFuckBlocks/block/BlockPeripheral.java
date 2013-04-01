@@ -20,7 +20,7 @@ import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneInput;
 
 public class BlockPeripheral extends BlockContainer {
 
-	public static String[] blockNames = new String[] {"Redstone Data Interpreter", "Redstone Input Interpreter"};
+	public static String[] blockNames = new String[] {"Redstone Data Interpreter", "Redstone Input Interpreter", "Chat Data Interpreter"};
 	
 	private Icon[] textures;
 	
@@ -37,9 +37,9 @@ public class BlockPeripheral extends BlockContainer {
 		int meta = world.getBlockMetadata(x, y, z);
 		
 		if (sideForge == ForgeDirection.DOWN) {
-			return textures[3];
+			return textures[4];
 		} else if (sideForge != ForgeDirection.UP) {
-			return textures[2];
+			return textures[3];
 		} else {
 			return textures[meta];
 		}
@@ -50,9 +50,9 @@ public class BlockPeripheral extends BlockContainer {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		
 		if (sideForge == ForgeDirection.DOWN) {
-			return textures[3];
+			return textures[4];
 		} else if (sideForge != ForgeDirection.UP) {
-			return textures[2];
+			return textures[3];
 		} else {
 			return textures[meta];
 		}
@@ -69,13 +69,13 @@ public class BlockPeripheral extends BlockContainer {
 	}
 	
 	public static void updateSurroundingBlocks(World world, int x, int y, int z) {
-    	world.notifyBlocksOfNeighborChange(x, y, z, BlockIDs.bfPeripheralRedstoneID);
-        world.notifyBlocksOfNeighborChange(x - 1, y, z, BlockIDs.bfPeripheralRedstoneID);
-        world.notifyBlocksOfNeighborChange(x + 1, y, z, BlockIDs.bfPeripheralRedstoneID);
-        world.notifyBlocksOfNeighborChange(x, y, z - 1, BlockIDs.bfPeripheralRedstoneID);
-        world.notifyBlocksOfNeighborChange(x, y, z + 1, BlockIDs.bfPeripheralRedstoneID);
-        world.notifyBlocksOfNeighborChange(x, y - 1, z, BlockIDs.bfPeripheralRedstoneID);
-        world.notifyBlocksOfNeighborChange(x, y + 1, z, BlockIDs.bfPeripheralRedstoneID);
+    	world.notifyBlocksOfNeighborChange(x, y, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x - 1, y, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x + 1, y, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y, z - 1, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y, z + 1, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y - 1, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y + 1, z, BlockIDs.bfPeripheralID);
     }
 	
 	@Override
@@ -85,12 +85,13 @@ public class BlockPeripheral extends BlockContainer {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		textures = new Icon[4];
+		textures = new Icon[5];
 		
 		textures[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":rsperipheral/rs_data");
 		textures[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":rsperipheral/rs_input");
-		textures[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
-		textures[3] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
+		textures[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":chatperipheral/chat_data");
+		textures[3] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
+		textures[4] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

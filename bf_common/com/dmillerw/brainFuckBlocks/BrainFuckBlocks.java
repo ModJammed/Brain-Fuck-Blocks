@@ -51,7 +51,7 @@ public class BrainFuckBlocks {
 			BlockIDs.bfCodeID = config.getBlock("brainFuckCodeBlockID", BlockIDs.bfCodeDefaultID).getInt();
 			BlockIDs.bfCPUID = config.getBlock("bfCPU", BlockIDs.bfCPUDefaultID).getInt();
 			BlockIDs.bfWireID = config.getBlock("bfWire", BlockIDs.bfWireDefaultID).getInt();
-			BlockIDs.bfPeripheralRedstoneID = config.getBlock("bfPeripheral", BlockIDs.bfPeriphperalRedstoneDefaultID).getInt();
+			BlockIDs.bfPeripheralID = config.getBlock("bfPeripheral", BlockIDs.bfPeriphperalDefaultID).getInt();
 			
 			Property craftingEnable = config.get(Configuration.CATEGORY_GENERAL, "codeBlockCraftingEnabled", UserPreferences.codeBlockCraftingEnableDefault);
 			craftingEnable.comment = "Should code blocks have crafting recipes? If enabled, the blocks will drop themselves when broken. If false, they'll drop nothing and a code block creation item will exist.";
@@ -66,7 +66,7 @@ public class BrainFuckBlocks {
 			BlockIDs.bfCodeID = BlockIDs.bfCodeDefaultID;
 			BlockIDs.bfCPUID = BlockIDs.bfCPUDefaultID;
 			BlockIDs.bfWireID = BlockIDs.bfWireDefaultID;
-			BlockIDs.bfPeripheralRedstoneID = BlockIDs.bfPeriphperalRedstoneDefaultID;
+			BlockIDs.bfPeripheralID = BlockIDs.bfPeriphperalDefaultID;
 			
 			UserPreferences.codeBlockCraftingEnable = UserPreferences.codeBlockCraftingEnableDefault;
 			
@@ -110,9 +110,9 @@ public class BrainFuckBlocks {
 		//Wire
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfWire, 16), new Object[] {" B ", "BRB", " B ", 'B', new ItemStack(Block.cloth, 1, 15), 'R', Item.redstone});
 		//Redstone Data Interpreter
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheralRS, 1, 0), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 0), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
 		//Redstone Input Interpreter
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheralRS, 1, 1), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 5)});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 1), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 5)});
 		
 		//Code blocks
 		if (UserPreferences.codeBlockCraftingEnable) {

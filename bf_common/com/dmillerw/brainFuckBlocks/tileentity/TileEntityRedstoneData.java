@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 
 import com.dmillerw.brainFuckBlocks.block.BlockIDs;
-import com.dmillerw.brainFuckBlocks.block.BlockPeripheralRedstone;
+import com.dmillerw.brainFuckBlocks.block.BlockPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
 
 public class TileEntityRedstoneData extends TileEntity implements IInputPeripheral {
@@ -14,7 +14,7 @@ public class TileEntityRedstoneData extends TileEntity implements IInputPeripher
 	@SuppressWarnings("static-access")
 	@Override
 	public void handleDataInput(byte data) {
-		BlockPeripheralRedstone block = (BlockPeripheralRedstone) Block.blocksList[BlockIDs.bfPeripheralRedstoneID];
+		BlockPeripheral block = (BlockPeripheral) Block.blocksList[BlockIDs.bfPeripheralID];
 		block.updateSurroundingBlocks(worldObj, xCoord, yCoord, zCoord);
 		rsOutput = data;
 	}

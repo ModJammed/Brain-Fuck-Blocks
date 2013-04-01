@@ -10,7 +10,7 @@ public class BlockHandler {
 	public static Block bfCode;
 	public static Block bfCPU;
 	public static Block bfWire;
-	public static Block bfPeripheralRS;
+	public static Block bfPeripheral;
 	
 	public static void init() {
 		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setUnlocalizedName("bfCPU");
@@ -27,10 +27,10 @@ public class BlockHandler {
 		GameRegistry.registerBlock(bfWire, "bfWire");
 		LanguageRegistry.addName(bfWire, "Wire");
 		
-		bfPeripheralRS = new BlockPeripheralRedstone(BlockIDs.bfPeripheralRedstoneID).setUnlocalizedName("bfPeripheral");
-		GameRegistry.registerBlock(bfPeripheralRS, ItemBlockRedstone.class, "bfPeripheralRS");
-		for (int i=0; i<BlockPeripheralRedstone.blockNames.length; i++) {
-			LanguageRegistry.addName(new ItemStack(bfPeripheralRS.blockID, 1, i), BlockPeripheralRedstone.blockNames[i]);
+		bfPeripheral = new BlockPeripheral(BlockIDs.bfPeripheralID).setUnlocalizedName("bfPeripheral");
+		GameRegistry.registerBlock(bfPeripheral, ItemBlockRedstone.class, "bfPeripheralRS");
+		for (int i=0; i<BlockPeripheral.blockNames.length; i++) {
+			LanguageRegistry.addName(new ItemStack(bfPeripheral.blockID, 1, i), BlockPeripheral.blockNames[i]);
 		}
 	}
 	
