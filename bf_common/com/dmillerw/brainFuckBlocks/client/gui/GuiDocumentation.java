@@ -12,8 +12,6 @@ public class GuiDocumentation extends GuiScreen {
     private int bookImageHeight = 192;
 	
 	public void drawScreen(int par1, int par2, float par3) {
-		System.out.println("Drawing screen");
-		
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture("/gui/book.png");
         int k = (this.width - this.bookImageWidth) / 2;
