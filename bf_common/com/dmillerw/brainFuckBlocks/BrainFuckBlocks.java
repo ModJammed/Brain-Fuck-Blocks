@@ -102,9 +102,28 @@ public class BrainFuckBlocks {
 		/* BLOCKS */
 		//Machine casing
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RRR", "RCR", "DID", 'R', Item.redstone, 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), 'I', Block.blockSteel});
-	
 		//CPU
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCPU), new Object[] {"");
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCPU), new Object[] {"T", "A", "M", 'T', new ItemStack(ItemHandler.bfCraftingComponent, 1, 4), 'A', new ItemStack(ItemHandler.bfCraftingComponent, 1, 3), 'M', new ItemStack(BlockHandler.bfCode, 1, 8)});
+		
+		//Code blocks
+		if (UserPreferences.codeBlockCraftingEnable) {
+			int CRAFTING_AMOUNT = 16;
+			
+			//Increment Pointer
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"RII", "IIR", "RII", 'R', Item.redstone, 'I', Item.ingotIron});
+			
+			//Decrement Pointer
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 1), new Object[] {"IIR", "RII", "IRR", 'R', Item.redstone, 'I', Item.ingotIron});
+		
+			//Increment Data
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"IRI", "RRR", "IRI", 'R', Item.redstone, 'I', Item.ingotIron});
+		
+			//Decrement Data
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"III", "RRR", "III", 'R', Item.redstone, 'I', Item.ingotIron});
+		
+			//Output
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"IRI", "RIR", "IRI", 'R', Item.redstone, 'I', Item.ingotIron});
+		}
 		
 		/* CRAFTING COMPONENTS */
 		
