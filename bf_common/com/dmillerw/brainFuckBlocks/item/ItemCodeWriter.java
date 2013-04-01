@@ -15,10 +15,8 @@ import net.minecraft.world.World;
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
-import com.dmillerw.brainFuckBlocks.client.gui.GuiDocumentation;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -56,15 +54,10 @@ public class ItemCodeWriter extends Item {
 			if (cwMeta <= 7) {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[cwMeta]);
 				setCodeWriterMeta(par1ItemStack, cwMeta);
-			} else if (cwMeta == 8) {
-				par3EntityPlayer.addChatMessage("Mode Changed: Documentation");
-				setCodeWriterMeta(par1ItemStack, cwMeta);
 			} else {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[0]);
 				setCodeWriterMeta(par1ItemStack, 0);
 			}
-		} else if (cwMeta == 9) {
-			FMLClientHandler.instance().getClient().displayGuiScreen(new GuiDocumentation());
 		}
 		
 		return par1ItemStack;
