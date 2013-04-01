@@ -24,7 +24,6 @@ import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCode;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
-import com.dmillerw.brainFuckBlocks.util.Position;
 
 public class BlockCode extends BlockContainer {
 
@@ -61,8 +60,7 @@ public class BlockCode extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, living, stack);
-		EntityPlayer player = (EntityPlayer)living;
-		ForgeDirection side = PlayerUtil.get2dOrientation(new Position(player.posX, player.posY, player.posZ), new Position(x,y, z ));
+		ForgeDirection side = PlayerUtil.get2DBlockOrientation(living);
 		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
 		tile.setRotation(side);
 	}

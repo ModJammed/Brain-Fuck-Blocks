@@ -55,7 +55,7 @@ public class BlockWire extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, living, stack);
-		ForgeDirection side = PlayerUtil.getBlockOrientation(world, x, y, z, living);
+		ForgeDirection side = PlayerUtil.get3DBlockOrientation(world, x, y, z, living);
 		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
 		tile.setRotation(side);
 	}
