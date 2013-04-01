@@ -3,8 +3,8 @@ package com.dmillerw.brainfuckInterpreter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IOutputPeripheral;
-import com.dmillerw.brainFuckBlocks.interfaces.IPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IPeripheralConnector;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
 import com.dmillerw.brainFuckBlocks.util.Position;
@@ -84,8 +84,12 @@ public class BrainfuckEngine {
 				data[dataPointer] = ((IOutputPeripheral)connector.getConnectedPeripherals(IOutputPeripheral.class)[0]).handleDataOutput();
 			}
 		} else if (token == Token.BYTE_OUT) {
-			System.out.println("Data @ Output >>> "+data[dataPointer]);
-			cpu.sendOutput(data[dataPointer]);
+			Position position = storedSymbolPositions.get(charPointer);
+			IPeripheralConnector connector = (IPeripheralConnector) cpu.worldObj.getBlockTileEntity((int) position.x, (int) position.y, (int) position.z);
+		
+			if (connector.acceptsPeripherals(IInputPeripheral.class)) {
+				((IInputPeripheral)connector.getConnectedPeripherals(IOutputPeripheral.class)[0]).handleDataInput(data[dataPointer]);
+			}
 		} else if (token == Token.BRACKET_OPEN) {
 			if (data[dataPointer] - 1 > 0) {
 				charStack.add(charPointer - 1);

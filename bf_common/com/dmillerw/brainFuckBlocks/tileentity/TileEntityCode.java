@@ -129,7 +129,12 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 			}
 		}
 		
-		return (IPeripheral[]) connected.toArray();
+		IPeripheral[] toReturn = new IPeripheral[connected.size()];
+		for (int i=0; i<connected.size(); i++) {
+			toReturn[i] = connected.get(i);
+		}
+		
+		return toReturn;
 	}
 	
 }
