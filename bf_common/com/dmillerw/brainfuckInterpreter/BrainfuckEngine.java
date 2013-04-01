@@ -52,8 +52,6 @@ public class BrainfuckEngine {
 	}
 	
 	private void interpret(char token, char[] chars) {
-		System.out.println(token);
-		
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
 				dataPointer++;
@@ -73,10 +71,10 @@ public class BrainfuckEngine {
 		} else if (token == Token.BYTE_IN) {
 			data[dataPointer] = cpu.getInput();
 		} else if (token == Token.BYTE_OUT) {
+			System.out.println("Data @ Output >>> "+data[dataPointer]);
 			cpu.sendOutput(data[dataPointer]);
 		} else if (token == Token.BRACKET_OPEN) {
-			System.out.println("Data @ Bracket_Open >>> "+data[dataPointer]);
-			if (data[dataPointer] > 0) {
+			if (data[dataPointer] - 1 > 0) {
 				charStack.add(charPointer - 1);
 			}
 		} else if (token == Token.BRACKET_CLOSE) {
