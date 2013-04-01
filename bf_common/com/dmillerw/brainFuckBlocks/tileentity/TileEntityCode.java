@@ -93,7 +93,6 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 			TileEntity tile = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
 			
 			if (tile instanceof IPeripheral) {
-				System.out.println("Found and added peripheral");
 				connected.add((IPeripheral) tile);
 			}
 		}

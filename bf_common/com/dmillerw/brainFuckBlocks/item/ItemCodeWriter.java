@@ -48,8 +48,6 @@ public class ItemCodeWriter extends Item {
 		
 		int cwMeta = getCodeWriterMeta(par1ItemStack) + 1;
 		
-		System.out.println(cwMeta);
-		
 		if (par3EntityPlayer.isSneaking()) {
 			if (cwMeta <= 7) {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[cwMeta]);
