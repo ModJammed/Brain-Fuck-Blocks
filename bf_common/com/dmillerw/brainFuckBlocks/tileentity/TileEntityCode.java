@@ -1,5 +1,8 @@
 package com.dmillerw.brainFuckBlocks.tileentity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -114,7 +117,19 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 
 	@Override
 	public IPeripheral[] getConnectedPeripherals( Class<? extends IPeripheral> typeClass) {
-		return null;
+		List<IPeripheral> connected = new ArrayList<IPeripheral>();
+		
+		for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity tile = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
+			
+			if (tile instanceof IPeripheral) {
+				if (tile.getClass() == typeClass) {
+					connected.add((IPeripheral) tile);
+				}
+			}
+		}
+		
+		return (IPeripheral[]) connected.toArray();
 	}
 	
 }
