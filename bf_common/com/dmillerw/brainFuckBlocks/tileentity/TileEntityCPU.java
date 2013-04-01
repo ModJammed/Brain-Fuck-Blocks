@@ -12,9 +12,6 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
-import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
-import com.dmillerw.brainFuckBlocks.interfaces.IOutputPeripheral;
-import com.dmillerw.brainFuckBlocks.interfaces.IPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.util.Position;
 import com.dmillerw.brainfuckInterpreter.BrainfuckEngine;
@@ -27,8 +24,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 	private BrainfuckEngine engine;
 	
 	private List<String> instructionPositions;
-	
-	private List<IPeripheral> connectedPeripherals;
 	
 	public TileEntityCPU() {
 		engine = new BrainfuckEngine(30000, this);
@@ -52,8 +47,6 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 		
 		engine.clear();
 		
-		updateConnectedPeripherals();
-				
 		int currXOffset = xCoord + outputSide.offsetX;
 		int currYOffset = yCoord + outputSide.offsetY;
 		int currZOffset = zCoord + outputSide.offsetZ;
@@ -89,40 +82,7 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 			}
 		}
 		
-//		for (char token : engine.storedSymbols) {
-//			System.out.println(token);
-//		}
-		
 		engine.interpret();
-	}
-	
-	private void updateConnectedPeripherals() {
-		connectedPeripherals = new ArrayList<IPeripheral>();
-		
-		for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
-			if (worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ) instanceof IPeripheral) {
-				connectedPeripherals.add((IPeripheral) worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ));
-			}
-		}
-	}
-	
-	public void sendOutput(byte data) {
-		for (IPeripheral periph : connectedPeripherals) {
-			if (periph instanceof IInputPeripheral) {
-				((IInputPeripheral)periph).handleDataInput(data);
-			}
-		}
-	}
-	
-	//TODO potential issue with multiple inputs?
-	public byte getInput() {
-		for (IPeripheral periph : connectedPeripherals) {
-			if (periph instanceof IOutputPeripheral) {
-				return ((IOutputPeripheral)periph).handleDataOutput();
-			}
-		}
-		
-		return 0;
 	}
 	
 	@Override
