@@ -9,6 +9,8 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
+import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
+import com.dmillerw.brainFuckBlocks.interfaces.IOutputPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IPeripheral;
 import com.dmillerw.brainFuckBlocks.interfaces.IPeripheralConnector;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
@@ -97,6 +99,22 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 	@Override
 	public byte getAccessingFlag() {
 		return active;
+	}
+
+	@Override
+	public boolean acceptsPeripherals(Class<? extends IPeripheral> typeClass) {
+		if (typeClass == IInputPeripheral.class && type == 4) {
+			return true;
+		} else if (typeClass == IOutputPeripheral.class && type == 5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public IPeripheral[] getConnectedPeripherals( Class<? extends IPeripheral> typeClass) {
+		return null;
 	}
 	
 }
