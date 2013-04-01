@@ -25,8 +25,18 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 	
 	private List<String> instructionPositions;
 	
+	private static final int ACTIVATION_COOLDOWN_DEFAULT = 40;
+	private int activationCooldown = 0;
+	
 	public TileEntityCPU() {
 		engine = new BrainfuckEngine(30000, this);
+	}
+	
+	@Override
+	public void updateEntity() {
+		if (activationCooldown > 0) {
+			activationCooldown--;
+		}
 	}
 	
 	@Override
@@ -40,6 +50,10 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 
 	public void updateInstructions() {
 		if (this.worldObj.isRemote) {
+			return;
+		}
+		
+		if (activationCooldown != 0) {
 			return;
 		}
 		
@@ -83,6 +97,8 @@ public class TileEntityCPU extends TileEntity implements IRotatable, IConnection
 		}
 		
 		engine.interpret();
+		
+		activationCooldown = ACTIVATION_COOLDOWN_DEFAULT;
 	}
 	
 	@Override
