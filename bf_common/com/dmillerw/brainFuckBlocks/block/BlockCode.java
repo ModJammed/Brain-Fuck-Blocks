@@ -29,11 +29,12 @@ public class BlockCode extends BlockContainer {
 
 	public static Icon[][][] textures;
 	public static Icon bottomTexture;
+	public static Icon topTexture;
 	public static Icon[] sideTexture;
 	
-	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close"};
+	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close", "Machine Casing"};
 	
-	public static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose"};
+	public static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose", "machineCasing"};
 	private static String[] textureTypes = new String[] {"on", "off"};
 	
 	private static String[] symbolTextureRotations = new String[] {"north", "east", "south", "west"};
@@ -89,6 +90,16 @@ public class BlockCode extends BlockContainer {
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		
+		if (meta == 8) {
+			if (sideForge == ForgeDirection.DOWN) {
+				return bottomTexture;
+			} else if (sideForge != ForgeDirection.UP) {
+				return sideTexture[0];
+			} else {
+				return topTexture;
+			}
+		}
+		
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
 		} else if (sideForge != ForgeDirection.UP) {
@@ -115,6 +126,7 @@ public class BlockCode extends BlockContainer {
 		textures = new Icon[16][4][4];
 		
 		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
+		topTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_top");
 		sideTexture = new Icon[3];
 		
 		sideTexture[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");

@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemBlockCode extends ItemBlock {
 
-	private static String[] subNames = new String[] {"dataInc", "dataDec", "byteInc", "byteDec", "output", "input", "bracketOpen", "bracketClose"};
+	private static String[] subNames = new String[] {"dataInc", "dataDec", "byteInc", "byteDec", "output", "input", "bracketOpen", "bracketClose", "machineCasing"};
 	
 	public ItemBlockCode(int id) {
 		super(id);
