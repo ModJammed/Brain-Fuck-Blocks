@@ -70,7 +70,6 @@ public class BlockCode extends BlockContainer {
 		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
-		TileEntityCode tile = (TileEntityCode) world.getBlockTileEntity(x, y, z);
 		
 		if (sideForge == ForgeDirection.DOWN) {
 			return bottomTexture;
@@ -81,7 +80,7 @@ public class BlockCode extends BlockContainer {
 			
 			return sideTexture[0];
 		} else {
-			return textures[meta][tile.getAccessingFlag()][getTextureIndexFromRotation(blockRotator.getRotation())];
+			return textures[meta][1][getTextureIndexFromRotation(blockRotator.getRotation())];
 		}
 	}
 	

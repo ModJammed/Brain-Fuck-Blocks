@@ -25,8 +25,6 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 	
 	private int type;
 	
-	private byte active = 1;
-	
 	public TileEntityCode(int type) {
 		this.type = type;
 	}
@@ -89,17 +87,6 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 	@Override
 	public Position getPosition() {
 		return new Position(xCoord, yCoord, zCoord);
-	}
-
-	@Override
-	public void setAccessingFlag(byte flag) {
-		active = flag;
-		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-	}
-
-	@Override
-	public byte getAccessingFlag() {
-		return active;
 	}
 
 	@Override
