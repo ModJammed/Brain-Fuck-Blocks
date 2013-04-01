@@ -1,6 +1,8 @@
 package com.dmillerw.brainFuckBlocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
@@ -97,8 +99,15 @@ public class BrainFuckBlocks {
 	}
 
 	public static void initializeRecipes() {
+		/* BLOCKS */
 		//Machine casing
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RTR", "RCR", "DID"});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RTR", "RCR", "DID", 'R', Item.redstone, 'T', new ItemStack(ItemHandler.bfCraftingComponent, 1, 4), 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), 'I', Block.blockSteel});
+	
+		/* CRAFTING COMPONENTS */
+		
+		/* ITEMS */
+		//Wrench
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfWrench), "  I", "BIB", "RIR", )
 	}
 	
 }

@@ -13,8 +13,8 @@ import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
 public class ItemCraftingComponent extends Item {
 
-	public static String[] itemNames = new String[] {"Metal Spool", "Strip of Paper", "Circut Board", "Advanced Circut Board"};
-	private String[] subNames = new String[] {"metalSpool", "paperStrip", "circut", "advancedCircut"};
+	public static String[] itemNames = new String[] {"Metal Spool", "Strip of Paper", "Circut Board", "Advanced Circut Board", "Data Tape"};
+	private String[] subNames = new String[] {"metalSpool", "paperStrip", "circut", "advancedCircut", "dataStrip"};
 	
 	private Icon[] textures;
 	
