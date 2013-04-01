@@ -3,6 +3,9 @@ package com.dmillerw.brainfuckInterpreter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dmillerw.brainFuckBlocks.interfaces.IOutputPeripheral;
+import com.dmillerw.brainFuckBlocks.interfaces.IPeripheral;
+import com.dmillerw.brainFuckBlocks.interfaces.IPeripheralConnector;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
 import com.dmillerw.brainFuckBlocks.util.Position;
 
@@ -52,11 +55,11 @@ public class BrainfuckEngine {
 	
 	public void interpret() {
 		for (; charPointer<storedSymbols.size(); charPointer++) {
-			interpret(storedSymbols.get(charPointer), toCharArray(storedSymbols));
+			interpret(charPointer, storedSymbols.get(charPointer), toCharArray(storedSymbols));
 		}
 	}
 	
-	private void interpret(char token, char[] chars) {
+	private void interpret(int charPointer, char token, char[] chars) {
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
 				dataPointer++;
@@ -74,7 +77,12 @@ public class BrainfuckEngine {
 				data[dataPointer]--;
 			}
 		} else if (token == Token.BYTE_IN) {
-			data[dataPointer] = cpu.getInput();
+			Position position = storedSymbolPositions.get(charPointer);
+			IPeripheralConnector connector = (IPeripheralConnector) cpu.worldObj.getBlockTileEntity((int) position.x, (int) position.y, (int) position.z);
+		
+			if (connector.acceptsPeripherals(IOutputPeripheral.class)) {
+				data[dataPointer] = ((IOutputPeripheral)connector.getConnectedPeripherals(IOutputPeripheral.class)[0]).handleDataOutput();
+			}
 		} else if (token == Token.BYTE_OUT) {
 			System.out.println("Data @ Output >>> "+data[dataPointer]);
 			cpu.sendOutput(data[dataPointer]);
