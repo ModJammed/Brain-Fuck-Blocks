@@ -101,13 +101,20 @@ public class BrainFuckBlocks {
 	public static void initializeRecipes() {
 		/* BLOCKS */
 		//Machine casing
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RTR", "RCR", "DID", 'R', Item.redstone, 'T', new ItemStack(ItemHandler.bfCraftingComponent, 1, 4), 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), 'I', Block.blockSteel});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RRR", "RCR", "DID", 'R', Item.redstone, 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), 'I', Block.blockSteel});
 	
+		//CPU
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCPU), new Object[] {"");
+		
 		/* CRAFTING COMPONENTS */
 		
 		/* ITEMS */
 		//Wrench
-		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfWrench), "  I", "BIB", "RIR", )
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfWrench), new Object[] {"  RI", "BIR", "IR ", 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 1), 'I', Item.ingotIron});
+	
+		if (!UserPreferences.codeBlockCraftingEnable) {
+			GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCodeWriter), new Object[] {"III", "IGI", "SRS", 'I', Item.ingotIron, 'G', Block.thinGlass, 'S', Block.stone, 'R', Item.redstone});
+		}
 	}
 	
 }
