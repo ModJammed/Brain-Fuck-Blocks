@@ -27,7 +27,7 @@ import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
 
 public class BlockCode extends BlockContainer {
 
-	public static Icon[][][] textures;
+	public static Icon[][] textures;
 	public static Icon bottomTexture;
 	public static Icon topTexture;
 	public static Icon[] sideTexture;
@@ -81,7 +81,7 @@ public class BlockCode extends BlockContainer {
 			
 			return sideTexture[0];
 		} else {
-			return textures[meta][1][getTextureIndexFromRotation(blockRotator.getRotation())];
+			return textures[meta][getTextureIndexFromRotation(blockRotator.getRotation())];
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class BlockCode extends BlockContainer {
 			
 			return sideTexture[0];
 		} else {
-			return textures[meta][1][0];
+			return textures[meta][0];
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class BlockCode extends BlockContainer {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		textures = new Icon[16][4][4];
+		textures = new Icon[16][4];
 		
 		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
 		topTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_top");
@@ -134,7 +134,7 @@ public class BlockCode extends BlockContainer {
 		
 		for (int i=0; i<8; i++) {
 			for (int j=0; j<4; j++) {
-				textures[i][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":"+blockFileNames[i]+"/code_" + blockFileNames[i] + "_" + symbolTextureRotations[j]);
+				textures[i][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":"+blockFileNames[i]+"/code_" + blockFileNames[i] + "_" + symbolTextureRotations[j] + "_off");
 			}
 		}
 	}
