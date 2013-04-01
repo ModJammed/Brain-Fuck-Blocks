@@ -16,6 +16,7 @@ public class BrainfuckEngine {
 	public List<Character> storedSymbols;
 	
 	public List<Integer> loopStack;
+	public List<Integer> charStack;
 	
 	private TileEntityCPU cpu;
 	
@@ -31,6 +32,7 @@ public class BrainfuckEngine {
 		this.cells = cells;
 		storedSymbols = new ArrayList<Character>();
 		loopStack = new ArrayList<Integer>();
+		charStack = new ArrayList<Integer>();
 	}
 	
 	public void clear() {
@@ -39,6 +41,7 @@ public class BrainfuckEngine {
 		charPointer = 0;
 		storedSymbols.clear();
 		loopStack.clear();
+		charStack.clear();
 	}
 	
 	public void store(char token) {
@@ -77,11 +80,14 @@ public class BrainfuckEngine {
 		} else if (token == Token.BRACKET_OPEN) {
 			if (data[dataPointer] > 0) {
 				loopStack.add(dataPointer);
+				charStack.add(charPointer);
 			}
 		} else if (token == Token.BRACKET_CLOSE) {
 			if (loopStack.size() > 0) {
 				dataPointer = loopStack.get(loopStack.size() - 1);
+				charPointer = charStack.get(charStack.size() - 1);
 				loopStack.remove(loopStack.size() - 1);
+				charStack.remove(charStack.size() - 1);
 			}
 		}
 	}
