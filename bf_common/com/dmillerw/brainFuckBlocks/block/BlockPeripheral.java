@@ -18,13 +18,13 @@ import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneData;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneInput;
 
-public class BlockPeripheralRedstone extends BlockContainer {
+public class BlockPeripheral extends BlockContainer {
 
 	public static String[] blockNames = new String[] {"Redstone Data Interpreter", "Redstone Input Interpreter"};
 	
 	private Icon[] textures;
 	
-	public BlockPeripheralRedstone(int id) {
+	public BlockPeripheral(int id) {
 		super(id, Material.iron);
 		setHardness(1F);
 		setResistance(1F);
