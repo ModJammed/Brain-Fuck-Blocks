@@ -51,7 +51,6 @@ public class BrainfuckEngine {
 		}
 	}
 	
-	//TODO Implement loop parsing
 	private void interpret(char token, char[] chars) {
 		System.out.println(token);
 		
@@ -74,7 +73,6 @@ public class BrainfuckEngine {
 		} else if (token == Token.BYTE_IN) {
 			data[dataPointer] = cpu.getInput();
 		} else if (token == Token.BYTE_OUT) {
-			System.out.println("Debug Output @ "+dataPointer+" >>> "+data[dataPointer]);
 			cpu.sendOutput(data[dataPointer]);
 		} else if (token == Token.BRACKET_OPEN) {
 			if (data[dataPointer] != 0) {
