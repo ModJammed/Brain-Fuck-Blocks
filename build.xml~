@@ -84,7 +84,7 @@
 		<antcall target="clean" />
 		<antcall target="build" />
 		<antcall target="recompile" />		
-		<antcall target="reobfuscate-srg" />
+		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
 		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
