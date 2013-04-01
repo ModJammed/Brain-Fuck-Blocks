@@ -26,7 +26,7 @@ When placed, any code block (or CPU) will face the player who placed it, with th
 
 If you want to build away from the CPU, or form a 3D code structure, the Wire block exists. When placed, the output side will face you, and it's capable of facing in all six directions, allowing you to build up or down, as well as in various directions.
 
-Once you've built the code the way you want it, simply right click on the CPU to begin the compilation process.
+Once you've built the code the way you want it, either right click on the CPU or provide it with a redstone signal to begin the compilation process.
 
 ## Peripherals
 So far there are three peripherals that can be used to interact with the internal BrainFuck interpreter in various ways. While this isn't something that's present in the BrainFuck language itself, it was added in order to give this mod more purpose in a Minecraft setting.
