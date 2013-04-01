@@ -123,9 +123,25 @@ public class BrainFuckBlocks {
 		
 			//Output
 			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"IRI", "RIR", "IRI", 'R', Item.redstone, 'I', Item.ingotIron});
+		
+			//Input
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"IRI", "IRI", "IRI", 'R', Item.redstone, 'I', Item.ingotIron});
+		
+			//Bracket open
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"RRI", "RII", "RRI", 'R', Item.redstone, 'I', Item.ingotIron});
+		
+			//Bracket close
+			GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, CRAFTING_AMOUNT, 0), new Object[] {"IRR", "IIR", "IRR", 'R', Item.redstone, 'I', Item.ingotIron});
 		}
 		
 		/* CRAFTING COMPONENTS */
+		//Circut
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 0), new Object[] {" I ", "I I", " I ", 'I', Item.ingotIron});
+
+		//Strip of Paper
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 1), new Object[] {"PPP", 'P', Item.paper});
+		
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), new Object[] {"RIR", "GIG", "LIL", 'R', Item.redstone, 'I', Item.ingotIron, 'G', Item.glowstoneDust, 'L', new ItemStack(Item.dyePowder, 1, 4)});
 		
 		/* ITEMS */
 		//Wrench
