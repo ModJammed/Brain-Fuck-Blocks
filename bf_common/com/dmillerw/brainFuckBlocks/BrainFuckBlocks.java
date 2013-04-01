@@ -1,6 +1,7 @@
 package com.dmillerw.brainFuckBlocks;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
@@ -23,6 +24,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid=ModInfo.MOD_ID, name=ModInfo.MOD_NAME, version=ModInfo.MOD_VERSION)
@@ -92,6 +94,11 @@ public class BrainFuckBlocks {
 		
 		//Initializes TileEntities
 		proxy.registerTileEntities();
+	}
+
+	public static void initializeRecipes() {
+		//Machine casing
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RTR", "RCR", "DID"});
 	}
 	
 }
