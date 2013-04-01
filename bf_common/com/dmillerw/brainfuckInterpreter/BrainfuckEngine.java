@@ -53,6 +53,8 @@ public class BrainfuckEngine {
 	
 	//TODO Implement loop parsing
 	private void interpret(char token, char[] chars) {
+		System.out.println(token);
+		
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
 				dataPointer++;
