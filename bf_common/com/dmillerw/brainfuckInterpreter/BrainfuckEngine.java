@@ -82,7 +82,11 @@ public class BrainfuckEngine {
 			IPeripheralConnector connector = (IPeripheralConnector) cpu.worldObj.getBlockTileEntity((int) position.x, (int) position.y, (int) position.z);
 			
 			if (connector.getConnectedPeripherals().length > 0) {
+				IPeripheral periph = connector.getConnectedPeripherals()[0];
 				
+				if (periph instanceof IOutputPeripheral) {
+					data[dataPointer] = ((IOutputPeripheral) periph).handleDataOutput();
+				}
 			}
 		} else if (token == Token.BYTE_OUT) {
 			Position position = storedSymbolPositions.get(charPointer);
@@ -91,7 +95,7 @@ public class BrainfuckEngine {
 			if (connector.getConnectedPeripherals().length > 0) {
 				for (IPeripheral periph : connector.getConnectedPeripherals()) {
 					if (periph instanceof IInputPeripheral) {
-						
+						((IInputPeripheral) periph).handleDataInput(data[dataPointer]);
 					}
 				}
 			}
