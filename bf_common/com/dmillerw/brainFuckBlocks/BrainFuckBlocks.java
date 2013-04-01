@@ -96,6 +96,9 @@ public class BrainFuckBlocks {
 		
 		//Initializes TileEntities
 		proxy.registerTileEntities();
+		
+		//Initializes recipes
+		initializeRecipes();
 	}
 
 	public static void initializeRecipes() {
@@ -135,13 +138,20 @@ public class BrainFuckBlocks {
 		}
 		
 		/* CRAFTING COMPONENTS */
-		//Circut
+		//Metal Spool
 		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 0), new Object[] {" I ", "I I", " I ", 'I', Item.ingotIron});
 
 		//Strip of Paper
-		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 1), new Object[] {"PPP", 'P', Item.paper});
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 16, 1), new Object[] {"PPP", 'P', Item.paper});
 		
-		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), new Object[] {"RIR", "GIG", "LIL", 'R', Item.redstone, 'I', Item.ingotIron, 'G', Item.glowstoneDust, 'L', new ItemStack(Item.dyePowder, 1, 4)});
+		//Circut
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), new Object[] {"RIR", "GIG", "LIL", 'R', Item.redstone, 'I', Item.ingotIron, 'G', Item.lightStoneDust, 'L', new ItemStack(Item.dyePowder, 1, 4)});
+		
+		//Advanced Circut
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 3), new Object[] {"RRR", "RCR", "RRR", 'R', Item.redstone, 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2)});
+		
+		//Data Tape
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 4), new Object[] {"SPS", 'S', new ItemStack(ItemHandler.bfCraftingComponent, 1, 0), 'P', new ItemStack(ItemHandler.bfCraftingComponent, 16, 1)}); 
 		
 		/* ITEMS */
 		//Wrench
