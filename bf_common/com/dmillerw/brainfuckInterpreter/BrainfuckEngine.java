@@ -105,7 +105,7 @@ public class BrainfuckEngine {
 			}
 		} else if (token == Token.BRACKET_CLOSE) {
 			if (charStack.size() > 0) {
-				charPointer = charStack.get(charStack.size() - 1);
+				this.charPointer = charStack.get(charStack.size() - 1);
 				charStack.remove(charStack.size() - 1);
 			}
 		}
