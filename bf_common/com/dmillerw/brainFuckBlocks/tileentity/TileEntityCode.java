@@ -23,11 +23,7 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
 	
-	private int type;
-	
-	public TileEntityCode(int type) {
-		this.type = type;
-	}
+	public int type;
 	
 	@Override
 	public ForgeDirection getRotation() {

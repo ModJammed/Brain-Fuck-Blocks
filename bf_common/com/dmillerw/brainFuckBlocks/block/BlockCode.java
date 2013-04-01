@@ -61,8 +61,9 @@ public class BlockCode extends BlockContainer {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, living, stack);
 		ForgeDirection side = PlayerUtil.get2DBlockOrientation(living);
-		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
+		TileEntityCode tile = (TileEntityCode) world.getBlockTileEntity(x, y, z);
 		tile.setRotation(side);
+		tile.type = world.getBlockMetadata(x, y, z);
 	}
 	
 	@Override
@@ -163,7 +164,7 @@ public class BlockCode extends BlockContainer {
     }
 	
 	public TileEntity createTileEntity(World world, int meta) {
-		return new TileEntityCode(meta);
+		return new TileEntityCode();
 	}
 	
 	/* IGNORE */
