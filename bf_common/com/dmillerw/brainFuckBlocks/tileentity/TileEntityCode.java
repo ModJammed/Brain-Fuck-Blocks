@@ -105,27 +105,15 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 	}
 
 	@Override
-	public boolean acceptsPeripherals(Class<? extends IPeripheral> typeClass) {
-		if (typeClass == IInputPeripheral.class && type == 4) {
-			return true;
-		} else if (typeClass == IOutputPeripheral.class && type == 5) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public IPeripheral[] getConnectedPeripherals( Class<? extends IPeripheral> typeClass) {
+	public IPeripheral[] getConnectedPeripherals() {
 		List<IPeripheral> connected = new ArrayList<IPeripheral>();
 		
 		for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
 			TileEntity tile = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
 			
 			if (tile instanceof IPeripheral) {
-				if (tile.getClass() == typeClass) {
-					connected.add((IPeripheral) tile);
-				}
+				System.out.println("Found and added peripheral");
+				connected.add((IPeripheral) tile);
 			}
 		}
 		
