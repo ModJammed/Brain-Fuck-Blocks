@@ -15,8 +15,10 @@ import net.minecraft.world.World;
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
+import com.dmillerw.brainFuckBlocks.client.gui.GuiDocumentation;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -46,16 +48,21 @@ public class ItemCodeWriter extends Item {
 			return par1ItemStack;
 		}
 		
+		int cwMeta = getCodeWriterMeta(par1ItemStack) + 1;
+		
 		if (par3EntityPlayer.isSneaking()) {
-			int cwMeta = getCodeWriterMeta(par1ItemStack) + 1;
-			
 			if (cwMeta <= 7) {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[cwMeta]);
+				setCodeWriterMeta(par1ItemStack, cwMeta);
+			} else if (cwMeta == 8) {
+				par3EntityPlayer.addChatMessage("Mode Changed: Documentation");
 				setCodeWriterMeta(par1ItemStack, cwMeta);
 			} else {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[0]);
 				setCodeWriterMeta(par1ItemStack, 0);
 			}
+		} else if (cwMeta == 8) {
+			FMLClientHandler.instance().getClient().displayGuiScreen(new GuiDocumentation());
 		}
 		
 		return par1ItemStack;
@@ -88,6 +95,10 @@ public class ItemCodeWriter extends Item {
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
 		if (par2EntityPlayer.isSneaking()) {
+			return false;
+		}
+		
+		if (par1ItemStack.getItemDamage() == 8) {
 			return false;
 		}
 		
