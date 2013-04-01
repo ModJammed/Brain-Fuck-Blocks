@@ -50,6 +50,8 @@ public class ItemCodeWriter extends Item {
 		
 		int cwMeta = getCodeWriterMeta(par1ItemStack) + 1;
 		
+		System.out.println(cwMeta);
+		
 		if (par3EntityPlayer.isSneaking()) {
 			if (cwMeta <= 7) {
 				par3EntityPlayer.addChatMessage("Mode Changed: "+BlockCode.blockNames[cwMeta]);
@@ -62,6 +64,7 @@ public class ItemCodeWriter extends Item {
 				setCodeWriterMeta(par1ItemStack, 0);
 			}
 		} else if (cwMeta == 8) {
+			System.out.println("OPenling documentation");
 			FMLClientHandler.instance().getClient().displayGuiScreen(new GuiDocumentation());
 		}
 		
