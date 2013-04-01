@@ -9,11 +9,13 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.interfaces.IBrainfuckSymbol;
 import com.dmillerw.brainFuckBlocks.interfaces.IConnection;
+import com.dmillerw.brainFuckBlocks.interfaces.IPeripheral;
+import com.dmillerw.brainFuckBlocks.interfaces.IPeripheralConnector;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.util.Position;
 import com.dmillerw.brainfuckInterpreter.Token;
 
-public class TileEntityCode extends TileEntity implements IRotatable, IConnection, IBrainfuckSymbol {
+public class TileEntityCode extends TileEntity implements IRotatable, IConnection, IBrainfuckSymbol, IPeripheralConnector {
 
 	private ForgeDirection rotation;
 	private ForgeDirection outputSide;
