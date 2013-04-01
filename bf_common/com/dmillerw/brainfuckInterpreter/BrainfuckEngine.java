@@ -1,9 +1,13 @@
 package com.dmillerw.brainfuckInterpreter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
+import com.dmillerw.brainFuckBlocks.util.Position;
 
 public class BrainfuckEngine {
 
@@ -13,7 +17,7 @@ public class BrainfuckEngine {
 	public int dataPointer;
 	public int charPointer;
 	
-	public List<Character> storedSymbols;
+	public Map<Position, Character> storedSymbols;
 	
 	public List<Integer> charStack;
 	
@@ -29,7 +33,7 @@ public class BrainfuckEngine {
 		dataPointer = 0;
 		charPointer = 0;
 		this.cells = cells;
-		storedSymbols = new ArrayList<Character>();
+		storedSymbols = new HashMap<Position, Character>();
 		charStack = new ArrayList<Integer>();
 	}
 	
@@ -41,13 +45,13 @@ public class BrainfuckEngine {
 		charStack.clear();
 	}
 	
-	public void store(char token) {
-		storedSymbols.add(token);
+	public void store(Position position, char token) {
+		storedSymbols.put(position, token);
 	}
 	
 	public void interpret() {
 		for (; charPointer<storedSymbols.size(); charPointer++) {
-			interpret(storedSymbols.get(charPointer), toCharArray(storedSymbols));
+			interpret(storedSymbols.get(charPointer), toCharArray(storedSymbols.values()));
 		}
 	}
 	
@@ -85,8 +89,8 @@ public class BrainfuckEngine {
 		}
 	}
 	
-	private char[] toCharArray(List<Character> charList) {
-		Object[] array = charList.toArray();
+	private char[] toCharArray(Collection<Character> collection) {
+		Object[] array = collection.toArray();
 		char[] charArray = new char[array.length];
 		
 		for (int i=0; i<array.length; i++) {
