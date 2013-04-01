@@ -78,7 +78,7 @@ public class BrainfuckEngine {
 			cpu.sendOutput(data[dataPointer]);
 		} else if (token == Token.BRACKET_OPEN) {
 			if (data[dataPointer] != 0) {
-				charStack.add(charPointer);
+				charStack.add(charPointer - 1);
 			}
 		} else if (token == Token.BRACKET_CLOSE) {
 			if (charStack.size() > 0) {
