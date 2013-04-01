@@ -13,15 +13,15 @@ public class BlockHandler {
 	public static Block bfPeripheralRS;
 	
 	public static void init() {
+		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setUnlocalizedName("bfCPU");
+		GameRegistry.registerBlock(bfCPU, "bfCPU");
+		LanguageRegistry.addName(bfCPU, "CPU");
+		
 		bfCode = new BlockCode(BlockIDs.bfCodeID).setUnlocalizedName("bfCode");
 		GameRegistry.registerBlock(bfCode, ItemBlockCode.class, "bfCode");
 		for (int i=0; i<BlockCode.blockNames.length; i++) {
 			LanguageRegistry.addName(new ItemStack(bfCode.blockID, 1, i), BlockCode.blockNames[i]);
 		}
-		
-		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setUnlocalizedName("bfCPU");
-		GameRegistry.registerBlock(bfCPU, "bfCPU");
-		LanguageRegistry.addName(bfCPU, "CPU");
 		
 		bfWire = new BlockWire(BlockIDs.bfWireID).setUnlocalizedName("bfWire");
 		GameRegistry.registerBlock(bfWire, "bfWire");

@@ -35,7 +35,6 @@ public class BlockCode extends BlockContainer {
 	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close", "Machine Casing"};
 	
 	public static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose", "machineCasing"};
-	private static String[] textureTypes = new String[] {"on", "off"};
 	
 	private static String[] symbolTextureRotations = new String[] {"north", "east", "south", "west"};
 	
@@ -133,11 +132,9 @@ public class BlockCode extends BlockContainer {
 		sideTexture[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_in");
 		sideTexture[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_out");
 		
-		for (int i=0; i<blockNames.length; i++) {
-			for (int x=0; x<textureTypes.length; x++) {
-				for (int j=0; j<4; j++) {
-					textures[i][x][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":"+blockFileNames[i]+"/code_" + blockFileNames[i] + "_" + symbolTextureRotations[j] + "_" + textureTypes[x]);
-				}
+		for (int i=0; i<8; i++) {
+			for (int j=0; j<4; j++) {
+				textures[i][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":"+blockFileNames[i]+"/code_" + blockFileNames[i] + "_" + symbolTextureRotations[j]);
 			}
 		}
 	}
