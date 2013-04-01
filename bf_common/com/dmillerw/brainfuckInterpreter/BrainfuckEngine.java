@@ -56,11 +56,11 @@ public class BrainfuckEngine {
 	
 	public void interpret() {
 		for (; charPointer<storedSymbols.size(); charPointer++) {
-			interpret(charPointer, storedSymbols.get(charPointer), toCharArray(storedSymbols));
+			interpret(charPointer, storedSymbols.get(charPointer));
 		}
 	}
 	
-	private void interpret(int charPointer, char token, char[] chars) {
+	private void interpret(int charPointer, char token) {
 		if (token == Token.DATA_INC) {
 			if (dataPointer + 1 <= data.length) {
 				dataPointer++;
@@ -109,17 +109,6 @@ public class BrainfuckEngine {
 				charStack.remove(charStack.size() - 1);
 			}
 		}
-	}
-	
-	private char[] toCharArray(List<Character> charList) {
-		Object[] array = charList.toArray();
-		char[] charArray = new char[array.length];
-		
-		for (int i=0; i<array.length; i++) {
-			charArray[i] = (char) array[i];
-		}
-		
-		return charArray;
 	}
 	
 }
