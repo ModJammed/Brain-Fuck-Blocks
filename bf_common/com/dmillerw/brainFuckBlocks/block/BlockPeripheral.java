@@ -15,6 +15,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityChatData;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneData;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneInput;
 
@@ -105,8 +106,10 @@ public class BlockPeripheral extends BlockContainer {
 	public TileEntity createTileEntity(World world, int meta) {
 		if (meta == 0) {
 			return new TileEntityRedstoneData();
-		} else {
+		} else if (meta == 1) {
 			return new TileEntityRedstoneInput();
+		} else {
+			return new TileEntityChatData();
 		}
 	}
 	

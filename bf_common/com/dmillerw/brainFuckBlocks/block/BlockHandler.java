@@ -28,7 +28,7 @@ public class BlockHandler {
 		LanguageRegistry.addName(bfWire, "Wire");
 		
 		bfPeripheral = new BlockPeripheral(BlockIDs.bfPeripheralID).setUnlocalizedName("bfPeripheral");
-		GameRegistry.registerBlock(bfPeripheral, ItemBlockRedstone.class, "bfPeripheralRS");
+		GameRegistry.registerBlock(bfPeripheral, ItemBlockPeripheral.class, "bfPeripheralRS");
 		for (int i=0; i<BlockPeripheral.blockNames.length; i++) {
 			LanguageRegistry.addName(new ItemStack(bfPeripheral.blockID, 1, i), BlockPeripheral.blockNames[i]);
 		}

@@ -1,5 +1,6 @@
 package com.dmillerw.brainFuckBlocks.core;
 
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityChatData;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCode;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneData;
@@ -18,6 +19,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityWire.class, "bfWire");
 		GameRegistry.registerTileEntity(TileEntityRedstoneData.class, "bfRedstoneData");
 		GameRegistry.registerTileEntity(TileEntityRedstoneInput.class, "bfRedstoneInput");
+		GameRegistry.registerTileEntity(TileEntityChatData.class, "bfChatData");
 	}
 	
 }
