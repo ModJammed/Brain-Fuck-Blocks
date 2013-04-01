@@ -55,6 +55,7 @@ public class BrainFuckBlocks {
 			
 			ItemIDs.bfWrenchID = config.getItem("bfWrench", ItemIDs.bfWrenchDefaultID).getInt();
 			ItemIDs.bfCodeWriterID = config.getItem("bfCodeWriter", ItemIDs.bfCodeWriterDefaultID).getInt();
+			ItemIDs.bfCraftingComponentID = config.getItem("bfCraftingComponent", ItemIDs.bfCraftingComponentDefaultID).getInt();
 		} catch(Exception ex) {
 			LogHelper.log("Failed to load config. Assuming defaults!");
 			
@@ -67,6 +68,7 @@ public class BrainFuckBlocks {
 			
 			ItemIDs.bfWrenchID = ItemIDs.bfWrenchDefaultID;
 			ItemIDs.bfCodeWriterID = ItemIDs.bfCodeWriterDefaultID;
+			ItemIDs.bfCraftingComponentID = ItemIDs.bfCraftingComponentDefaultID;
 		} finally {
 			if (config.hasChanged()) {
 				config.save();
