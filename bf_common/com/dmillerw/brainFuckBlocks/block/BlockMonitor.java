@@ -29,7 +29,7 @@ public class BlockMonitor extends BlockContainer implements IIconProvider {
 	private TextureCoordinates sideTexture;
 	private TextureCoordinates frontTexture;
 	
-	public static String[] blockNames = new String[] {"Byte Monitor", "Char Monitor"};
+	public static String[] blockNames = new String[] {"Byte Monitor", "Character Monitor"};
 	
 	public BlockMonitor(int id) {
 		super(id, Material.iron);
