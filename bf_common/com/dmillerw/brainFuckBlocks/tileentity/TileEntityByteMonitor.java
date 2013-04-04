@@ -45,6 +45,7 @@ public class TileEntityByteMonitor extends TileEntity implements IRotatable, IIn
 		super.writeToNBT(nbt);
 		nbt.setByte("rotation", (byte) rotation.ordinal());
 		nbt.setByte("stored", storedData);
+		nbt.setByte("type", type);
 	}
 	
 	@Override
@@ -52,6 +53,7 @@ public class TileEntityByteMonitor extends TileEntity implements IRotatable, IIn
 		super.readFromNBT(nbt);
 		setRotation(ForgeDirection.getOrientation(nbt.getByte("rotation")));
 		storedData = nbt.getByte("stored");
+		type = nbt.getByte("type");
 	}
 	
 	public Packet getDescriptionPacket() {
