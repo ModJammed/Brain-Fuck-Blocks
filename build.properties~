@@ -1,7 +1,7 @@
 dir.source=.
-dir.share=../../Development/Foundry/Release
-dir.development=../../Development/Foundry
-dir.forge=../../Development/Foundry/mcp
+dir.share=../../Development/BrainFuck/Release
+dir.development=../../Development/BrainFuck
+dir.forge=../../Development/BrainFuck/mcp
 dir.release=Releases
-release.minecraft.version=1.5.1
-release.mod.version=0.1.0
+release.minecraft.version=1.4.7
+release.mod.version=1.0.0
