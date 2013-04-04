@@ -15,8 +15,6 @@ import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityChatData;
-import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneData;
-import com.dmillerw.brainFuckBlocks.tileentity.TileEntityRedstoneInput;
 import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 
 public class BlockPeripheral extends BlockContainer implements IIconProvider {

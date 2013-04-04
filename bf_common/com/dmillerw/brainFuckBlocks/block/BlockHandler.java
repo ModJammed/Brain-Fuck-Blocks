@@ -13,6 +13,7 @@ public class BlockHandler {
 	public static Block bfCPU;
 	public static Block bfWire;
 	public static Block bfPeripheral;
+	public static Block bfMonitor;
 	
 	public static void init() {
 		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setBlockName("bfCPU");
@@ -38,6 +39,13 @@ public class BlockHandler {
 			LanguageRegistry.addName(new ItemStack(bfPeripheral.blockID, 1, i), BlockPeripheral.blockNames[i]);
 		}
 		((IIconProvider)bfPeripheral).registerIcons();
+		
+		bfMonitor = new BlockMonitor(BlockIDs.bfMonitorID).setBlockName("bfMonitor");
+		GameRegistry.registerBlock(bfMonitor, ItemBlockMonitor.class, "bfMonitor");
+		for (int i=0; i<BlockMonitor.blockNames.length; i++) {
+			LanguageRegistry.addName(new ItemStack(bfMonitor.blockID, 1, i), BlockMonitor.blockNames[i]);
+		}
+		((IIconProvider)bfMonitor).registerIcons();
 	}
 	
 }

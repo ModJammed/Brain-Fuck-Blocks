@@ -17,6 +17,7 @@ import com.dmillerw.brainFuckBlocks.item.ItemIDs;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 import com.dmillerw.brainFuckBlocks.network.BFPacketHandler;
+import com.dmillerw.brainFuckBlocks.network.packets.PacketFoundry;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -30,7 +31,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid=ModInfo.MOD_ID, name=ModInfo.MOD_NAME, version=ModInfo.MOD_VERSION)
-@NetworkMod(serverSideRequired=false, clientSideRequired=true, packetHandler=BFPacketHandler.class)
+@NetworkMod(channels={"bfBlocks"}, serverSideRequired=false, clientSideRequired=true, packetHandler=BFPacketHandler.class)
 public class BrainFuckBlocks {
 	@Instance(ModInfo.MOD_ID)
 	public static BrainFuckBlocks instance;
@@ -52,6 +53,7 @@ public class BrainFuckBlocks {
 			BlockIDs.bfCPUID = config.getBlock("bfCPU", BlockIDs.bfCPUDefaultID).getInt();
 			BlockIDs.bfWireID = config.getBlock("bfWire", BlockIDs.bfWireDefaultID).getInt();
 			BlockIDs.bfPeripheralID = config.getBlock("bfPeripheral", BlockIDs.bfPeriphperalDefaultID).getInt();
+			BlockIDs.bfMonitorID = config.getBlock("bfMonitor", BlockIDs.bfMonitorDefaultID).getInt();
 			
 			Property craftingEnable = config.get(Configuration.CATEGORY_GENERAL, "codeBlockCraftingEnabled", UserPreferences.codeBlockCraftingEnableDefault);
 			craftingEnable.comment = "Should code blocks have crafting recipes? If enabled, the blocks will drop themselves when broken. If false, they'll drop nothing and a code block creation item will exist.";
@@ -67,6 +69,7 @@ public class BrainFuckBlocks {
 			BlockIDs.bfCPUID = BlockIDs.bfCPUDefaultID;
 			BlockIDs.bfWireID = BlockIDs.bfWireDefaultID;
 			BlockIDs.bfPeripheralID = BlockIDs.bfPeriphperalDefaultID;
+			BlockIDs.bfMonitorID = BlockIDs.bfMonitorDefaultID;
 			
 			UserPreferences.codeBlockCraftingEnable = UserPreferences.codeBlockCraftingEnableDefault;
 			
@@ -76,6 +79,8 @@ public class BrainFuckBlocks {
 		} finally {
 			config.save();
 		}
+		
+		PacketFoundry.buildPacketList();
 	}
 	
 	@Init
@@ -94,6 +99,9 @@ public class BrainFuckBlocks {
 		
 		//Initializes TileEntities
 		proxy.registerTileEntities();
+		
+		//Registers renders
+		proxy.registerRenders();
 		
 		//Initializes recipes
 		initializeRecipes();
