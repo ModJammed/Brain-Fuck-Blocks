@@ -28,8 +28,8 @@ public class ItemBlockPeripheral extends ItemBlock {
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
+	public String getItemNameIS(ItemStack stack) {
+		return super.getItemName() + "." + subNames[stack.getItemDamage()];
 	}
 	
 }

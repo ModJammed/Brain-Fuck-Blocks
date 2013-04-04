@@ -9,14 +9,18 @@ import com.dmillerw.brainFuckBlocks.interfaces.IInputPeripheral;
 
 public class TileEntityRedstoneData extends TileEntity implements IInputPeripheral {
 
-	public byte rsOutput = 0;
+	public boolean rsOutput = false;
 
 	@SuppressWarnings("static-access")
 	@Override
 	public void handleDataInput(byte data) {
 		BlockPeripheral block = (BlockPeripheral) Block.blocksList[BlockIDs.bfPeripheralID];
 		block.updateSurroundingBlocks(worldObj, xCoord, yCoord, zCoord);
-		rsOutput = data;
+		if (data == 0) {
+			rsOutput = false;
+		} else {
+			rsOutput = true;
+		}
 	}
 
 }

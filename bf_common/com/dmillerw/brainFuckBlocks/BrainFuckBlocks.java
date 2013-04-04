@@ -74,9 +74,7 @@ public class BrainFuckBlocks {
 			ItemIDs.bfCodeWriterID = ItemIDs.bfCodeWriterDefaultID;
 			ItemIDs.bfCraftingComponentID = ItemIDs.bfCraftingComponentDefaultID;
 		} finally {
-			if (config.hasChanged()) {
-				config.save();
-			}
+			config.save();
 		}
 	}
 	
@@ -110,9 +108,9 @@ public class BrainFuckBlocks {
 		//Wire
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfWire, 16), new Object[] {" B ", "BRB", " B ", 'B', new ItemStack(Block.cloth, 1, 15), 'R', Item.redstone});
 		//Redstone Data Interpreter
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 0), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 0), new Object[] {"R", "M", 'R', Item.redstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
 		//Redstone Input Interpreter
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 1), new Object[] {"R", "M", 'R', Block.blockRedstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 5)});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 1), new Object[] {"R", "M", 'R', Item.redstone, 'M', new ItemStack(BlockHandler.bfCode, 1, 5)});
 		//Chat Data Interpreter
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfPeripheral, 1, 2), new Object[] {"S", "M", 'S', Item.sign, 'M', new ItemStack(BlockHandler.bfCode, 1, 4)});
 		

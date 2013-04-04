@@ -2,6 +2,7 @@ package com.dmillerw.brainFuckBlocks.util;
 
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -9,7 +10,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class PlayerUtil {
 
 	public static ForgeDirection get3DBlockOrientation(World world, int x, int y, int z, EntityLiving entity) {
-		return ForgeDirection.getOrientation(BlockPistonBase.determineOrientation(world, x, y, z, entity));
+		return ForgeDirection.getOrientation(BlockPistonBase.determineOrientation(world, x, y, z, (EntityPlayer) entity));
 	}
 	
 	public static ForgeDirection get2DBlockOrientation(EntityLiving living) {

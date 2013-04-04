@@ -3,40 +3,39 @@ package com.dmillerw.brainFuckBlocks.block;
 import java.util.List;
 import java.util.Random;
 
+import javax.sql.CommonDataSource;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+import com.dmillerw.brainFuckBlocks.core.CommonProxy;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
+import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCode;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
+import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 
-public class BlockCode extends BlockContainer {
+public class BlockCode extends BlockContainer implements IIconProvider {
 
-	public static Icon[][] textures;
-	public static Icon bottomTexture;
-	public static Icon topTexture;
-	public static Icon[] sideTexture;
+	public static TextureCoordinates bottomTexture;
+	public static TextureCoordinates topTexture;
+	public static TextureCoordinates sideTexture;
+	public static TextureCoordinates sideOutTexture;
 	
 	public static String[] blockNames = new String[] {"Increment Pointer", "Decrement Pointer", "Increment Byte", "Decrement Byte", "Output Byte", "Input Byte", "Bracket Open", "Bracket Close", "Machine Casing"};
-	
-	public static String[] blockFileNames = new String[] {"datainc", "datadec", "byteinc", "bytedec", "byteout", "bytein", "bracketopen", "bracketclose", "machineCasing"};
-	
-	private static String[] symbolTextureRotations = new String[] {"north", "east", "south", "west"};
 	
 	protected BlockCode(int id) {
 		super(id, Material.rock);
@@ -58,8 +57,8 @@ public class BlockCode extends BlockContainer {
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
-		super.onBlockPlacedBy(world, x, y, z, living, stack);
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living) {
+		super.onBlockPlacedBy(world, x, y, z, living);
 		ForgeDirection side = PlayerUtil.get2DBlockOrientation(living);
 		TileEntityCode tile = (TileEntityCode) world.getBlockTileEntity(x, y, z);
 		tile.setRotation(side);
@@ -67,48 +66,46 @@ public class BlockCode extends BlockContainer {
 	}
 	
 	@Override
-	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
+	public int getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		int meta = world.getBlockMetadata(x, y, z);
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		IRotatable blockRotator = (IRotatable) world.getBlockTileEntity(x, y, z);
 		
 		if (sideForge == ForgeDirection.DOWN) {
-			return bottomTexture;
+			return bottomTexture.getTextureIndex();
 		} else if (sideForge != ForgeDirection.UP) {
 			if (sideForge == blockRotator.getRotation().getRotation(ForgeDirection.UP)) {
-				return sideTexture[2];
+				return sideOutTexture.getTextureIndex();
 			}
-			
-			return sideTexture[0];
+			return sideTexture.getTextureIndex();
 		} else {
-			return textures[meta][getTextureIndexFromRotation(blockRotator.getRotation())];
+			return new TextureCoordinates(getTextureIndexFromRotation(blockRotator.getRotation()), meta).getTextureIndex();
 		}
 	}
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+	public int getBlockTextureFromSideAndMetadata(int side, int meta) {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		
 		if (meta == 8) {
 			if (sideForge == ForgeDirection.DOWN) {
-				return bottomTexture;
+				return bottomTexture.getTextureIndex();
 			} else if (sideForge != ForgeDirection.UP) {
-				return sideTexture[0];
+				return sideTexture.getTextureIndex();
 			} else {
-				return topTexture;
+				return topTexture.getTextureIndex();
 			}
 		}
 		
 		if (sideForge == ForgeDirection.DOWN) {
-			return bottomTexture;
+			return bottomTexture.getTextureIndex();
 		} else if (sideForge != ForgeDirection.UP) {
 			if (sideForge == ForgeDirection.EAST) {
-				return sideTexture[2];
+				return sideTexture.getTextureIndex();
 			}
-			
-			return sideTexture[0];
+			return sideTexture.getTextureIndex();
 		} else {
-			return textures[meta][0];
+			return new TextureCoordinates(0, meta).getTextureIndex();
 		}
 	}
 	
@@ -121,32 +118,21 @@ public class BlockCode extends BlockContainer {
 	}
 	
 	@Override
-	public void registerIcons(IconRegister register) {
-		textures = new Icon[16][4];
-		
-		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_bottom");
-		topTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_top");
-		sideTexture = new Icon[3];
-		
-		sideTexture[0] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side");
-		sideTexture[1] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_in");
-		sideTexture[2] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":code_side_out");
-		
-		for (int i=0; i<8; i++) {
-			for (int j=0; j<4; j++) {
-				textures[i][j] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":"+blockFileNames[i]+"/code_" + blockFileNames[i] + "_" + symbolTextureRotations[j] + "_off");
-			}
-		}
+	public void registerIcons() {
+		bottomTexture = new TextureCoordinates(0, 9);
+		topTexture = new TextureCoordinates(3, 9);
+		sideTexture = new TextureCoordinates(1, 9);
+		sideOutTexture = new TextureCoordinates(2, 9);
 	}
 	
 	private int getTextureIndexFromRotation(ForgeDirection rot) {
 		if (rot == ForgeDirection.NORTH) {
 			return 0;
-		} else if (rot == ForgeDirection.EAST) {
+		} else if (rot == ForgeDirection.WEST) {
 			return 1;
 		} else if (rot == ForgeDirection.SOUTH) {
 			return 2;
-		} else if (rot == ForgeDirection.WEST) {
+		} else if (rot == ForgeDirection.EAST) {
 			return 3;
 		}
 		
@@ -174,6 +160,11 @@ public class BlockCode extends BlockContainer {
 	
 	public TileEntity createTileEntity(World world, int meta) {
 		return new TileEntityCode();
+	}
+	
+	@Override
+	public String getTextureFile() {
+		return ModInfo.BLOCK_TEXTURE_LOCATION;
 	}
 	
 	/* IGNORE */

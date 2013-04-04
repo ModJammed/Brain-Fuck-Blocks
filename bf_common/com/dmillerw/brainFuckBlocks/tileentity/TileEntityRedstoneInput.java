@@ -8,7 +8,8 @@ public class TileEntityRedstoneInput extends TileEntity implements IOutputPeriph
 	
 	@Override
 	public byte handleDataOutput() {
-		return (byte) worldObj.getBlockPowerInput(xCoord, yCoord, zCoord);
+		//Because 1.4.7 doesn't have signal strength, it interprets a simple on/off signal instead
+		return (byte) (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) ? 15 : 0);
 	}
 
 }

@@ -2,21 +2,19 @@ package com.dmillerw.brainFuckBlocks.item;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
+import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
+import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 
 public class ItemCraftingComponent extends Item {
 
 	public static String[] itemNames = new String[] {"Metal Spool", "Strip of Paper", "Circut Board", "Advanced Circut Board", "Data Tape"};
 	private String[] subNames = new String[] {"metalSpool", "paperStrip", "circut", "advancedCircut", "dataStrip"};
-	
-	private Icon[] textures;
 	
 	public ItemCraftingComponent(int id) {
 		super(id);
@@ -25,22 +23,13 @@ public class ItemCraftingComponent extends Item {
 		setHasSubtypes(true);
 	}
 	
-	public Icon getIconFromDamage(int damage) {
-        return textures[damage];
+	public int getIconFromDamage(int damage) {
+        return new TextureCoordinates(damage, 1).getTextureIndex();
     }
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
-	}
-	
-	@Override
-	public void updateIcons(IconRegister register) {
-		textures = new Icon[subNames.length];
-		
-		for (int i=0; i<subNames.length; i++) {
-			textures[i] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":craftingComponents/"+subNames[i]);
-		}
+	public String getItemNameIS(ItemStack stack) {
+		return super.getItemName() + "." + subNames[stack.getItemDamage()];
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -50,5 +39,10 @@ public class ItemCraftingComponent extends Item {
 			list.add(new ItemStack(id, 1, i));
 		}
 	}
+	
+    @Override
+    public String getTextureFile() {
+    	return ModInfo.ITEM_TEXTURE_LOCATION;
+    }
 	
 }
