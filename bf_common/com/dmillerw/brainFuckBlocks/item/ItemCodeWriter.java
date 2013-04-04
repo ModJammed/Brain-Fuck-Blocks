@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
-import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 
@@ -23,8 +22,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCodeWriter extends Item {
 
 	private int blockID = BlockHandler.bfCode.blockID;
-	
-	private TextureCoordinates[] textures;
 	
 	public ItemCodeWriter(int id) {
 		super(id);

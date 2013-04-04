@@ -7,7 +7,6 @@ import net.minecraft.world.World;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
-import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 

@@ -33,7 +33,6 @@ public class BlockPeripheral extends BlockContainer implements IIconProvider {
 	@Override
 	public int getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
-		int meta = world.getBlockMetadata(x, y, z);
 		
 		if (sideForge == ForgeDirection.DOWN) {
 			return textures[4].getTextureIndex();

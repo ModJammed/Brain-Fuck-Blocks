@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
-import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 

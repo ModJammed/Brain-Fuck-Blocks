@@ -8,7 +8,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
 import com.dmillerw.brainFuckBlocks.helper.LogHelper;
-import com.dmillerw.brainFuckBlocks.network.packets.PacketFoundry;
+import com.dmillerw.brainFuckBlocks.network.packets.PacketBrainfuck;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 
@@ -24,7 +24,7 @@ public class BFPacketHandler implements IPacketHandler {
 			EntityPlayer entityPlayer = (EntityPlayer)player;
 			ByteArrayDataInput in = ByteStreams.newDataInput(packet.data);
 			int packetID = in.readUnsignedByte();
-			PacketFoundry packetFoundry = PacketFoundry.constructPacket(packetID);
+			PacketBrainfuck packetFoundry = PacketBrainfuck.constructPacket(packetID);
 			
 			packetFoundry.read(in);
 			packetFoundry.execute(entityPlayer, entityPlayer.worldObj.isRemote ? Side.CLIENT : Side.SERVER);

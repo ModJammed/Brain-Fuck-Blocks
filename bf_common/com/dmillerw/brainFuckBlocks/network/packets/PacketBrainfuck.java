@@ -13,12 +13,12 @@ import com.google.common.io.ByteStreams;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 
-public abstract class PacketFoundry {
+public abstract class PacketBrainfuck {
 
-	private static BiMap<Integer, Class<? extends PacketFoundry>> idMap;
+	private static BiMap<Integer, Class<? extends PacketBrainfuck>> idMap;
 	
 	public static void buildPacketList() {
-		ImmutableBiMap.Builder<Integer, Class<? extends PacketFoundry>> builder = ImmutableBiMap.builder();
+		ImmutableBiMap.Builder<Integer, Class<? extends PacketBrainfuck>> builder = ImmutableBiMap.builder();
 		
 		//Default packets go here
 		builder.put(0, PacketUpdateTileEntity.class);
@@ -26,8 +26,8 @@ public abstract class PacketFoundry {
 		idMap = builder.build();
 	}
 	
-	public static PacketFoundry constructPacket(int packetID) throws ProtocalException, ReflectiveOperationException {
-		Class<? extends PacketFoundry> clazz = idMap.get(Integer.valueOf(packetID));
+	public static PacketBrainfuck constructPacket(int packetID) throws ProtocalException, ReflectiveOperationException {
+		Class<? extends PacketBrainfuck> clazz = idMap.get(Integer.valueOf(packetID));
 		if (clazz == null) {
 			throw new ProtocalException("Unknown Packet ID");
 		} else {

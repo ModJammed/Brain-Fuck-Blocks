@@ -3,7 +3,6 @@ package com.dmillerw.brainFuckBlocks.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 
 import cpw.mods.fml.common.registry.GameRegistry;

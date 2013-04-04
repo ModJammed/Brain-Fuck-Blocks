@@ -8,7 +8,7 @@ import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.relauncher.Side;
 
-public class PacketBlockCoords extends PacketFoundry {
+public class PacketBlockCoords extends PacketBrainfuck {
 
 	public BlockCoords coords;
 	

@@ -17,7 +17,7 @@ import com.dmillerw.brainFuckBlocks.item.ItemIDs;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.lib.UserPreferences;
 import com.dmillerw.brainFuckBlocks.network.BFPacketHandler;
-import com.dmillerw.brainFuckBlocks.network.packets.PacketFoundry;
+import com.dmillerw.brainFuckBlocks.network.packets.PacketBrainfuck;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -80,7 +80,7 @@ public class BrainFuckBlocks {
 			config.save();
 		}
 		
-		PacketFoundry.buildPacketList();
+		PacketBrainfuck.buildPacketList();
 	}
 	
 	@Init
