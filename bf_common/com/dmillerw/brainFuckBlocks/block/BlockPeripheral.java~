@@ -60,6 +60,31 @@ public class BlockPeripheral extends BlockContainer implements IIconProvider {
 	}
 	
 	@Override
+	public boolean isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
+		if (world.getBlockMetadata(x, y, z) == 0) {
+			TileEntityRedstoneData periph = (TileEntityRedstoneData) world.getBlockTileEntity(x, y, z);
+			return periph.rsOutput;
+		} else {
+			return false;
+		}
+	}
+	
+	public static void updateSurroundingBlocks(World world, int x, int y, int z) {
+    	world.notifyBlocksOfNeighborChange(x, y, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x - 1, y, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x + 1, y, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y, z - 1, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y, z + 1, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y - 1, z, BlockIDs.bfPeripheralID);
+        world.notifyBlocksOfNeighborChange(x, y + 1, z, BlockIDs.bfPeripheralID);
+    }
+	
+	@Override
+	public boolean canProvidePower() {
+		return true;
+	}
+	
+	@Override
 	public void registerIcons() {
 		textures = new TextureCoordinates[5];
 		
