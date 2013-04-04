@@ -19,6 +19,7 @@ public class TileEntityByteMonitor extends TileEntity implements IRotatable, IIn
 
 	private ForgeDirection rotation;
 	public byte storedData;
+	public byte type = 0;
 	
 	@Override
 	public ForgeDirection getRotation() {

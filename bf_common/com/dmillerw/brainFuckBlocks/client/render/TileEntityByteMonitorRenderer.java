@@ -16,6 +16,10 @@ public class TileEntityByteMonitorRenderer extends TileEntitySpecialRenderer {
 	public void renderMonitorAt(TileEntityByteMonitor tile, double x, double y, double z, float f) {
 		String toDisplay = ""+tile.storedData;
 
+		if (tile.type == 1) {
+			toDisplay = ""+(char)tile.storedData;
+		}
+		
 		GL11.glPushMatrix();
 		GL11.glTranslated(x+.5, y+.5, z+.5);
 		FontRenderer font = FMLClientHandler.instance().getClient().fontRenderer;

@@ -1,9 +1,13 @@
 package com.dmillerw.brainFuckBlocks.block;
 
+import java.util.List;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -50,8 +54,9 @@ public class BlockMonitor extends BlockContainer implements IIconProvider {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living) {
 		super.onBlockPlacedBy(world, x, y, z, living);
 		ForgeDirection side = PlayerUtil.get2DBlockOrientation(living);
-		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
+		TileEntityByteMonitor tile = (TileEntityByteMonitor) world.getBlockTileEntity(x, y, z);
 		tile.setRotation(side);
+		tile.type = (byte) world.getBlockMetadata(x, y, z);
 	}
 	
 	@Override
@@ -91,6 +96,14 @@ public class BlockMonitor extends BlockContainer implements IIconProvider {
 		bottomTexture = new TextureCoordinates(0,9);
 		sideTexture = new TextureCoordinates(1, 9);
 		frontTexture = topTexture;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+		for (int i=0; i<blockNames.length; i++) {
+			list.add(new ItemStack(id, 1, i));
+		}
 	}
 	
 	@Override
