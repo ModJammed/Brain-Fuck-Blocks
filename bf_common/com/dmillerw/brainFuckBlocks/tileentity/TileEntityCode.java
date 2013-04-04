@@ -89,12 +89,10 @@ public class TileEntityCode extends TileEntity implements IRotatable, IConnectio
 	public IPeripheral[] getConnectedPeripherals() {
 		List<IPeripheral> connected = new ArrayList<IPeripheral>();
 		
-		for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
-			TileEntity tile = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
-			
-			if (tile instanceof IPeripheral) {
-				connected.add((IPeripheral) tile);
-			}
+		TileEntity tile = worldObj.getBlockTileEntity(xCoord + ForgeDirection.UP.offsetX, yCoord + ForgeDirection.UP.offsetY, zCoord + ForgeDirection.UP.offsetZ);
+		
+		if (tile instanceof IPeripheral) {
+			connected.add((IPeripheral) tile);
 		}
 		
 		IPeripheral[] toReturn = new IPeripheral[connected.size()];
