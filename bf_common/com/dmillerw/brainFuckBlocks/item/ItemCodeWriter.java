@@ -3,18 +3,19 @@ package com.dmillerw.brainFuckBlocks.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.block.BlockCode;
 import com.dmillerw.brainFuckBlocks.block.BlockHandler;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
-import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,6 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCodeWriter extends Item {
 
 	private int blockID = BlockHandler.bfCode.blockID;
+	
+	private Icon[] textures;
 	
 	public ItemCodeWriter(int id) {
 		super(id);
@@ -59,8 +62,8 @@ public class ItemCodeWriter extends Item {
 	}
 	
 	@Override
-	public int getIconFromDamage(int damage) {
-        return new TextureCoordinates(damage, 0).getTextureIndex();
+	public Icon getIconFromDamage(int damage) {
+        return textures[damage];
     }
 	
 	public int getCodeWriterMeta(ItemStack stack) {
@@ -144,7 +147,7 @@ public class ItemCodeWriter extends Item {
         {
             return false;
         }
-        else if (par3World.canPlaceEntityOnSide(this.blockID, par4, par5, par6, false, par7, par2EntityPlayer))
+        else if (par3World.canPlaceEntityOnSide(this.blockID, par4, par5, par6, false, par7, par2EntityPlayer, par1ItemStack))
         {
             Block block = Block.blocksList[this.blockID];
             int j1 = getCodeWriterMeta(par1ItemStack);
@@ -207,16 +210,16 @@ public class ItemCodeWriter extends Item {
             }
         }
 
-        return par1World.canPlaceEntityOnSide(this.blockID, par2, par3, par4, false, par5, (Entity)null);
+        return par1World.canPlaceEntityOnSide(this.blockID, par2, par3, par4, false, par5, (Entity)null, par7ItemStack);
     }
 	
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
-       if (!world.setBlockAndMetadata(x, y, z, this.blockID, getCodeWriterMeta(stack))) {
+       if (!world.setBlock(x, y, z, this.blockID, getCodeWriterMeta(stack), 3)) {
            return false;
        }
 
        if (world.getBlockId(x, y, z) == this.blockID) {
-           Block.blocksList[this.blockID].onBlockPlacedBy(world, x, y, z, player);
+           Block.blocksList[this.blockID].onBlockPlacedBy(world, x, y, z, player, stack);
            Block.blocksList[this.blockID].onPostBlockPlaced(world, x, y, z, getCodeWriterMeta(stack));
        }
 
@@ -224,8 +227,14 @@ public class ItemCodeWriter extends Item {
     }
 	
     @Override
-    public String getTextureFile() {
-    	return ModInfo.ITEM_TEXTURE_LOCATION;
+    public void updateIcons(IconRegister register) {
+    	textures = new Icon[9];
+    	
+    	for (int i=0; i<8; i++) {
+    		textures[i] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":codewriter/cw_"+BlockCode.blockFileNames[i]);
+    	}
+    	
+    	textures[8] = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":codewriter/cw_documentation");
     }
     
 }
