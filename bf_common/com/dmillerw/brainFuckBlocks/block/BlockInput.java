@@ -4,6 +4,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,7 +27,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
-public class BlockInput extends BlockContainer implements IIconProvider {
+public class BlockInput extends BlockContainer {
 
 	private TextureCoordinates topTexture;
 	private TextureCoordinates bottomTexture;
@@ -66,8 +67,8 @@ public class BlockInput extends BlockContainer implements IIconProvider {
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living) {
-		super.onBlockPlacedBy(world, x, y, z, living);
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
+		super.onBlockPlacedBy(world, x, y, z, living, stack);
 		ForgeDirection side = PlayerUtil.get2DBlockOrientation(living);
 		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
 		tile.setRotation(side);
@@ -102,19 +103,6 @@ public class BlockInput extends BlockContainer implements IIconProvider {
 		} else {
 			return frontTexture.getTextureIndex();
 		}
-	}
-	
-	@Override
-	public void registerIcons() {
-		topTexture = new TextureCoordinates(3, 9);
-		bottomTexture = new TextureCoordinates(0,9);
-		sideTexture = new TextureCoordinates(1, 9);
-		frontTexture = new TextureCoordinates(0, 11);
-	}
-	
-	@Override
-	public String getTextureFile() {
-		return ModInfo.BLOCK_TEXTURE_LOCATION;
 	}
 	
 	@Override

@@ -22,7 +22,7 @@ import com.dmillerw.brainFuckBlocks.tileentity.TileEntityByteMonitor;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
 import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 
-public class BlockMonitor extends BlockContainer implements IIconProvider {
+public class BlockMonitor extends BlockContainer {
 
 	private TextureCoordinates topTexture;
 	private TextureCoordinates bottomTexture;
@@ -51,8 +51,8 @@ public class BlockMonitor extends BlockContainer implements IIconProvider {
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living) {
-		super.onBlockPlacedBy(world, x, y, z, living);
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
+		super.onBlockPlacedBy(world, x, y, z, living, stack);
 		ForgeDirection side = PlayerUtil.get2DBlockOrientation(living);
 		TileEntityByteMonitor tile = (TileEntityByteMonitor) world.getBlockTileEntity(x, y, z);
 		tile.setRotation(side);
@@ -90,25 +90,12 @@ public class BlockMonitor extends BlockContainer implements IIconProvider {
 		}
 	}
 	
-	@Override
-	public void registerIcons() {
-		topTexture = new TextureCoordinates(3, 9);
-		bottomTexture = new TextureCoordinates(0,9);
-		sideTexture = new TextureCoordinates(1, 9);
-		frontTexture = topTexture;
-	}
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {
 		for (int i=0; i<blockNames.length; i++) {
 			list.add(new ItemStack(id, 1, i));
 		}
-	}
-	
-	@Override
-	public String getTextureFile() {
-		return ModInfo.BLOCK_TEXTURE_LOCATION;
 	}
 	
 	@Override

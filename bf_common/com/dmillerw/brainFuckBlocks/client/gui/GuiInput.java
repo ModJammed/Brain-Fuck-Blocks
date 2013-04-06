@@ -51,9 +51,9 @@ public class GuiInput extends GuiScreen {
 		typeToggle = new GuiButton(1, this.width / 2 - 100, this.height / 2 + 30, buttonLabels[payloadReceiver.getPayload()[1]]);
 		cancelButton = new GuiButton(2, this.width / 2 - 100, this.height / 2 + 55, "Cancel");
 		
-		this.controlList.add(saveButton);
-		this.controlList.add(typeToggle);
-		this.controlList.add(cancelButton);
+		this.buttonList.add(saveButton);
+		this.buttonList.add(typeToggle);
+		this.buttonList.add(cancelButton);
 		
 		inputField = new GuiTextField(FMLClientHandler.instance().getClient().fontRenderer, this.width / 2 - 100, 70, 200, 20);
 		if (payloadReceiver.getPayload()[1] == 0) {
@@ -78,7 +78,7 @@ public class GuiInput extends GuiScreen {
 		updateButtonStates();
 		
 		if (par1 == 13) {
-			this.actionPerformed((GuiButton) this.controlList.get(2));
+			this.actionPerformed((GuiButton) this.buttonList.get(2));
 		}
 	}
 	

@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 
 public class ItemBlockPeripheral extends ItemBlock {
 
-	private static String[] subNames = new String[] {"chatData"};
-	private static String[] ioTypes = new String[] {"Output"};
+	private static String[] subNames = new String[] {"redstoneData", "redstoneInput", "chatData"};
+	private static String[] ioTypes = new String[] {"Output", "Input", "Output"};
 	
 	public ItemBlockPeripheral(int id) {
 		super(id);
@@ -28,8 +28,8 @@ public class ItemBlockPeripheral extends ItemBlock {
 	}
 	
 	@Override
-	public String getItemNameIS(ItemStack stack) {
-		return super.getItemName() + "." + subNames[stack.getItemDamage()];
+	public String getUnlocalizedName(ItemStack stack) {
+		return super.getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
 	}
 	
 }
