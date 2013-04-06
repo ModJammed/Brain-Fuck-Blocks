@@ -63,19 +63,20 @@ public class GuiInput extends GuiScreen {
 			inputField.setText(""+(char)payloadReceiver.getPayload()[0]);
 			inputField.setMaxStringLength(1);
 		}
+		inputField.setFocused(true);
 	}
 	
 	protected void keyTyped(char par1, int par2) {
 		if (payloadReceiver.getPayload()[1] == 1) {
 			inputField.textboxKeyTyped(par1, par2);
 		} else {
-			if (isNumeric(par1)) {
+			if (par2 == 14 || isNumeric(par1)) {
 				inputField.textboxKeyTyped(par1, par2);
 			}
 		}
 		
-		((GuiButton) this.controlList.get(0)).enabled = this.inputField.getText().trim().length() > 0;
-
+		updateButtonStates();
+		
 		if (par1 == 13) {
 			this.actionPerformed((GuiButton) this.controlList.get(2));
 		}
@@ -141,6 +142,24 @@ public class GuiInput extends GuiScreen {
 		
 		payloadReceiver.handlePayload(packet.payload);
 		PacketDispatcher.sendPacketToServer(packet.makePacket());
+	}
+	
+	private void updateButtonStates() {
+		if (inputField.getText().trim().length() == 0) {
+			saveButton.enabled = false;
+			return;
+		}
+		
+		if (payloadReceiver.getPayload()[1] == 0) {
+			if (inputField.getText().trim().length() == 3) {
+				if (Integer.parseInt(inputField.getText().trim()) > 127) {
+					saveButton.enabled = false;
+					return;
+				}
+			}
+		}
+		
+		saveButton.enabled = true;
 	}
 	
 	public static boolean isNumeric(char chr) {
