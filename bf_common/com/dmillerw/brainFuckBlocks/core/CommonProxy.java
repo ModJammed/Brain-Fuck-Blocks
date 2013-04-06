@@ -4,6 +4,7 @@ import com.dmillerw.brainFuckBlocks.tileentity.TileEntityByteMonitor;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityChatData;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCode;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityCPU;
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityInput;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityWire;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -18,6 +19,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityWire.class, "bfWire");
 		GameRegistry.registerTileEntity(TileEntityChatData.class, "bfChatData");
 		GameRegistry.registerTileEntity(TileEntityByteMonitor.class, "bfMonitor");
+		GameRegistry.registerTileEntity(TileEntityInput.class, "bfInput");
 	}
 	
 }

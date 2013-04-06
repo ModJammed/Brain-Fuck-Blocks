@@ -7,11 +7,13 @@ public class BlockIDs {
 	public static final int bfWireDefaultID = 3902;
 	public static final int bfPeriphperalDefaultID = 3903;
 	public static final int bfMonitorDefaultID = 3904;
+	public static final int bfInputDefaultID = 3905;
 	
 	public static int bfCodeID;
 	public static int bfCPUID;
 	public static int bfWireID;
 	public static int bfPeripheralID;
 	public static int bfMonitorID;
+	public static int bfInput;
 	
 }

@@ -54,6 +54,7 @@ public class BrainFuckBlocks {
 			BlockIDs.bfWireID = config.getBlock("bfWire", BlockIDs.bfWireDefaultID).getInt();
 			BlockIDs.bfPeripheralID = config.getBlock("bfPeripheral", BlockIDs.bfPeriphperalDefaultID).getInt();
 			BlockIDs.bfMonitorID = config.getBlock("bfMonitor", BlockIDs.bfMonitorDefaultID).getInt();
+			BlockIDs.bfInput = config.getBlock("bfInput", BlockIDs.bfInputDefaultID).getInt();
 			
 			Property craftingEnable = config.get(Configuration.CATEGORY_GENERAL, "codeBlockCraftingEnabled", UserPreferences.codeBlockCraftingEnableDefault);
 			craftingEnable.comment = "Should code blocks have crafting recipes? If enabled, the blocks will drop themselves when broken. If false, they'll drop nothing and a code block creation item will exist.";
@@ -70,6 +71,7 @@ public class BrainFuckBlocks {
 			BlockIDs.bfWireID = BlockIDs.bfWireDefaultID;
 			BlockIDs.bfPeripheralID = BlockIDs.bfPeriphperalDefaultID;
 			BlockIDs.bfMonitorID = BlockIDs.bfMonitorDefaultID;
+			BlockIDs.bfInput = BlockIDs.bfInputDefaultID;
 			
 			UserPreferences.codeBlockCraftingEnable = UserPreferences.codeBlockCraftingEnableDefault;
 			
@@ -121,6 +123,8 @@ public class BrainFuckBlocks {
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfMonitor, 1, 1), new Object[] {"III", "SGS", "SAS", 'I', Item.ingotIron, 'S', Block.stone, 'G', Block.thinGlass, 'A', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2)});
 		//Character Monitor
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfMonitor, 1, 1), new Object[] {"III", "SGS", "SAS", 'I', Item.ingotIron, 'S', Block.stone, 'G', Block.thinGlass, 'A', new ItemStack(ItemHandler.bfCraftingComponent, 1, 3)});
+		//Input Peripheral
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfInput, 1, 0), new Object[] {"III", "SGS", "SBS", 'I', Item.ingotIron, 'S', Block.stone, 'G', Block.thinGlass, 'B', Block.stoneButton});
 		
 		//Code blocks
 		if (UserPreferences.codeBlockCraftingEnable) {

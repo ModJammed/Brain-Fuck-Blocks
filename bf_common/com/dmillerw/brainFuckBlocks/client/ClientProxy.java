@@ -3,9 +3,11 @@ package com.dmillerw.brainFuckBlocks.client;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.dmillerw.brainFuckBlocks.client.render.TileEntityByteMonitorRenderer;
+import com.dmillerw.brainFuckBlocks.client.render.TileEntityInputRenderer;
 import com.dmillerw.brainFuckBlocks.core.CommonProxy;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityByteMonitor;
+import com.dmillerw.brainFuckBlocks.tileentity.TileEntityInput;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 
@@ -17,6 +19,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.preloadTexture(ModInfo.ITEM_TEXTURE_LOCATION);
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityByteMonitor.class, new TileEntityByteMonitorRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInput.class, new TileEntityInputRenderer());
 	}
 	
 }

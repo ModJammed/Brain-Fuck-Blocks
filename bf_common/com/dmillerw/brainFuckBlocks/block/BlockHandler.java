@@ -14,6 +14,7 @@ public class BlockHandler {
 	public static Block bfWire;
 	public static Block bfPeripheral;
 	public static Block bfMonitor;
+	public static Block bfInput;
 	
 	public static void init() {
 		bfCPU = new BlockCPU(BlockIDs.bfCPUID).setBlockName("bfCPU");
@@ -46,6 +47,11 @@ public class BlockHandler {
 			LanguageRegistry.addName(new ItemStack(bfMonitor.blockID, 1, i), BlockMonitor.blockNames[i]);
 		}
 		((IIconProvider)bfMonitor).registerIcons();
+		
+		bfInput = new BlockInput(BlockIDs.bfInput).setBlockName("bfInput");
+		GameRegistry.registerBlock(bfInput, ItemBlockInput.class, "bfInput");
+		LanguageRegistry.addName(new ItemStack(bfInput, 1, 0), "Input Peripheral");
+		((IIconProvider)bfInput).registerIcons();
 	}
 	
 }
