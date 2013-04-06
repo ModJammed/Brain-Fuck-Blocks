@@ -4,30 +4,30 @@ import java.util.List;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.dmillerw.brainFuckBlocks.BrainFuckBlocks;
 import com.dmillerw.brainFuckBlocks.interfaces.IBFWrench;
-import com.dmillerw.brainFuckBlocks.interfaces.IIconProvider;
 import com.dmillerw.brainFuckBlocks.interfaces.IRotatable;
 import com.dmillerw.brainFuckBlocks.lib.ModInfo;
 import com.dmillerw.brainFuckBlocks.tileentity.TileEntityByteMonitor;
 import com.dmillerw.brainFuckBlocks.util.PlayerUtil;
-import com.dmillerw.brainFuckBlocks.util.TextureCoordinates;
 
 public class BlockMonitor extends BlockContainer {
 
-	private TextureCoordinates topTexture;
-	private TextureCoordinates bottomTexture;
-	private TextureCoordinates sideTexture;
-	private TextureCoordinates frontTexture;
+	private Icon topTexture;
+	private Icon bottomTexture;
+	private Icon sideTexture;
+	private Icon frontTexture;
 	
 	public static String[] blockNames = new String[] {"Byte Monitor", "Character Monitor"};
 	
@@ -60,33 +60,33 @@ public class BlockMonitor extends BlockContainer {
 	}
 	
 	@Override
-	public int getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
+	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		ForgeDirection forgeSide = ForgeDirection.getOrientation(side);
 		IRotatable rotate = (IRotatable) world.getBlockTileEntity(x, y, z);
 		
 		if (forgeSide == ForgeDirection.UP) {
-			return topTexture.getTextureIndex();
+			return topTexture;
 		} else if (forgeSide == ForgeDirection.DOWN) {
-			return bottomTexture.getTextureIndex();
+			return bottomTexture;
 		} else if (forgeSide != rotate.getRotation().getOpposite()) {
-			return sideTexture.getTextureIndex();
+			return sideTexture;
 		} else {
-			return frontTexture.getTextureIndex();
+			return frontTexture;
 		}
 	}
 	
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int side, int meta) {
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
 		ForgeDirection forgeSide = ForgeDirection.getOrientation(side);
 		
 		if (forgeSide == ForgeDirection.UP) {
-			return topTexture.getTextureIndex();
+			return topTexture;
 		} else if (forgeSide == ForgeDirection.DOWN) {
-			return bottomTexture.getTextureIndex();
+			return bottomTexture;
 		} else if (forgeSide != ForgeDirection.SOUTH) {
-			return sideTexture.getTextureIndex();
+			return sideTexture;
 		} else {
-			return frontTexture.getTextureIndex();
+			return frontTexture;
 		}
 	}
 	
@@ -96,6 +96,14 @@ public class BlockMonitor extends BlockContainer {
 		for (int i=0; i<blockNames.length; i++) {
 			list.add(new ItemStack(id, 1, i));
 		}
+	}
+	
+	@Override
+	public void registerIcons(IconRegister register) {
+		topTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":monitor/monitor_top");
+		sideTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":monitor/monitor_side");
+		bottomTexture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":monitor/monitor_bottom");
+		frontTexture = topTexture;
 	}
 	
 	@Override

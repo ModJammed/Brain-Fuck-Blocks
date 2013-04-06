@@ -28,8 +28,8 @@ public class ItemBlockInput extends ItemBlock {
 	}
 	
 	@Override
-	public String getItemNameIS(ItemStack stack) {
-		return super.getItemName() + "." + subNames[stack.getItemDamage()];
+	public String getUnlocalizedName(ItemStack stack) {
+		return super.getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
 	}
 	
 }
