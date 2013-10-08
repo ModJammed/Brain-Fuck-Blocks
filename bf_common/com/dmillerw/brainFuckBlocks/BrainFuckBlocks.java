@@ -20,6 +20,7 @@ import com.dmillerw.brainFuckBlocks.network.BFPacketHandler;
 import com.dmillerw.brainFuckBlocks.network.packets.PacketBrainfuck;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -33,6 +34,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid=ModInfo.MOD_ID, name=ModInfo.MOD_NAME, version=ModInfo.MOD_VERSION)
 @NetworkMod(channels={"bfBlocks"}, serverSideRequired=false, clientSideRequired=true, packetHandler=BFPacketHandler.class)
 public class BrainFuckBlocks {
+	
 	@Instance(ModInfo.MOD_ID)
 	public static BrainFuckBlocks instance;
 	@SidedProxy(serverSide="com.dmillerw.brainFuckBlocks.core.CommonProxy", clientSide="com.dmillerw.brainFuckBlocks.client.ClientProxy")
@@ -42,7 +44,7 @@ public class BrainFuckBlocks {
 	
 	public static int wireRenderID = 0;
 	
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		//Config stuffs
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
@@ -85,7 +87,7 @@ public class BrainFuckBlocks {
 		PacketBrainfuck.buildPacketList();
 	}
 	
-	@Init
+	@EventHandler
 	public void init(FMLInitializationEvent e) {
 		//Initializing logger
 		LogHelper.init();
@@ -112,7 +114,7 @@ public class BrainFuckBlocks {
 	public static void initializeRecipes() {
 		/* BLOCKS */
 		//Machine casing
-		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RRR", "RCR", "DID", 'R', Item.redstone, 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), 'I', Block.blockSteel});
+		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCode, 1, 8), new Object[] {"RRR", "RCR", "DID", 'R', Item.redstone, 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), 'I', Block.blockIron});
 		//CPU
 		GameRegistry.addRecipe(new ItemStack(BlockHandler.bfCPU), new Object[] {"T", "A", "M", 'T', new ItemStack(ItemHandler.bfCraftingComponent, 1, 4), 'A', new ItemStack(ItemHandler.bfCraftingComponent, 1, 3), 'M', new ItemStack(BlockHandler.bfCode, 1, 8)});
 		//Wire
@@ -163,7 +165,7 @@ public class BrainFuckBlocks {
 		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 16, 1), new Object[] {"PPP", 'P', Item.paper});
 		
 		//Circut
-		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), new Object[] {"RIR", "GIG", "LIL", 'R', Item.redstone, 'I', Item.ingotIron, 'G', Item.lightStoneDust, 'L', new ItemStack(Item.dyePowder, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 2), new Object[] {"RIR", "GIG", "LIL", 'R', Item.redstone, 'I', Item.ingotIron, 'G', Item.glowstone, 'L', new ItemStack(Item.dyePowder, 1, 4)});
 		
 		//Advanced Circut
 		GameRegistry.addRecipe(new ItemStack(ItemHandler.bfCraftingComponent, 1, 3), new Object[] {"RRR", "RCR", "RRR", 'R', Item.redstone, 'C', new ItemStack(ItemHandler.bfCraftingComponent, 1, 2)});

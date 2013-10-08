@@ -15,7 +15,7 @@ public class TileEntityChatData extends TileEntity implements IInputPeripheral {
 			return;
 		}
 		
-		PacketDispatcher.sendPacketToAllInDimension(new Packet3Chat("BrainFuck Output: "+data), worldObj.getWorldInfo().getDimension());
+		PacketDispatcher.sendPacketToAllInDimension(new Packet3Chat("BrainFuck Output: "+data), worldObj.provider.dimensionId);
 	}
 
 }

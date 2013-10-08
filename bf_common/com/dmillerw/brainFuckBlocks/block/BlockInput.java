@@ -3,7 +3,7 @@ package com.dmillerw.brainFuckBlocks.block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -67,7 +67,7 @@ public class BlockInput extends BlockContainer {
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack stack) {
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, living, stack);
 		ForgeDirection side = PlayerUtil.get2DBlockOrientation(living);
 		IRotatable tile = (IRotatable) world.getBlockTileEntity(x, y, z);
@@ -91,7 +91,7 @@ public class BlockInput extends BlockContainer {
 	}
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+	public Icon getIcon(int side, int meta) {
 		ForgeDirection forgeSide = ForgeDirection.getOrientation(side);
 		
 		if (forgeSide == ForgeDirection.UP) {

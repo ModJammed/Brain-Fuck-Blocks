@@ -227,7 +227,7 @@ public class ItemCodeWriter extends Item {
     }
 	
     @Override
-    public void updateIcons(IconRegister register) {
+    public void registerIcons(IconRegister register) {
     	textures = new Icon[9];
     	
     	for (int i=0; i<8; i++) {

@@ -35,7 +35,7 @@ public class ItemWrench extends Item implements IBFWrench {
 	}
 	
 	@Override
-	public void updateIcons(IconRegister register) {
+	public void registerIcons(IconRegister register) {
 		texture = register.registerIcon(ModInfo.MOD_ID.toLowerCase()+":wrench");
 	}
 	

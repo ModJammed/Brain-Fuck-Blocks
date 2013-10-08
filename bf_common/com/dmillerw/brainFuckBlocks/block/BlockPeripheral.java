@@ -47,7 +47,7 @@ public class BlockPeripheral extends BlockContainer {
 	}
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+	public Icon getIcon(int side, int meta) {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		
 		if (sideForge == ForgeDirection.DOWN) {

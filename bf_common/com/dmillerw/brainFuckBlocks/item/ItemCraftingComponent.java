@@ -35,7 +35,7 @@ public class ItemCraftingComponent extends Item {
 	}
 	
 	@Override
-	public void updateIcons(IconRegister register) {
+	public void registerIcons(IconRegister register) {
 		textures = new Icon[subNames.length];
 		
 		for (int i=0; i<subNames.length; i++) {

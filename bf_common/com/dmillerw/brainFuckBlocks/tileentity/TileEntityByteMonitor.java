@@ -64,7 +64,7 @@ public class TileEntityByteMonitor extends TileEntity implements IRotatable, IIn
 	
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
 		if (pkt.xPosition == this.xCoord && pkt.yPosition == this.yCoord && pkt.zPosition == this.zCoord) {
-			readFromNBT(pkt.customParam1);
+			readFromNBT(pkt.data);
 		}
     }
 	
